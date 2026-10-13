@@ -58,14 +58,14 @@
                 <a href="#pricing" class="hover:text-slate-900 transition">Pricing</a>
             </div>
             <div>
-                <button onclick="openModal()" class="px-5 py-2.5 rounded-lg text-sm font-semibold border border-slate-300 hover:border-slate-900 hover:text-slate-900 transition">
+                <button type="button" onclick="openModal('trialModal'); return false;" class="px-5 py-2.5 rounded-lg text-sm font-semibold border border-slate-300 hover:border-slate-900 hover:text-slate-900 transition">
                     Start Free Trial
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION WITH UPLOADED COMPOSITE HERO IMAGE -->
+    <!-- HERO SECTION -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
         <div>
             <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold mb-6">
@@ -79,7 +79,7 @@
                 Whether you're behind a styling chair, leading a training session, treating a client, or on a job site—PremierDirect AI instantly texts back missed callers, captures requests, and drives 5-star Google reviews on complete autopilot.
             </p>
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-8">
-                <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white btn-solid shadow-lg shadow-slate-900/10 transform hover:-translate-y-0.5 transition">
+                <button type="button" onclick="openModal('trialModal'); return false;" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white btn-solid shadow-lg shadow-slate-900/10 transform hover:-translate-y-0.5 transition">
                     Start 14-Day Free Trial
                 </button>
                 <a href="#roi-calculator" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-center transition">
@@ -102,11 +102,11 @@
             </div>
         </div>
         
-        <!-- HERO IMAGE: UPLOADED REPO FILE -->
+        <!-- HERO IMAGE -->
         <div class="relative">
             <div class="absolute -inset-1 rounded-3xl bg-slate-200 opacity-50 blur-xl"></div>
             <div class="relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-2xl">
-                <img src="1791863224976.jpg" alt="PremierDirect AI across local industries: salon owner, gym coach, beauty technician, and contractor displaying 5-star Google review notifications on smartphones" class="w-full h-auto object-cover">
+                <img src="1791863224976.jpg" alt="PremierDirect AI across local industries" class="w-full h-auto object-cover">
                 <div class="p-6 bg-slate-50/90 backdrop-blur-md border-t border-slate-200">
                     <div class="flex items-center space-x-3 mb-2">
                         <span class="relative flex h-3 w-3">
@@ -193,7 +193,7 @@
                     <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">Estimated Monthly Lost Revenue</p>
                     <p id="roiResult" class="text-4xl sm:text-5xl font-black text-slate-900 mb-4">$3,000</p>
                     <p class="text-xs text-slate-600 mb-6">PremierDirect AI costs just <strong class="text-slate-900">$39/mo</strong> to recover these leads.</p>
-                    <button onclick="openModal()" class="w-full py-3.5 rounded-xl font-bold text-white btn-solid text-sm shadow-md">
+                    <button type="button" onclick="openModal('trialModal'); return false;" class="w-full py-3.5 rounded-xl font-bold text-white btn-solid text-sm shadow-md">
                         Recover My Revenue Now
                     </button>
                 </div>
@@ -235,7 +235,7 @@
                 </li>
             </ul>
 
-            <button onclick="openModal()" class="w-full max-w-md py-4 rounded-xl font-bold text-white btn-solid shadow-lg shadow-slate-900/10 text-base">
+            <button type="button" onclick="openModal('trialModal'); return false;" class="w-full max-w-md py-4 rounded-xl font-bold text-white btn-solid shadow-lg shadow-slate-900/10 text-base">
                 Start 14-Day Free Trial
             </button>
         </div>
@@ -244,7 +244,7 @@
     <!-- TRIAL SIGNUP MODAL -->
     <div id="trialModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden px-4">
         <div class="bg-white p-8 rounded-3xl border border-slate-200 max-w-md w-full relative shadow-2xl">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+            <button type="button" onclick="closeModal('trialModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
             <h3 class="text-2xl font-extrabold mb-2 text-center text-slate-900">Start Your 14-Day Trial</h3>
@@ -270,14 +270,61 @@
         </div>
     </div>
 
+    <!-- PRIVACY POLICY MODAL -->
+    <div id="privacyModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden px-4">
+        <div class="bg-white p-8 rounded-3xl border border-slate-200 max-w-2xl w-full relative shadow-2xl max-h-[80vh] overflow-y-auto">
+            <button type="button" onclick="closeModal('privacyModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-2xl font-extrabold mb-2 text-slate-900">Privacy Policy</h3>
+            <p class="text-xs text-slate-500 mb-6">Effective Date: October 2026</p>
+            
+            <div class="space-y-4 text-sm text-slate-600 leading-relaxed">
+                <h4 class="font-bold text-slate-900">1. Information We Collect</h4>
+                <p>PremierDirect AI collects minimal contact details (such as your name, business name, phone number, and email address) when you sign up for a trial or service. This information is strictly used to configure automated SMS responses and Google Review management for your business.</p>
+
+                <h4 class="font-bold text-slate-900">2. How We Use Information</h4>
+                <p>Your information is exclusively utilized to operate, maintain, and provide the core services of PremierDirect AI. We never sell, rent, or trade subscriber or end-customer data to third parties.</p>
+
+                <h4 class="font-bold text-slate-900">3. SMS Communications</h4>
+                <p>All missed-call text-back triggers and automated review invites adhere strictly to business messaging guidelines. Phone numbers collected are used purely for requested transactional communications.</p>
+
+                <h4 class="font-bold text-slate-900">4. Contact Us</h4>
+                <p>For any privacy concerns, reach out to our team at support@premierdirect.ai.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TERMS OF SERVICE MODAL -->
+    <div id="termsModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden px-4">
+        <div class="bg-white p-8 rounded-3xl border border-slate-200 max-w-2xl w-full relative shadow-2xl max-h-[80vh] overflow-y-auto">
+            <button type="button" onclick="closeModal('termsModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-2xl font-extrabold mb-2 text-slate-900">Terms of Service</h3>
+            <p class="text-xs text-slate-500 mb-6">Effective Date: October 2026</p>
+            
+            <div class="space-y-4 text-sm text-slate-600 leading-relaxed">
+                <h4 class="font-bold text-slate-900">1. Acceptance of Terms</h4>
+                <p>By creating an account or subscribing to PremierDirect AI, you agree to these Terms of Service. Our platform provides automated customer messaging and review acquisition tools for local service providers.</p>
+
+                <h4 class="font-bold text-slate-900">2. Service Terms & Billing</h4>
+                <p>Services are provided on a monthly subscription rate ($39/month). There are no long-term contracts, and you are free to cancel your plan at any time without hidden fees.</p>
+
+                <h4 class="font-bold text-slate-900">3. Proper Use</h4>
+                <p>Subscribers agree to use automated SMS functionality responsibly and comply with local commercial messaging standards.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="w-full border-t border-slate-200 py-8 text-center text-slate-500 text-xs bg-white">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 PremierDirect AI. All rights reserved.</p>
             <div class="flex space-x-6">
-                <a href="#" class="hover:text-slate-800">Privacy Policy</a>
-                <a href="#" class="hover:text-slate-800">Terms of Service</a>
-                <a href="#" class="hover:text-slate-800">Support</a>
+                <button type="button" onclick="openModal('privacyModal'); return false;" class="hover:text-slate-800 transition focus:outline-none">Privacy Policy</button>
+                <button type="button" onclick="openModal('termsModal'); return false;" class="hover:text-slate-800 transition focus:outline-none">Terms of Service</button>
+                <a href="mailto:support@premierdirect.ai" class="hover:text-slate-800 transition">Support</a>
             </div>
         </div>
     </footer>
@@ -295,18 +342,24 @@
             document.getElementById('roiResult').innerText = '$' + Math.round(monthlyLost).toLocaleString();
         }
 
-        function openModal() {
-            document.getElementById('trialModal').classList.remove('hidden');
+        function openModal(id) {
+            var modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
         }
 
-        function closeModal() {
-            document.getElementById('trialModal').classList.add('hidden');
+        function closeModal(id) {
+            var modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('hidden');
+            }
         }
 
         function handleFormSubmit(e) {
             e.preventDefault();
             alert('Trial account requested! We will reach out via text to finish setup.');
-            closeModal();
+            closeModal('trialModal');
         }
 
         calculateROI();
