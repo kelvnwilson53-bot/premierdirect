@@ -3,406 +3,704 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PremierDirect AI | Missed-Call Recovery & Reviews</title>
-    <!-- Tailwind CSS CDN -->
+    <title>PremierDirect AI | Never Lose Another High Value Lead</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <!-- Google Font Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#0f172a',
+                            gold: '#d97706',
+                            goldHover: '#b45309'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #0f172a;
+            background-color: #0b0f19;
+            color: #f3f4f6;
         }
-        .light-border {
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .light-border:hover {
-            border-color: #0f172a;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        .glass-card-hover:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.15);
         }
-        .btn-solid {
-            background-color: #0f172a;
-            color: #ffffff;
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .btn-solid:hover {
-            background-color: #1e293b;
-        }
-        .img-card {
-            width: 100%;
-            height: 340px;
-            object-fit: cover;
-            border-radius: 0.75rem;
-            display: block;
-        }
-        input[type=range] {
-            accent-color: #0f172a;
+        .text-gradient-accent {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="antialiased text-slate-800 bg-white">
+<body class="antialiased selection:bg-blue-600 selection:text-white">
 
-    <!-- NAVIGATION HEADER -->
-    <header class="w-full border-b border-slate-200 bg-white/90 sticky top-0 z-50 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center font-bold text-xl text-white shadow-md">
-                    <i class="fa-solid fa-bolt"></i>
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo & Tagline -->
+                <div class="flex items-center gap-3">
+                    <a href="#" class="flex flex-col">
+                        <span class="text-xl sm:text-2xl font-extrabold tracking-wider text-white">
+                            PREMIERDIRECT <span class="text-blue-500">AI</span>
+                        </span>
+                        <span class="text-xs text-slate-400 font-medium tracking-tight">Busy hands, confident results.</span>
+                    </a>
                 </div>
-                <div>
-                    <span class="text-xl font-extrabold tracking-tight text-slate-900 block leading-none">PREMIERDIRECT AI</span>
-                    <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-widest block mt-0.5">Busy hands, confident results.</span>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                    <a href="#industries" class="hover:text-white transition-colors">Industries</a>
+                    <a href="#demo" class="hover:text-white transition-colors">Interactive Demo</a>
+                    <a href="#calculator" class="hover:text-white transition-colors">ROI Calculator</a>
+                    <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+                    <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+                </nav>
+
+                <!-- Navigation Buttons -->
+                <div class="hidden sm:flex items-center space-x-4">
+                    <button onclick="openModal('Login')" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
+                        Log In
+                    </button>
+                    <a href="#pricing" class="px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-lg shadow-blue-600/20 active:scale-95">
+                        Start Free Trial
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+                    </button>
                 </div>
             </div>
-            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
-                <a href="#industries" class="hover:text-slate-900 transition">Industries</a>
-                <a href="#simulator" class="hover:text-slate-900 transition">Interactive Demo</a>
-                <a href="#roi-calculator" class="hover:text-slate-900 transition">ROI Calculator</a>
-                <a href="#faq" class="hover:text-slate-900 transition">FAQ</a>
-                <a href="#pricing" class="hover:text-slate-900 transition">Pricing</a>
-            </div>
-            <div class="flex items-center space-x-3">
-                <!-- STYLED LOG IN BUTTON -->
-                <a href="#pricing" onclick="alert('Client Portal: Subscribers can log into their dashboard here once their account is active.'); return false;" class="px-4 py-2 text-sm font-bold text-slate-800 bg-slate-100 border border-slate-300 rounded-lg hover:bg-slate-900 hover:text-white transition shadow-sm flex items-center gap-1.5">
-                    <i class="fa-solid fa-right-to-bracket text-xs"></i> Log In
-                </a>
-                <!-- START FREE TRIAL CTA -->
-                <button type="button" onclick="openModal('trialModal'); return false;" class="px-5 py-2 text-sm font-bold btn-solid rounded-lg shadow-md hover:shadow-lg transition">
-                    Start Free Trial
-                </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/95 px-4 pt-4 pb-6 space-y-3">
+            <a href="#industries" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-white font-medium py-2">Industries</a>
+            <a href="#demo" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-white font-medium py-2">Interactive Demo</a>
+            <a href="#calculator" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-white font-medium py-2">ROI Calculator</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-white font-medium py-2">FAQ</a>
+            <a href="#pricing" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-white font-medium py-2">Pricing</a>
+            <div class="pt-2 border-t border-slate-800 flex flex-col gap-2">
+                <button onclick="openModal('Login'); toggleMobileMenu();" class="w-full text-center py-2 text-slate-300 hover:text-white font-medium">Log In</button>
+                <a href="#pricing" onclick="toggleMobileMenu()" class="w-full text-center py-2.5 rounded-lg text-white font-semibold bg-blue-600 hover:bg-blue-500">Start Free Trial</a>
             </div>
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="py-20 bg-slate-50 border-b border-slate-200">
-        <div class="max-w-5xl mx-auto px-4 text-center">
-            <span class="inline-block px-3 py-1 bg-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+    <section class="relative pt-16 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+        <!-- Subtle Glow Background Effects -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <!-- Category Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-400 text-xs sm:text-sm font-semibold tracking-wide uppercase mb-8 shadow-inner">
+                <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
                 Automated Client Acquisition & Recovery
-            </span>
-            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
-                Never Lose Another Client to a Missed Call.
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                Never lose another <span class="text-gradient-accent">high value lead.</span>
             </h1>
-            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-                When your hands are busy, PremierDirect AI instantly texts missed callers back with your automated booking link and captures 5-star Google reviews automatically—so you can focus on the job without losing revenue.
+
+            <!-- Sub-headline -->
+            <p class="max-w-3xl mx-auto text-lg sm:text-xl text-slate-300 font-normal leading-relaxed mb-10">
+                PremierDirect AI instantly engages missed callers via automated SMS and captures 5-star Google reviews—ensuring seamless lead conversion while you focus on client delivery.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="openModal('trialModal')" class="btn-solid px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition">
+
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-xl shadow-blue-600/30 active:scale-95 flex items-center justify-center gap-2">
                     Start 14-Day Free Trial
-                </button>
-                <a href="#simulator" class="px-8 py-4 bg-white border border-slate-300 text-slate-700 font-bold text-lg rounded-xl hover:bg-slate-100 transition text-center">
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </a>
+                <a href="#demo" class="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold text-slate-300 glass-card hover:bg-slate-800/80 hover:text-white transition-all border border-slate-700/60 active:scale-95 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play text-xs text-blue-400"></i>
                     See How It Works
                 </a>
             </div>
-            <p class="text-xs text-slate-500 mt-4">No contract • $29/mo after trial • Setup in under 5 minutes</p>
+
+            <!-- Trust Line -->
+            <p class="text-sm font-medium text-slate-400 tracking-wide">
+                $29/month &bull; No setup fees &bull; No long-term contracts
+            </p>
         </div>
     </section>
 
-    <!-- INDUSTRY CARDS SECTION (ORIGINAL TEXT RESTORED) -->
-    <section id="industries" class="py-24 bg-white">
+    <!-- INDUSTRIES SECTION -->
+    <section id="industries" class="py-20 bg-slate-950/60 border-y border-slate-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Tailored Solutions for Hands-On Professionals</h2>
-                <p class="text-slate-600 mt-2">Built specifically for local businesses where stepping away from work means missing money.</p>
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                    Tailored Solutions for Hands-On Professionals
+                </h2>
+                <p class="text-base sm:text-lg text-slate-400 italic font-medium">
+                    Built specifically for local service businesses where every unanswered call is a missed client opportunity.
+                </p>
             </div>
 
-            <div class="space-y-20">
-                <!-- 1. Trade Services -->
-                <div class="grid md:grid-cols-2 gap-10 items-center">
-                    <div>
-                        <img src="1791881066069~2.jpg" alt="Trade Services Professional" class="img-card light-border" onerror="this.onerror=null; this.src='https://placehold.co/600x340/0f172a/ffffff?text=Trade+Services';">
+            <!-- 4 Industry Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Card 1: Hair & Beauty Salons -->
+                <div class="glass-card rounded-2xl overflow-hidden glass-card-hover transition-all duration-300 flex flex-col group">
+                    <div class="h-64 sm:h-72 w-full overflow-hidden relative">
+                        <img src="1791884069230.jpg" 
+                             alt="Hair & Beauty Salons" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/800x600/1e293b/94a3b8?text=Hair+%26+Beauty+Salons'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute bottom-4 left-4 px-3 py-1 rounded-md bg-slate-900/90 text-xs font-semibold text-blue-400 border border-slate-700">
+                            Hair & Beauty Salons
+                        </span>
                     </div>
-                    <div class="space-y-4">
-                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Trade Services (Plumbing, Electrical, HVAC)</span>
-                        <h3 class="text-2xl font-bold text-slate-900">On the Job Site? Don't Lose Emergency Leads</h3>
-                        <p class="text-slate-600 leading-relaxed">
-                            Under a sink or up a ladder, answering a phone call is dangerous and impractical. PremierDirect AI texts homeowners immediately so they don't call the next contractor on Google.
-                        </p>
-                        <ul class="space-y-2 text-sm text-slate-600">
-                            <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Lock in quotes while operating power tools or driving</li>
-                            <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Build Google local SEO with automated review requests</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- 2. Hair & Beauty Salon -->
-                <div class="grid md:grid-cols-2 gap-10 items-center md:flex-row-reverse">
-                    <div class="space-y-4 md:order-1 order-2">
-                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Hair & Beauty Salons</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Keep Your Hands in the Styling Chair</h3>
-                        <p class="text-slate-600 leading-relaxed">
-                            When you're mid-blowout or applying color, answering a ringing phone isn't an option. PremierDirect AI immediately replies via SMS to confirm appointments, answer quick questions, and keep your chair booked.
-                        </p>
-                        <ul class="space-y-2 text-sm text-slate-600">
-                            <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Instant text response to salon call inquiries</li>
-                            <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Automatic Google review requests post-appointment</li>
-                        </ul>
-                    </div>
-                    <div class="md:order-2 order-1">
-                        <img src="1791884069230.jpg" alt="Hair and Beauty Salon Professional" class="img-card light-border" onerror="this.onerror=null; this.src='https://placehold.co/600x340/0f172a/ffffff?text=Hair+%26+Beauty+Salons';">
+                    <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mb-3">
+                                Never Miss a Booking While Serving a Client
+                            </h3>
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                When you're mid-appointment, picking up the phone isn't an option. PremierDirect AI instantly replies via SMS to confirm appointments, answer client inquiries, and keep your schedule full.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 3. Fitness & Personal Trainers -->
-                <div class="grid md:grid-cols-2 gap-10 items-center">
-                    <div>
-                        <img src="1791884316108.jpg" alt="Fitness and Personal Trainer Professional" class="img-card light-border" onerror="this.onerror=null; this.src='https://placehold.co/600x340/0f172a/ffffff?text=Fitness+%26+Trainers';">
+                <!-- Card 2: Fitness & Personal Trainers -->
+                <div class="glass-card rounded-2xl overflow-hidden glass-card-hover transition-all duration-300 flex flex-col group">
+                    <div class="h-64 sm:h-72 w-full overflow-hidden relative">
+                        <img src="1791884316108.jpg" 
+                             alt="Fitness & Personal Trainers" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/800x600/1e293b/94a3b8?text=Fitness+%26+Personal+Trainers'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute bottom-4 left-4 px-3 py-1 rounded-md bg-slate-900/90 text-xs font-semibold text-blue-400 border border-slate-700">
+                            Fitness & Personal Trainers
+                        </span>
                     </div>
-                    <div class="space-y-4">
-                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Fitness & Personal Trainers</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Focus on the Session, Not the Phone</h3>
-                        <p class="text-slate-600 leading-relaxed">
-                            You can't interrupt a 1-on-1 personal training session to take a call from a prospect. Our automated system handles missed calls instantly, turning interested gym-goers into scheduled consults.
-                        </p>
-                        <ul class="space-y-2 text-sm text-slate-600">
-                            <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Capture new member leads while actively training</li>
-                            <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Automated trial session scheduling via SMS</li>
-                        </ul>
+                    <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mb-3">
+                                Never miss a training session to take a call.
+                            </h3>
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                You can't interrupt a training session to take a call. Our automated system handles missed calls instantly, turning interested inquiries into scheduled consultations.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 4. Health, Wellness & Spa -->
-                <div class="grid md:grid-cols-2 gap-10 items-center md:flex-row-reverse">
-                    <div class="space-y-4 md:order-1 order-2">
-                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Health, Wellness & Spa</span>
-                        <h3 class="text-2xl font-bold text-slate-900">Protect the Serene Spa Environment</h3>
-                        <p class="text-slate-600 leading-relaxed">
-                            Ringing phones disrupt tranquil massage or facial treatments. Let PremierDirect AI quietly text back callers, share booking links, and gather positive client reviews without breaking ambient peace.
-                        </p>
-                        <ul class="space-y-2 text-sm text-slate-600">
-                            <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Quiet missed call text-backs keep spa quiet</li>
-                            <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Seamless client satisfaction follow-ups</li>
-                        </ul>
+                <!-- Card 3: Health, Wellness & Spa -->
+                <div class="glass-card rounded-2xl overflow-hidden glass-card-hover transition-all duration-300 flex flex-col group">
+                    <div class="h-64 sm:h-72 w-full overflow-hidden relative">
+                        <img src="1791884228401.jpg" 
+                             alt="Health, Wellness & Spa" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/800x600/1e293b/94a3b8?text=Health%2C+Wellness+%26+Spa'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute bottom-4 left-4 px-3 py-1 rounded-md bg-slate-900/90 text-xs font-semibold text-blue-400 border border-slate-700">
+                            Health, Wellness & Spa
+                        </span>
                     </div>
-                    <div class="md:order-2 order-1">
-                        <img src="1791884228401.jpg" alt="Health Wellness and Spa Professional" class="img-card light-border" onerror="this.onerror=null; this.src='https://placehold.co/600x340/0f172a/ffffff?text=Health+%26+Spa';">
+                    <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mb-3">
+                                Maintain a Peaceful Spa Environment
+                            </h3>
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                Ringing phones disrupt a quiet, relaxing atmosphere. PremierDirect AI quietly sends text responses with direct booking options and gathers positive client reviews seamlessly.
+                            </p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Card 4: Boutique Hotels & Guest Houses -->
+                <div class="glass-card rounded-2xl overflow-hidden glass-card-hover transition-all duration-300 flex flex-col group">
+                    <div class="h-64 sm:h-72 w-full overflow-hidden relative">
+                        <img src="1791881066069~2.jpg" 
+                             alt="Boutique Hotels & Guest Houses" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/800x600/1e293b/94a3b8?text=Boutique+Hotels+%26+Guest+Houses'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute bottom-4 left-4 px-3 py-1 rounded-md bg-slate-900/90 text-xs font-semibold text-blue-400 border border-slate-700">
+                            Boutique Hotels & Guest Houses
+                        </span>
+                    </div>
+                    <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mb-3">
+                                Never lose a direct room booking. New bookings get captured automatically.
+                            </h3>
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                Whether your front desk team is checking in guests or attending to special requests, missed phone calls can mean lost direct room bookings. PremierDirect AI texts callers back immediately with direct booking links and automated answers to common guest questions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- INTERACTIVE DEMO SIMULATOR -->
-    <section id="simulator" class="py-20 bg-slate-50 border-t border-b border-slate-200">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-extrabold text-slate-900">Interactive Missed Call Simulator</h2>
-                <p class="text-slate-600 mt-2">See how callers self-book instantly when your hands are busy.</p>
+    <!-- INTERACTIVE MISSED CALL DEMO -->
+    <section id="demo" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                    Interactive Missed Call Simulator
+                </h2>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    Experience what your clients see when you're unable to take a call.
+                </p>
             </div>
-            
-            <div class="bg-white rounded-2xl light-border p-6 md:p-8 max-w-xl mx-auto">
-                <div class="space-y-4 mb-6">
-                    <div class="p-4 bg-slate-100 rounded-xl text-sm text-slate-700">
-                        <strong>Simulated Scenario:</strong> A potential client calls your business line while you are actively working with another client.
-                    </div>
-                    <!-- STEP 1 -->
-                    <div id="simStep1" class="p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm flex justify-between items-center">
-                        <span><i class="fa-solid fa-phone-slash mr-2"></i> Missed Call from Prospect</span>
-                        <span class="text-xs font-bold uppercase">10:00 AM</span>
-                    </div>
-                    <!-- STEP 2 -->
-                    <div id="simStep2" class="p-4 bg-slate-900 text-white rounded-xl text-sm space-y-2 hidden">
-                        <div class="text-xs text-slate-400 font-bold uppercase">PremierDirect AI SMS Sent (10:01 AM)</div>
-                        <p>"Hi! Sorry we missed your call—we are currently assisting another client. Tap here to view our open schedule & book directly: <span class="underline text-blue-300">premierdirect.ai/book</span>"</p>
-                    </div>
-                    <!-- STEP 3 -->
-                    <div id="simStep3" class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm space-y-1 hidden">
-                        <div class="text-xs text-emerald-600 font-bold uppercase flex items-center gap-1">
-                            <i class="fa-solid fa-circle-check"></i> Direct Self-Booking Confirmed (10:02 AM)
+
+            <div class="max-w-md mx-auto">
+                <!-- Mobile Phone Frame -->
+                <div class="bg-slate-900 border-4 border-slate-700 rounded-[3rem] p-4 shadow-2xl relative overflow-hidden">
+                    <!-- Phone Notch -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-5 bg-slate-800 rounded-b-xl z-20"></div>
+                    
+                    <!-- Phone Display Area -->
+                    <div class="bg-slate-950 rounded-[2.2rem] pt-8 pb-6 px-4 min-h-[480px] flex flex-col justify-between relative z-10 border border-slate-800">
+                        
+                        <!-- Header Bar -->
+                        <div class="text-center border-b border-slate-800/80 pb-3">
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Messages &bull; PremierDirect AI</span>
+                            <div class="text-xs text-slate-500 mt-0.5">Today</div>
                         </div>
-                        <p class="font-semibold">Caller clicked link & booked: Tomorrow at 2:00 PM</p>
-                        <p class="text-xs text-emerald-700">Client acquired automatically without taking a phone call!</p>
+
+                        <!-- Messages Container -->
+                        <div id="simMessages" class="flex-1 py-4 space-y-3 overflow-y-auto max-h-[340px]">
+                            <div class="text-center text-xs text-slate-500 my-4 italic" id="simPlaceholder">
+                                Click "Trigger Simulated Call" below to test the instant response workflow.
+                            </div>
+                        </div>
+
+                        <!-- Phone Action Button -->
+                        <div class="pt-2">
+                            <button id="simBtn" onclick="runSimulation()" class="w-full py-3 px-4 rounded-xl text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-md active:scale-95 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-phone-slash"></i>
+                                Trigger Simulated Call
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <button id="runSimBtn" onclick="runSimulator()" class="w-full btn-solid py-3 rounded-xl font-bold transition">
-                    Trigger Simulated Call
-                </button>
             </div>
         </div>
     </section>
 
     <!-- ROI CALCULATOR SECTION -->
-    <section id="roi-calculator" class="py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-extrabold text-slate-900">Calculate Your Lost Revenue</h2>
-            <p class="text-slate-600 mt-2">Drag the sliders below to see how much missed calls cost your business each month.</p>
-            
-            <div class="mt-10 bg-slate-50 rounded-2xl light-border p-8 text-left max-w-2xl mx-auto space-y-8">
-                <div>
-                    <div class="flex justify-between items-center mb-2">
-                        <label class="text-sm font-bold text-slate-700">Estimated Missed Calls Per Week:</label>
-                        <span id="callsDisplay" class="text-lg font-extrabold text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-200">5 calls</span>
-                    </div>
-                    <input type="range" id="missedCalls" min="1" max="25" value="5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" oninput="calculateROI()">
-                </div>
+    <section id="calculator" class="py-20 bg-slate-950/60 border-y border-slate-800/80">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                    Calculate Your Lost Revenue
+                </h2>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    Drag the sliders below to see how much unanswered calls cost your business each month.
+                </p>
+            </div>
 
-                <div>
-                    <div class="flex justify-between items-center mb-2">
-                        <label class="text-sm font-bold text-slate-700">Average Customer Value ($):</label>
-                        <span id="valDisplay" class="text-lg font-extrabold text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-200">$75</span>
+            <div class="glass-card rounded-2xl p-6 sm:p-10 border border-slate-800">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    
+                    <!-- Sliders Side -->
+                    <div class="space-y-8">
+                        <!-- Slider 1: Missed Calls per Week -->
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <label for="missedCalls" class="text-sm font-semibold text-slate-200">
+                                    Estimated Missed Calls / Week
+                                </label>
+                                <span id="missedCallsVal" class="text-lg font-bold text-blue-400 bg-blue-950/80 px-3 py-1 rounded-lg border border-blue-800">
+                                    5
+                                </span>
+                            </div>
+                            <input type="range" id="missedCalls" min="1" max="30" value="5" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500" oninput="updateCalculator()">
+                        </div>
+
+                        <!-- Slider 2: Average Customer Value -->
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <label for="avgValue" class="text-sm font-semibold text-slate-200">
+                                    Average Customer Value ($)
+                                </label>
+                                <span id="avgValueVal" class="text-lg font-bold text-blue-400 bg-blue-950/80 px-3 py-1 rounded-lg border border-blue-800">
+                                    $75
+                                </span>
+                            </div>
+                            <input type="range" id="avgValue" min="20" max="500" step="5" value="75" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500" oninput="updateCalculator()">
+                        </div>
                     </div>
-                    <input type="range" id="avgValue" min="20" max="500" step="5" value="75" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" oninput="calculateROI()">
-                </div>
-                
-                <div class="pt-6 border-t border-slate-200 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs text-slate-500 uppercase font-bold block">Estimated Monthly Lost Revenue</span>
-                        <span id="roiResult" class="text-3xl font-extrabold text-red-600">$1,500 / mo</span>
+
+                    <!-- Output Results Side -->
+                    <div class="bg-slate-900/90 rounded-xl p-6 border border-slate-800 text-center flex flex-col justify-center items-center">
+                        <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+                            Estimated Monthly Lost Revenue
+                        </div>
+                        <div id="lostRevenue" class="text-4xl sm:text-5xl font-black text-red-400 mb-6 tracking-tight">
+                            $1,500
+                        </div>
+
+                        <div class="w-full border-t border-slate-800 pt-6 flex justify-between items-center text-sm">
+                            <span class="text-slate-400 font-medium">PremierDirect AI Monthly Cost:</span>
+                            <span class="text-xl font-bold text-emerald-400">$29 / mo</span>
+                        </div>
                     </div>
-                    <div class="text-right">
-                        <span class="text-xs text-slate-500 uppercase font-bold block">PremierDirect AI Cost</span>
-                        <span class="text-3xl font-extrabold text-slate-900">$29 / mo</span>
-                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ SECTION -->
-    <section id="faq" class="py-20 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-3xl font-extrabold text-slate-900 text-center mb-12">Frequently Asked Questions</h2>
-            
-            <div class="space-y-6">
-                <div class="bg-white p-6 rounded-xl light-border">
-                    <h3 class="font-bold text-lg text-slate-900">What do you mean by linking my Google Business dashboard?</h3>
-                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
+    <section id="faq" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                    Frequently Asked Questions
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Question 1 -->
+                <div class="glass-card rounded-xl overflow-hidden border border-slate-800">
+                    <button onclick="toggleFaq(1)" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="text-base sm:text-lg font-semibold text-white">
+                            What do you mean by linking my Google Business dashboard?
+                        </span>
+                        <i id="faqIcon-1" class="fa-solid fa-chevron-down text-blue-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faqAns-1" class="hidden px-6 pb-5 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/60 pt-4">
                         When you sign up, you simply paste your official Google Business review link into your secure PremierDirect online dashboard portal. Our automated system uses that link to send SMS review invites to your clients after a service is finished.
-                    </p>
+                    </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl light-border">
-                    <h3 class="font-bold text-lg text-slate-900">How do I access my online dashboard?</h3>
-                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
+                <!-- Question 2 -->
+                <div class="glass-card rounded-xl overflow-hidden border border-slate-800">
+                    <button onclick="toggleFaq(2)" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="text-base sm:text-lg font-semibold text-white">
+                            How do I access my online dashboard?
+                        </span>
+                        <i id="faqIcon-2" class="fa-solid fa-chevron-down text-blue-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faqAns-2" class="hidden px-6 pb-5 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/60 pt-4">
                         You can log into your dashboard from any web browser on your laptop, desktop, or mobile phone. Simply click the "Log In" link in our header to manage your settings, view incoming SMS responses, and track your acquired reviews.
-                    </p>
+                    </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl light-border">
-                    <h3 class="font-bold text-lg text-slate-900">Are there any contracts or hidden setup fees?</h3>
-                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
-                        No contracts whatsoever. PremierDirect AI is $29/month with a 14-day free trial. You can cancel online at any time with a single click in your dashboard settings.
-                    </p>
+                <!-- Question 3 -->
+                <div class="glass-card rounded-xl overflow-hidden border border-slate-800">
+                    <button onclick="toggleFaq(3)" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="text-base sm:text-lg font-semibold text-white">
+                            Are there any contracts or setup fees?
+                        </span>
+                        <i id="faqIcon-3" class="fa-solid fa-chevron-down text-blue-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faqAns-3" class="hidden px-6 pb-5 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/60 pt-4">
+                        No contracts and no setup fees whatsoever. PremierDirect AI is $29/month with a 14-day free trial.
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- PRICING SECTION -->
-    <section id="pricing" class="py-20 bg-white">
-        <div class="max-w-3xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-extrabold text-slate-900">Simple, Transparent Pricing</h2>
-            <p class="text-slate-600 mt-2 mb-10">One simple plan with everything included to grow your business.</p>
+    <section id="pricing" class="py-20 bg-slate-950/60 border-t border-slate-800/80">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                    Simple, Transparent Pricing
+                </h2>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    One simple plan with everything included to grow your business.
+                </p>
+            </div>
 
-            <div class="bg-slate-50 rounded-2xl light-border p-8 border-2 border-slate-900 relative">
-                <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs font-bold uppercase px-3 py-1 rounded-full">
-                    Most Popular
-                </span>
-                <div class="text-4xl font-extrabold text-slate-900 mb-2">$29 <span class="text-lg font-normal text-slate-600">/ month</span></div>
-                <p class="text-sm text-slate-500 mb-6">Start with a 14-day free trial. No credit card required to test.</p>
-                
-                <ul class="text-left space-y-3 mb-8 text-sm text-slate-700 max-w-sm mx-auto">
-                    <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Unlimited missed-call SMS text-backs</li>
-                    <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Google Review auto-acquisition link</li>
-                    <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Web & Mobile subscriber portal dashboard</li>
-                    <li><i class="fa-solid fa-check text-slate-900 mr-2"></i> Custom business hours & auto-replies</li>
+            <!-- Single Pricing Card -->
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border-2 border-blue-500/40 relative shadow-2xl max-w-xl mx-auto">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full shadow-lg">
+                    All-Inclusive
+                </div>
+
+                <div class="text-center mb-8">
+                    <div class="flex items-baseline justify-center gap-1">
+                        <span class="text-5xl sm:text-6xl font-extrabold text-white tracking-tight">$29</span>
+                        <span class="text-slate-400 font-medium text-lg">/ month</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mt-2">Start with a 14-day free trial. No setup fees.</p>
+                </div>
+
+                <!-- Feature List -->
+                <ul class="space-y-4 mb-8 text-sm sm:text-base text-slate-300">
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-blue-400 text-lg"></i>
+                        <span>Unlimited missed-call SMS text-backs</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-blue-400 text-lg"></i>
+                        <span>Google Review auto-acquisition link</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-blue-400 text-lg"></i>
+                        <span>Web & Mobile subscriber portal dashboard</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-blue-400 text-lg"></i>
+                        <span>Custom business hours & auto-replies</span>
+                    </li>
                 </ul>
 
-                <button onclick="openModal('trialModal')" class="w-full btn-solid py-4 rounded-xl font-bold text-lg shadow-md hover:shadow-lg transition">
+                <button onclick="openModal('Trial')" class="w-full py-4 rounded-xl text-base font-bold text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-xl shadow-blue-600/30 active:scale-95 text-center block">
                     Start 14-Day Free Trial
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER WITH LEGAL LINKS & TERMS -->
-    <footer class="py-12 bg-slate-900 text-slate-400 text-xs border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="text-center md:text-left">
-                    <p class="font-bold text-slate-200 text-sm mb-1">PREMIERDIRECT AI</p>
-                    <p>© 2026 PremierDirect AI. All rights reserved. Automated customer recovery for local service professionals.</p>
-                </div>
-                <div class="flex space-x-6 text-slate-300">
-                    <a href="#terms" onclick="alert('Terms & Conditions: By subscribing to PremierDirect AI ($29/mo), you agree to our standard service agreement. Subscriptions can be canceled at any time directly through your dashboard.'); return false;" class="hover:text-white transition">Terms & Conditions</a>
-                    <a href="#privacy" onclick="alert('Privacy Policy: PremierDirect AI respects subscriber privacy and protects customer data. We never share or sell contact information.'); return false;" class="hover:text-white transition">Privacy Policy</a>
-                    <a href="#support" onclick="alert('Support: Need assistance? Reach out to support@premierdirect.ai or contact our help desk from your subscriber portal.'); return false;" class="hover:text-white transition">Support & Contact</a>
-                </div>
+    <!-- FOOTER -->
+    <footer class="py-12 bg-slate-950 border-t border-slate-800 text-sm text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <p>&copy; 2026 PremierDirect AI. All rights reserved. Automated customer recovery for local service professionals.</p>
+            </div>
+            <div class="flex items-center space-x-6">
+                <button onclick="openModal('Terms')" class="hover:text-white transition-colors">Terms & Conditions</button>
+                <button onclick="openModal('Privacy')" class="hover:text-white transition-colors">Privacy Policy</button>
             </div>
         </div>
     </footer>
 
-    <!-- TRIAL MODAL -->
-    <div id="trialModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
-            <button onclick="closeModal('trialModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-xl font-bold">&times;</button>
-            <h3 class="text-xl font-bold text-slate-900 mb-2">Start Your 14-Day Free Trial</h3>
-            <p class="text-xs text-slate-600 mb-6">No credit card required. Setup takes less than 5 minutes.</p>
-            
-            <form onsubmit="alert('Thank you for signing up! Your trial dashboard setup instructions have been sent to your email.'); closeModal('trialModal'); return false;" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Business Name</label>
-                    <input type="text" required placeholder="e.g. Elite Salon or Apex Plumbing" class="w-full p-3 border border-slate-300 rounded-lg text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Your Email</label>
-                    <input type="email" required placeholder="you@example.com" class="w-full p-3 border border-slate-300 rounded-lg text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Phone Number</label>
-                    <input type="tel" required placeholder="(555) 000-0000" class="w-full p-3 border border-slate-300 rounded-lg text-sm">
-                </div>
-                <button type="submit" class="w-full btn-solid py-3 rounded-lg font-bold text-sm shadow mt-2">
-                    Create Account & Get Dashboard Access
+    <!-- POP-UP MODAL (Terms / Privacy / Login / Trial) -->
+    <div id="modalOverlay" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Content -->
+            <div id="modalTitle" class="text-xl font-bold text-white mb-4">Terms & Conditions</div>
+            <div id="modalBody" class="text-slate-300 text-sm leading-relaxed space-y-3 max-h-[60vh] overflow-y-auto pr-2">
+                <!-- Injected dynamically -->
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+                <button onclick="closeModal()" class="px-5 py-2 rounded-lg bg-slate-800 text-white hover:bg-slate-700 text-sm font-semibold">
+                    Close
                 </button>
-            </form>
+            </div>
         </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-        }
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-xl';
+            }
         }
 
-        function runSimulator() {
-            const btn = document.getElementById('runSimBtn');
+        // FAQ Accordion Toggle
+        function toggleFaq(index) {
+            const ans = document.getElementById(`faqAns-${index}`);
+            const icon = document.getElementById(`faqIcon-${index}`);
+            const isHidden = ans.classList.contains('hidden');
+
+            // Close all
+            [1, 2, 3].forEach(i => {
+                document.getElementById(`faqAns-${i}`).classList.add('hidden');
+                document.getElementById(`faqIcon-${i}`).style.transform = 'rotate(0deg)';
+            });
+
+            // Open clicked if was hidden
+            if (isHidden) {
+                ans.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // ROI Calculator Logic
+        function updateCalculator() {
+            const missedCalls = parseInt(document.getElementById('missedCalls').value);
+            const avgValue = parseInt(document.getElementById('avgValue').value);
+
+            document.getElementById('missedCallsVal').innerText = missedCalls;
+            document.getElementById('avgValueVal').innerText = `$${avgValue}`;
+
+            // Monthly calculation: (Missed Calls * 4.33 weeks) * Customer Value
+            const monthlyLost = Math.round(missedCalls * 4.33 * avgValue);
+            document.getElementById('lostRevenue').innerText = `$${monthlyLost.toLocaleString()}`;
+        }
+
+        // Missed Call Simulator Logic
+        let simRunning = false;
+        function runSimulation() {
+            if (simRunning) return;
+            simRunning = true;
+
+            const container = document.getElementById('simMessages');
+            const placeholder = document.getElementById('simPlaceholder');
+            const btn = document.getElementById('simBtn');
+
+            if (placeholder) placeholder.remove();
+            container.innerHTML = '';
+
             btn.disabled = true;
-            btn.innerText = "Simulating Call...";
+            btn.classList.add('opacity-50');
 
-            document.getElementById('simStep2').classList.add('hidden');
-            document.getElementById('simStep3').classList.add('hidden');
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
+            // Step 1: Missed Call
+            const msg1 = document.createElement('div');
+            msg1.className = 'bg-red-950/80 border border-red-800/80 rounded-xl p-3 text-xs text-red-200 flex items-center gap-2.5 animate-fade-in';
+            msg1.innerHTML = `
+                <i class="fa-solid fa-phone-slash text-red-400 text-sm"></i>
+                <div>
+                    <div class="font-bold">Missed Call from Prospect</div>
+                    <div class="text-[10px] text-red-300/80">${timeStr}</div>
+                </div>
+            `;
+            container.appendChild(msg1);
+
+            // Step 2: Automated SMS Sent
             setTimeout(() => {
-                document.getElementById('simStep2').classList.remove('hidden');
-            }, 1000);
+                const msg2 = document.createElement('div');
+                msg2.className = 'bg-blue-600 rounded-xl rounded-tr-none p-3 text-xs text-white ml-auto max-w-[85%] shadow-md animate-fade-in space-y-1';
+                msg2.innerHTML = `
+                    <p>Hi! Sorry we missed your call—we're currently assisting another client. Tap here to view available times & book online instantly: <span class="underline font-bold">premierdirect.ai/book</span></p>
+                    <div class="text-[9px] text-blue-200 text-right font-mono">${timeStr} &bull; Delivered</div>
+                `;
+                container.appendChild(msg2);
+                container.scrollTop = container.scrollHeight;
+            }, 1200);
 
+            // Step 3: Customer Action Confirmation
             setTimeout(() => {
-                document.getElementById('simStep3').classList.remove('hidden');
+                const msg3 = document.createElement('div');
+                msg3.className = 'bg-emerald-950/80 border border-emerald-800/80 rounded-xl p-3 text-xs text-emerald-200 flex items-center gap-2.5 animate-fade-in';
+                msg3.innerHTML = `
+                    <i class="fa-solid fa-calendar-check text-emerald-400 text-sm"></i>
+                    <div>
+                        <div class="font-bold">New Booking Confirmed!</div>
+                        <div class="text-[10px] text-emerald-300/80">Client scheduled via automated link</div>
+                    </div>
+                `;
+                container.appendChild(msg3);
+                container.scrollTop = container.scrollHeight;
+
                 btn.disabled = false;
-                btn.innerText = "Re-Trigger Simulated Call";
-            }, 2500);
+                btn.classList.remove('opacity-50');
+                simRunning = false;
+            }, 2800);
         }
 
-        function calculateROI() {
-            const calls = parseFloat(document.getElementById('missedCalls').value) || 0;
-            const val = parseFloat(document.getElementById('avgValue').value) || 0;
+        // Modal Logic
+        function openModal(type) {
+            const overlay = document.getElementById('modalOverlay');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
 
-            document.getElementById('callsDisplay').innerText = calls + ' call' + (calls > 1 ? 's' : '');
-            document.getElementById('valDisplay').innerText = '$' + val;
+            if (type === 'Terms' || type === 'Privacy') {
+                title.innerText = 'PremierDirect AI — Terms of Service & Privacy Notice';
+                body.innerHTML = `
+                    <p class="font-semibold text-white">1. Service Overview</p>
+                    <p>PremierDirect AI provides an automated missed-call SMS text-back and Google Review distribution service for $29/month.</p>
+                    <p class="font-semibold text-white mt-3">2. Privacy & Data Handling</p>
+                    <p>Your subscriber account data, client numbers, and review links remain 100% strictly confidential and will never be sold or shared with third parties.</p>
+                    <p class="font-semibold text-white mt-3">3. Subscription Terms</p>
+                    <p>All plans are month-to-month with no setup fees or long-term contracts. You may cancel service at any time in your online subscriber portal.</p>
+                `;
+            } else if (type === 'Login') {
+                title.innerText = 'Subscriber Portal Login';
+                body.innerHTML = `
+                    <div class="space-y-4 pt-2">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Email Address</label>
+                            <input type="email" placeholder="you@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Password</label>
+                            <input type="password" placeholder="••••••••" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <button onclick="closeModal()" class="w-full py-2.5 rounded-lg bg-blue-600 text-white font-bold text-sm hover:bg-blue-500">
+                            Log In
+                        </button>
+                    </div>
+                `;
+            } else if (type === 'Trial') {
+                title.innerText = 'Start Your 14-Day Free Trial';
+                body.innerHTML = `
+                    <div class="space-y-4 pt-2">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Business Name</label>
+                            <input type="text" placeholder="e.g. Apex Salon & Spa" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Work Email</label>
+                            <input type="email" placeholder="owner@business.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white text-sm focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <button onclick="closeModal()" class="w-full py-2.5 rounded-lg bg-blue-600 text-white font-bold text-sm hover:bg-blue-500">
+                            Create Account & Start Free Trial
+                        </button>
+                    </div>
+                `;
+            }
 
-            const monthlyLoss = Math.round(calls * 4 * val);
-            document.getElementById('roiResult').innerText = '$' + monthlyLoss.toLocaleString() + ' / mo';
+            overlay.classList.remove('hidden');
         }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.add('hidden');
+        }
+
+        // Close modal on outside click
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
