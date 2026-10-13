@@ -37,29 +37,39 @@
                 <a href="#" class="text-2xl font-bold tracking-tight text-slate-900">
                     PremierDirect<span class="text-slate-500 font-light">.AI</span>
                 </a>
-                <button id="menu-btn" aria-label="Toggle Menu" class="p-2.5 rounded-lg text-slate-800 hover:bg-slate-100 transition focus:outline-none">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+                
+                <div class="flex items-center gap-3">
+                    <button onclick="openAuthModal('login')" class="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition">
+                        Log In
+                    </button>
+                    <button id="menu-btn" aria-label="Toggle Menu" class="p-2 rounded-lg text-slate-800 hover:bg-slate-100 transition focus:outline-none">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- SOLID OPAQUE MOBILE NAVIGATION DRAWER (Z-INDEX 9999) -->
+    <!-- SOLID OPAQUE MOBILE NAVIGATION DRAWER -->
     <div id="nav-drawer" class="fixed top-20 left-0 right-0 bottom-0 bg-white z-[9999] hidden flex-col justify-between p-6 border-t border-slate-200 overflow-y-auto">
-        <nav class="space-y-4">
+        <nav class="space-y-3">
             <a href="#demo" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">Interactive Demo</a>
             <a href="#industries" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">Industries & Reviews</a>
             <a href="#agent" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">Google Review Agent</a>
             <a href="#roi" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">ROI Calculator</a>
-            <a href="#pricing" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">Pricing & Trial</a>
+            <a href="#pricing" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">Pricing</a>
             <a href="#faq" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">FAQ</a>
+            <hr class="border-slate-100 my-2">
+            <button onclick="closeMenu(); openAuthModal('login')" class="w-full text-left px-4 py-3 text-lg font-semibold text-slate-700 hover:bg-slate-50 rounded-lg transition">
+                Log In
+            </button>
         </nav>
         <div class="pt-6 pb-8 border-t border-slate-100">
-            <a href="#pricing" onclick="closeMenu()" class="block w-full py-4 text-center bg-black hover:bg-slate-800 text-white font-bold rounded-xl transition shadow-lg text-lg">
+            <button onclick="closeMenu(); openAuthModal('signup')" class="block w-full py-4 text-center bg-black hover:bg-slate-800 text-white font-bold rounded-xl transition shadow-lg text-lg">
                 Start 14-Day Free Trial
-            </a>
+            </button>
         </div>
     </div>
 
@@ -76,9 +86,9 @@
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-            <a href="#pricing" class="w-full sm:w-auto px-8 py-4 bg-black hover:bg-slate-800 text-white font-bold text-lg rounded-xl transition shadow-lg text-center">
+            <button onclick="openAuthModal('signup')" class="w-full sm:w-auto px-8 py-4 bg-black hover:bg-slate-800 text-white font-bold text-lg rounded-xl transition shadow-lg text-center">
                 Start 14-Day Free Trial
-            </a>
+            </button>
             <a href="#demo" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-semibold text-lg rounded-xl transition text-center">
                 See How It Works
             </a>
@@ -93,7 +103,6 @@
     <section id="industries" class="py-16 bg-slate-50 border-y border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
                 <!-- Card 1 -->
                 <div class="flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
                     <div class="overflow-hidden h-72">
@@ -153,7 +162,6 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -370,7 +378,7 @@
                         </li>
                     </ul>
 
-                    <button class="w-full py-5 bg-black hover:bg-slate-800 text-white text-xl font-bold rounded-xl transition shadow-xl">
+                    <button onclick="openAuthModal('signup')" class="w-full py-5 bg-black hover:bg-slate-800 text-white text-xl font-bold rounded-xl transition shadow-xl">
                         Start 14-Day Free Trial
                     </button>
                 </div>
@@ -383,25 +391,64 @@
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>© PremierDirect AI. All rights reserved.</p>
             <div class="flex gap-6">
-                <button onclick="toggleModal()" class="hover:text-slate-900 underline transition">Terms & Conditions</button>
-                <button onclick="toggleModal()" class="hover:text-slate-900 underline transition">Privacy Policy</button>
+                <button onclick="toggleTermsModal()" class="hover:text-slate-900 underline transition">Terms & Conditions</button>
+                <button onclick="toggleTermsModal()" class="hover:text-slate-900 underline transition">Privacy Policy</button>
             </div>
         </div>
     </footer>
+
+    <!-- SIGN UP / LOGIN AUTH MODAL -->
+    <div id="auth-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[10000] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl relative space-y-6">
+            <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+            
+            <div class="text-center">
+                <h3 id="auth-title" class="text-2xl font-extrabold text-slate-900">Start 14-Day Free Trial</h3>
+                <p id="auth-subtitle" class="text-slate-500 text-sm mt-1">No credit card required to start.</p>
+            </div>
+
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div id="name-field">
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name</label>
+                    <input type="text" placeholder="John Doe" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Business Email</label>
+                    <input type="email" placeholder="you@company.com" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black">
+                </div>
+
+                <div id="phone-field">
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Mobile Phone Number</label>
+                    <input type="tel" placeholder="+1 (555) 000-0000" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black">
+                </div>
+
+                <button id="auth-submit-btn" type="submit" class="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-slate-800 transition shadow-lg text-base mt-2">
+                    Start Free Trial
+                </button>
+            </form>
+
+            <div class="text-center pt-2">
+                <p id="auth-toggle-text" class="text-xs text-slate-500">
+                    Already have an account? <button onclick="toggleAuthMode()" class="text-black font-bold underline">Log In</button>
+                </p>
+            </div>
+        </div>
+    </div>
 
     <!-- TERMS & CONDITIONS MODAL -->
     <div id="terms-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[10000] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-xl w-full p-8 shadow-2xl space-y-6 max-h-[80vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-4">
                 <h3 class="text-xl font-bold text-slate-900">Terms & Service Terms</h3>
-                <button onclick="toggleModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+                <button onclick="toggleTermsModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
             </div>
             <div class="text-sm text-slate-600 space-y-4 leading-relaxed">
                 <p><strong>Service Subscription:</strong> PremierDirect AI provides automated messaging and lead recovery toolsets at $29 per month following your 14-day free trial.</p>
                 <p><strong>No Long-Term Contracts:</strong> You retain complete control to pause or end your subscription at any time within your user portal without penalty or hidden cancellation fees.</p>
                 <p><strong>Data Privacy:</strong> We strictly manage lead contact numbers and business automated messages adhering to privacy standards. Your data is never sold or repurposed.</p>
             </div>
-            <button onclick="toggleModal()" class="w-full py-3 bg-black text-white font-bold rounded-xl hover:bg-slate-800 transition">
+            <button onclick="toggleTermsModal()" class="w-full py-3 bg-black text-white font-bold rounded-xl hover:bg-slate-800 transition">
                 Close
             </button>
         </div>
@@ -411,6 +458,7 @@
     <script>
         const menuBtn = document.getElementById('menu-btn');
         const navDrawer = document.getElementById('nav-drawer');
+        let currentAuthMode = 'signup';
 
         function toggleMenu() {
             if (navDrawer.classList.contains('hidden')) {
@@ -427,6 +475,53 @@
         }
 
         menuBtn.addEventListener('click', toggleMenu);
+
+        // Auth Modal Controls
+        function openAuthModal(mode) {
+            currentAuthMode = mode;
+            updateAuthUI();
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function toggleAuthMode() {
+            currentAuthMode = currentAuthMode === 'signup' ? 'login' : 'signup';
+            updateAuthUI();
+        }
+
+        function updateAuthUI() {
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            const nameField = document.getElementById('name-field');
+            const phoneField = document.getElementById('phone-field');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const toggleText = document.getElementById('auth-toggle-text');
+
+            if (currentAuthMode === 'login') {
+                title.textContent = 'Welcome Back';
+                subtitle.textContent = 'Log in to manage your PremierDirect portal.';
+                nameField.classList.add('hidden');
+                phoneField.classList.add('hidden');
+                submitBtn.textContent = 'Log In';
+                toggleText.innerHTML = 'Don\'t have an account yet? <button onclick="toggleAuthMode()" class="text-black font-bold underline">Start 14-Day Free Trial</button>';
+            } else {
+                title.textContent = 'Start 14-Day Free Trial';
+                subtitle.textContent = 'No credit card required to start.';
+                nameField.classList.remove('hidden');
+                phoneField.classList.remove('hidden');
+                submitBtn.textContent = 'Start Free Trial';
+                toggleText.innerHTML = 'Already have an account? <button onclick="toggleAuthMode()" class="text-black font-bold underline">Log In</button>';
+            }
+        }
+
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            alert(currentAuthMode === 'signup' ? 'Trial registration successful! Redirecting to your dashboard...' : 'Logging in...');
+            closeAuthModal();
+        }
 
         function triggerDemo() {
             const statusBox = document.getElementById('demo-status');
@@ -464,7 +559,7 @@
         jobSlider.addEventListener('input', calculateROI);
         callsSlider.addEventListener('input', calculateROI);
 
-        function toggleModal() {
+        function toggleTermsModal() {
             const modal = document.getElementById('terms-modal');
             modal.classList.toggle('hidden');
         }
