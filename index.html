@@ -55,6 +55,7 @@
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
                 <a href="#features" class="hover:text-slate-900 transition">Features</a>
                 <a href="#roi-calculator" class="hover:text-slate-900 transition">ROI Calculator</a>
+                <a href="#faq" class="hover:text-slate-900 transition">FAQ</a>
                 <a href="#pricing" class="hover:text-slate-900 transition">Pricing</a>
             </div>
             <div>
@@ -201,6 +202,51 @@
         </div>
     </section>
 
+    <!-- FREQUENTLY ASKED QUESTIONS (FAQ) SECTION -->
+    <section id="faq" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-slate-100">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold mb-3 text-slate-900">Frequently Asked Questions</h2>
+            <p class="text-slate-600 text-sm">Everything you need to know about setting up and using PremierDirect AI.</p>
+        </div>
+
+        <div class="space-y-6">
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                <h3 class="text-base font-bold text-slate-900 mb-2">How does the setup work for my business?</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Setup takes less than 5 minutes. You simply activate conditional call forwarding on your existing mobile or landline phone so unanswered calls automatically forward to your PremierDirect AI text engine.
+                </p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                <h3 class="text-base font-bold text-slate-900 mb-2">Do I need to change my business phone number?</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    No! You keep your current business phone number. PremierDirect AI works seamlessly in the background whenever you are unable to answer a call.
+                </p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                <h3 class="text-base font-bold text-slate-900 mb-2">How does Google Review Automation connect to Google?</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    You simply paste your Google Business Profile review link into your PremierDirect AI dashboard. After a appointment or service, tap "Send Review Request" to send a personalized SMS with your link straight to the customer.
+                </p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                <h3 class="text-base font-bold text-slate-900 mb-2">Can I customize the automatic text messages?</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Yes. You can edit the exact message template to fit your business voice, include your booking link, or ask specific questions (e.g., "Hi, thanks for calling Studio 8! How can we help you today?").
+                </p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                <h3 class="text-base font-bold text-slate-900 mb-2">Are there long-term contracts or hidden fees?</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    None at all. PremierDirect AI is a simple $39/month flat rate. You can cancel at any time directly from your account dashboard with zero cancellation fees.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- PRICING SECTION -->
     <section id="pricing" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center bg-slate-50/50 rounded-3xl my-8 border border-slate-100">
         <div class="relative overflow-hidden">
@@ -290,7 +336,7 @@
                 <p>All missed-call text-back triggers and automated review invites adhere strictly to business messaging guidelines. Phone numbers collected are used purely for requested transactional communications.</p>
 
                 <h4 class="font-bold text-slate-900">4. Contact Us</h4>
-                <p>For any privacy concerns, reach out to our team at support@premierdirect.ai.</p>
+                <p>For support inquiries, please request assistance via our trial signup form.</p>
             </div>
         </div>
     </div>
@@ -324,7 +370,6 @@
             <div class="flex space-x-6">
                 <button type="button" onclick="openModal('privacyModal'); return false;" class="hover:text-slate-800 transition focus:outline-none">Privacy Policy</button>
                 <button type="button" onclick="openModal('termsModal'); return false;" class="hover:text-slate-800 transition focus:outline-none">Terms of Service</button>
-                <a href="mailto:support@premierdirect.ai" class="hover:text-slate-800 transition">Support</a>
             </div>
         </div>
     </footer>
@@ -358,7 +403,7 @@
 
         function handleFormSubmit(e) {
             e.preventDefault();
-            alert('Trial account requested! We will reach out via text to finish setup.');
+            alert('Request received! We will reach out via text shortly.');
             closeModal('trialModal');
         }
 
