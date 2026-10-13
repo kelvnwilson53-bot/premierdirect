@@ -90,11 +90,10 @@
         </p>
     </section>
 
-    <!-- IMAGE SHOWCASE SECTION WITH REASON & STATISTIC BULLET POINTS BELOW EACH IMAGE -->
+    <!-- IMAGE SHOWCASE SECTION -->
     <section id="industries" class="py-16 bg-slate-50 border-y border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
                 <!-- Card 1 -->
                 <div class="flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
                     <div class="overflow-hidden h-72">
@@ -154,7 +153,6 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -213,7 +211,7 @@
                     <span class="text-xs text-slate-400">Live Simulation</span>
                 </div>
 
-                <div class="p-6 bg-slate-50 space-y-4 text-sm font-sans min-h-[320px] flex flex-col justify-end">
+                <div id="chat-window" class="p-6 bg-slate-50 space-y-4 text-sm font-sans min-h-[320px] flex flex-col justify-end">
                     <div class="text-center my-2">
                         <span class="bg-slate-200 text-slate-600 text-xs px-3 py-1 rounded-full">Missed Call Detected • 10:14 AM</span>
                     </div>
@@ -240,8 +238,13 @@
                     </div>
                 </div>
 
+                <!-- Status Feedback Message Container -->
+                <div id="demo-status" class="hidden px-4 py-2 bg-emerald-50 text-emerald-800 text-xs text-center border-t border-emerald-100 font-medium">
+                    ✓ Sequence triggered: Automated SMS sent within 5 seconds of missed call.
+                </div>
+
                 <div class="p-4 bg-white border-t border-slate-200 text-center">
-                    <button onclick="alert('Simulation Active: In real usage, this sequence fires automatically within 5 seconds of a missed call.')" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-sm rounded-lg transition">
+                    <button id="run-demo-btn" onclick="triggerDemo()" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-sm rounded-lg transition">
                         Test Live Speed Demo
                     </button>
                 </div>
@@ -414,6 +417,24 @@
             navDrawer.classList.toggle('flex');
         }
         menuBtn.addEventListener('click', toggleMenu);
+
+        // Custom Demo Trigger (no browser alert box)
+        function triggerDemo() {
+            const statusBox = document.getElementById('demo-status');
+            const btn = document.getElementById('run-demo-btn');
+            
+            statusBox.classList.remove('hidden');
+            btn.textContent = "✓ Simulation Active";
+            btn.classList.remove('bg-slate-100', 'hover:bg-slate-200', 'text-slate-800');
+            btn.classList.add('bg-emerald-600', 'text-white');
+
+            setTimeout(() => {
+                btn.textContent = "Test Live Speed Demo";
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('bg-slate-100', 'hover:bg-slate-200', 'text-slate-800');
+                statusBox.classList.add('hidden');
+            }, 4000);
+        }
 
         const jobSlider = document.getElementById('job-slider');
         const callsSlider = document.getElementById('calls-slider');
