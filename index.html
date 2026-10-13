@@ -28,10 +28,10 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-white text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white">
+<body class="bg-white text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white relative">
 
     <!-- TOP HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
+    <header class="sticky top-0 z-40 bg-white border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <a href="#" class="text-2xl font-bold tracking-tight text-slate-900">
@@ -44,25 +44,24 @@
                 </button>
             </div>
         </div>
-
-        <div id="nav-drawer" class="fixed inset-0 top-20 bg-white z-40 hidden flex-col justify-between p-6 border-t border-slate-100 md:max-w-sm md:left-auto md:right-0 md:border-l md:shadow-2xl transition-all">
-            <nav class="space-y-4">
-                <a href="#demo" onclick="toggleMenu()" class="block px-4 py-3 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg transition">Interactive Demo</a>
-                <a href="#industries" onclick="toggleMenu()" class="block px-4 py-3 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg transition">Industries</a>
-                <a href="#agent" onclick="toggleMenu()" class="block px-4 py-3 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg transition">Google Review Agent</a>
-                <a href="#roi" onclick="toggleMenu()" class="block px-4 py-3 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg transition">ROI Calculator</a>
-                <a href="#pricing" onclick="toggleMenu()" class="block px-4 py-3 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg transition">Pricing</a>
-                <a href="#faq" onclick="toggleMenu()" class="block px-4 py-3 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg transition">FAQ</a>
-                <hr class="border-slate-100 my-2">
-                <a href="#login" onclick="toggleMenu()" class="block px-4 py-3 text-lg font-medium text-slate-600 hover:text-slate-900 transition">Log In</a>
-            </nav>
-            <div class="pt-6">
-                <a href="#pricing" onclick="toggleMenu()" class="block w-full py-4 text-center bg-black hover:bg-slate-800 text-white font-semibold rounded-xl transition shadow-lg">
-                    Start 14-Day Free Trial
-                </a>
-            </div>
-        </div>
     </header>
+
+    <!-- SOLID OPAQUE MOBILE NAVIGATION DRAWER (Z-INDEX 9999) -->
+    <div id="nav-drawer" class="fixed top-20 left-0 right-0 bottom-0 bg-white z-[9999] hidden flex-col justify-between p-6 border-t border-slate-200 overflow-y-auto">
+        <nav class="space-y-4">
+            <a href="#demo" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">Interactive Demo</a>
+            <a href="#industries" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">Industries & Reviews</a>
+            <a href="#agent" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">Google Review Agent</a>
+            <a href="#roi" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">ROI Calculator</a>
+            <a href="#pricing" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">Pricing & Trial</a>
+            <a href="#faq" onclick="closeMenu()" class="block px-4 py-3 text-lg font-semibold text-slate-800 hover:bg-slate-50 rounded-lg transition">FAQ</a>
+        </nav>
+        <div class="pt-6 pb-8 border-t border-slate-100">
+            <a href="#pricing" onclick="closeMenu()" class="block w-full py-4 text-center bg-black hover:bg-slate-800 text-white font-bold rounded-xl transition shadow-lg text-lg">
+                Start 14-Day Free Trial
+            </a>
+        </div>
+    </div>
 
     <!-- HERO SECTION -->
     <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
@@ -95,7 +94,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
-                <!-- Card 1 (New Realtor Image) -->
+                <!-- Card 1 -->
                 <div class="flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
                     <div class="overflow-hidden h-72">
                         <img src="1791934087000.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80';" alt="Showcase" class="w-full h-full object-cover hover:scale-105 transition duration-500">
@@ -391,7 +390,7 @@
     </footer>
 
     <!-- TERMS & CONDITIONS MODAL -->
-    <div id="terms-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div id="terms-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[10000] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-xl w-full p-8 shadow-2xl space-y-6 max-h-[80vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-4">
                 <h3 class="text-xl font-bold text-slate-900">Terms & Service Terms</h3>
@@ -414,9 +413,19 @@
         const navDrawer = document.getElementById('nav-drawer');
 
         function toggleMenu() {
-            navDrawer.classList.toggle('hidden');
-            navDrawer.classList.toggle('flex');
+            if (navDrawer.classList.contains('hidden')) {
+                navDrawer.classList.remove('hidden');
+                navDrawer.classList.add('flex');
+            } else {
+                closeMenu();
+            }
         }
+
+        function closeMenu() {
+            navDrawer.classList.add('hidden');
+            navDrawer.classList.remove('flex');
+        }
+
         menuBtn.addEventListener('click', toggleMenu);
 
         function triggerDemo() {
