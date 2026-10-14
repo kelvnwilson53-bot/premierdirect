@@ -500,7 +500,7 @@
         </div>
     </footer>
 
-    <!-- SIGN UP / LOGIN AUTH MODAL -->
+    <!-- SIGN UP / LOGIN AUTH MODAL WITH COMPLETE LOGIN FIELDS -->
     <div id="auth-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[10000] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl relative space-y-6">
             <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
@@ -513,7 +513,7 @@
             <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
                 <div id="name-field">
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name</label>
-                    <input type="text" placeholder="John Doe" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black">
+                    <input type="text" placeholder="John Doe" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black">
                 </div>
 
                 <div>
@@ -521,9 +521,17 @@
                     <input type="email" placeholder="you@company.com" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black">
                 </div>
 
+                <div id="password-field" class="hidden">
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Password</label>
+                        <a href="#" onclick="alert('Password reset link sent to your email.'); return false;" class="text-xs text-slate-500 hover:text-black">Forgot?</a>
+                    </div>
+                    <input type="password" placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black">
+                </div>
+
                 <div id="phone-field">
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Mobile Phone Number</label>
-                    <input type="tel" placeholder="+1 (555) 000-0000" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black">
+                    <input type="tel" placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black">
                 </div>
 
                 <button id="auth-submit-btn" type="submit" class="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-slate-800 transition shadow-lg text-base mt-2">
@@ -647,15 +655,17 @@
             const title = document.getElementById('auth-title');
             const subtitle = document.getElementById('auth-subtitle');
             const nameField = document.getElementById('name-field');
+            const passwordField = document.getElementById('password-field');
             const phoneField = document.getElementById('phone-field');
             const submitBtn = document.getElementById('auth-submit-btn');
             const toggleText = document.getElementById('auth-toggle-text');
 
             if (currentAuthMode === 'login') {
                 title.textContent = 'Welcome Back';
-                subtitle.textContent = 'Log in to manage your PremierDirect portal.';
+                subtitle.textContent = 'Log in to your PremierDirect client portal.';
                 nameField.classList.add('hidden');
                 phoneField.classList.add('hidden');
+                passwordField.classList.remove('hidden');
                 submitBtn.textContent = 'Log In';
                 toggleText.innerHTML = 'Don\'t have an account yet? <button onclick="toggleAuthMode()" class="text-black font-bold underline">Start your 30-day pilot for just $5</button>';
             } else {
@@ -663,6 +673,7 @@
                 subtitle.textContent = 'Instant setup • Cancel anytime.';
                 nameField.classList.remove('hidden');
                 phoneField.classList.remove('hidden');
+                passwordField.classList.add('hidden');
                 submitBtn.textContent = 'Start your 30-day pilot for just $5';
                 toggleText.innerHTML = 'Already have an account? <button onclick="toggleAuthMode()" class="text-black font-bold underline">Log In</button>';
             }
@@ -670,7 +681,7 @@
 
         function handleAuthSubmit(e) {
             e.preventDefault();
-            alert(currentAuthMode === 'signup' ? 'Pilot registration successful! Redirecting to your dashboard...' : 'Logging in...');
+            alert(currentAuthMode === 'signup' ? 'Pilot registration successful! Redirecting to your dashboard...' : 'Logging in to your dashboard...');
             closeAuthModal();
         }
 
