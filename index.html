@@ -6,21 +6,28 @@
   <title>TriDashAI — Never Lose Another Trade Lead</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* High-Visibility Solid Dark Gray Panels */
-    .content-box {
-      background-color: #1e293b; /* Slate 800 */
-      border: 1px solid #334155; /* Slate 700 */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    /* 3D Floating Glass & Interactive Lift Physics */
+    .glass-3d {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .content-box:hover {
-      border-color: #6366f1;
+    .glass-3d:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(99, 102, 241, 0.6);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(99, 102, 241, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
     .nav-bar {
-      background-color: #0f172a;
-      border-bottom: 1px solid #1e293b;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Moving Ticker Animation */
+    /* Smooth Right-to-Left Marquee Ticker */
     @keyframes marqueeScroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -30,12 +37,14 @@
       overflow: hidden;
       width: 100%;
       position: relative;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     }
     .marquee-track {
       display: flex;
       gap: 1.5rem;
       width: max-content;
-      animation: marqueeScroll 30s linear infinite;
+      animation: marqueeScroll 35s linear infinite;
     }
     .marquee-track:hover {
       animation-play-state: paused;
@@ -43,6 +52,12 @@
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- BACKGROUND GLOW ACCENTS -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[700px] pointer-events-none -z-10 overflow-hidden">
+    <div class="absolute top-[-100px] left-[15%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[140px]"></div>
+    <div class="absolute top-[200px] right-[15%] w-[450px] h-[450px] bg-blue-600/15 rounded-full blur-[160px]"></div>
+  </div>
 
   <!-- NAVIGATION -->
   <nav class="fixed top-0 left-0 w-full z-50 nav-bar">
@@ -52,7 +67,7 @@
       </a>
       <div class="flex items-center gap-4">
         <a href="#features" class="hidden sm:inline-block text-sm text-slate-300 hover:text-white transition">Features</a>
-        <a href="#pilot" class="content-box px-5 py-2.5 rounded-full text-sm font-semibold text-white transition shadow-lg">
+        <a href="#pilot" class="glass-3d px-5 py-2.5 rounded-full text-sm font-semibold text-white shadow-lg">
           Claim $10 Pilot
         </a>
       </div>
@@ -60,8 +75,8 @@
   </nav>
 
   <!-- HERO SECTION -->
-  <section class="pt-36 pb-20 px-6 max-w-7xl mx-auto text-center relative">
-    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full content-box text-xs font-medium text-indigo-300 mb-8">
+  <section class="pt-36 pb-16 px-6 max-w-7xl mx-auto text-center relative">
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-3d text-xs font-medium text-indigo-300 mb-8">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
       Built Exclusively for Trade & Field Service Businesses
     </div>
@@ -73,16 +88,80 @@
     </p>
     
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-16">
-      <a href="#pilot" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold shadow-xl hover:opacity-90 transition">
+      <a href="#pilot" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold shadow-xl shadow-indigo-500/25 hover:scale-105 transition">
         Claim 30-Day Pilot →
       </a>
-      <a href="#features" class="w-full sm:w-auto px-8 py-4 rounded-xl content-box text-white font-semibold transition">
+      <a href="#workflow" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-3d text-white font-semibold transition">
         See How It Works
       </a>
     </div>
 
-    <!-- STATS BAR -->
-    <div class="grid grid-cols-3 gap-4 max-w-3xl mx-auto content-box p-6 rounded-2xl mb-16 text-center">
+    <!-- 3-STEP VISUAL WORKFLOW BANNER (3D CARD) -->
+    <div id="workflow" class="max-w-5xl mx-auto glass-3d p-6 sm:p-8 rounded-3xl mb-16 text-left">
+      <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-8">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="text-indigo-400">TriDash AI</span> | More Calls. More Bookings. More Growth.
+        </h3>
+        <span class="text-xs text-emerald-400 font-mono bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Automated Triage</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- STEP 1 -->
+        <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">1</span>
+              <h4 class="font-bold text-white text-base">The Call</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              A potential customer rings your business. You're busy on a job site, so you miss the call—but TriDash AI has your back immediately.
+            </p>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+            <p class="text-[10px] text-slate-400 font-mono">10:24 AM</p>
+            <p class="text-xs font-bold text-red-400">📞 Missed Call</p>
+            <p class="text-[11px] text-slate-300 font-mono">+1 (412) 345-678</p>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">2</span>
+              <h4 class="font-bold text-white text-base">Instant SMS Recovery</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              Within seconds, TriDash AI sends a friendly, personalized text message to let the customer know you'll be in touch soon.
+            </p>
+          </div>
+          <div class="bg-indigo-950/60 p-3 rounded-xl border border-indigo-500/30 text-left">
+            <p class="text-[10px] text-indigo-300 font-bold mb-1">⚡ TriDash AI SMS</p>
+            <p class="text-[11px] text-slate-200">"Hi! Saw we missed your call. We'd love to help with your enquiry. Reply YES or tap to book a time."</p>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">3</span>
+              <h4 class="font-bold text-white text-base">Direct Calendar Booking</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              The customer selects a time that suits them directly on your calendar, and the appointment is confirmed instantly.
+            </p>
+          </div>
+          <div class="bg-emerald-950/50 p-3 rounded-xl border border-emerald-500/30 text-center">
+            <p class="text-xs font-bold text-emerald-400">✅ Appointment Booked!</p>
+            <p class="text-[10px] text-slate-300 mt-0.5">You're all set. We'll see you soon!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS BAR (3D CARD) -->
+    <div class="grid grid-cols-3 gap-4 max-w-3xl mx-auto glass-3d p-6 rounded-2xl mb-16 text-center">
       <div>
         <p class="text-2xl sm:text-3xl font-extrabold text-indigo-400">85%</p>
         <p class="text-xs text-slate-400 mt-1">Of callers go to a competitor if unanswered</p>
@@ -99,7 +178,7 @@
   </section>
 
   <!-- MOVING SLIDER SECTION -->
-  <section class="py-16 border-y border-slate-800 bg-slate-900/50 overflow-hidden relative">
+  <section class="py-16 border-y border-slate-800 bg-slate-900/40 overflow-hidden relative">
     <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
       <p class="text-xs font-semibold uppercase tracking-widest text-indigo-400">Live Engine in Action</p>
       <h3 class="text-xl font-bold text-white mt-1">Real reviews & auto-responses flowing in real-time</h3>
@@ -109,7 +188,7 @@
       <div class="marquee-track">
         
         <!-- CARD 1 -->
-        <div class="w-[380px] content-box p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] glass-3d p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">5-Star Google Review</span>
             <span class="text-xs text-slate-400">Kitchen Extension</span>
@@ -122,7 +201,7 @@
         </div>
 
         <!-- CARD 2 -->
-        <div class="w-[380px] content-box p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] glass-3d p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full border border-indigo-500/20">Instant Lead Recovery</span>
             <span class="text-xs text-slate-400">Plumbing Repair</span>
@@ -135,7 +214,7 @@
         </div>
 
         <!-- CARD 3 -->
-        <div class="w-[380px] content-box p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] glass-3d p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">Review Request Trigger</span>
             <span class="text-xs text-slate-400">Post-Job SMS</span>
@@ -148,7 +227,7 @@
         </div>
 
         <!-- DUPLICATE SET FOR LOOP -->
-        <div class="w-[380px] content-box p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] glass-3d p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">5-Star Google Review</span>
             <span class="text-xs text-slate-400">Kitchen Extension</span>
@@ -160,9 +239,9 @@
           </div>
         </div>
 
-        <div class="w-[380px] content-box p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] glass-3d p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-bold text-indigo-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">Instant Lead Recovery</span>
+            <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full border border-indigo-500/20">Instant Lead Recovery</span>
             <span class="text-xs text-slate-400">Plumbing Repair</span>
           </div>
           <p class="text-xs text-slate-300 italic mb-4">"Call unanswered at 4:15 PM — Owner under truck."</p>
@@ -184,17 +263,17 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="content-box p-8 rounded-2xl">
+      <div class="glass-3d p-8 rounded-2xl">
         <div class="w-12 h-12 rounded-xl bg-indigo-500/25 border border-indigo-500/40 flex items-center justify-center text-2xl mb-6">⚡</div>
         <h3 class="text-xl font-bold text-white mb-3">1. Instant Lead Recovery</h3>
         <p class="text-slate-300 text-sm leading-relaxed">Automatically texts missed callers back in 5 seconds with your custom booking link before they call a competitor.</p>
       </div>
-      <div class="content-box p-8 rounded-2xl">
+      <div class="glass-3d p-8 rounded-2xl">
         <div class="w-12 h-12 rounded-xl bg-blue-500/25 border border-blue-500/40 flex items-center justify-center text-2xl mb-6">⭐</div>
         <h3 class="text-xl font-bold text-white mb-3">2. Automated Google Reviews</h3>
         <p class="text-slate-300 text-sm leading-relaxed">Automatically reaches out to satisfied clients right after jobs are marked finished to collect 5-star reviews on autopilot.</p>
       </div>
-      <div class="content-box p-8 rounded-2xl">
+      <div class="glass-3d p-8 rounded-2xl">
         <div class="w-12 h-12 rounded-xl bg-emerald-500/25 border border-emerald-500/40 flex items-center justify-center text-2xl mb-6">💬</div>
         <h3 class="text-xl font-bold text-white mb-3">3. Natural AI Responses</h3>
         <p class="text-slate-300 text-sm leading-relaxed">Automatically writes tailored, professional replies to every review with zero robot-speak or spam keywords.</p>
@@ -204,7 +283,7 @@
 
   <!-- PILOT CTA -->
   <section id="pilot" class="py-20 px-6 max-w-4xl mx-auto">
-    <div class="content-box p-8 sm:p-12 rounded-3xl border border-indigo-500/50 text-center relative">
+    <div class="glass-3d p-8 sm:p-12 rounded-3xl border border-indigo-500/50 text-center relative">
       <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Try TriDashAI for 30 Days</h2>
       <p class="text-slate-300 max-w-lg mx-auto mb-8 text-sm sm:text-base">Get full access to the complete 3-in-1 lead capture and review management system for your first month.</p>
       <div class="inline-flex items-baseline gap-2 mb-8">
