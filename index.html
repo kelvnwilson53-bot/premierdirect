@@ -6,19 +6,19 @@
   <title>TriDashAI — Never Lose Another Trade Lead</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Bulletproof Translucent Dark Panel Styling */
-    .glass-card {
-      background: linear-gradient(135deg, rgba(25, 30, 45, 0.85) 0%, rgba(10, 12, 18, 0.95) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    /* Solid Gray Panel Styling for Clear Visibility */
+    .solid-card {
+      background-color: #1e293b; /* Solid dark gray (Slate 800) */
+      border: 1px solid #334155; /* Slate 700 border */
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
-    .glass-card:hover {
-      border-color: rgba(99, 102, 241, 0.6);
-      box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2);
+    .solid-card:hover {
+      background-color: #334155;
+      border-color: #6366f1;
     }
-    .glass-nav {
-      background: rgba(10, 12, 18, 0.92);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    .solid-nav {
+      background-color: #0f172a; /* Slate 900 */
+      border-bottom: 1px solid #1e293b;
     }
 
     /* Continuous Moving Ticker Animation */
@@ -45,21 +45,15 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white relative overflow-x-hidden">
 
-  <!-- BACKGROUND GLOW EFFECTS -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] pointer-events-none -z-10 overflow-hidden">
-    <div class="absolute top-[-50px] left-[10%] w-[450px] h-[450px] bg-indigo-600/20 rounded-full blur-[100px]"></div>
-    <div class="absolute top-[100px] right-[10%] w-[400px] h-[400px] bg-blue-600/15 rounded-full blur-[120px]"></div>
-  </div>
-
   <!-- NAVIGATION -->
-  <nav class="fixed top-0 left-0 w-full z-50 glass-nav">
+  <nav class="fixed top-0 left-0 w-full z-50 solid-nav">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="#" class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
         <span class="bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent">TriDash</span><span class="text-indigo-500">AI</span>
       </a>
       <div class="flex items-center gap-4">
         <a href="#features" class="hidden sm:inline-block text-sm text-slate-300 hover:text-white transition">Features</a>
-        <a href="#pilot" class="glass-card px-5 py-2.5 rounded-full text-sm font-semibold text-white border border-indigo-500/40 transition shadow-lg">
+        <a href="#pilot" class="solid-card px-5 py-2.5 rounded-full text-sm font-semibold text-white transition shadow-lg">
           Claim $10 Pilot
         </a>
       </div>
@@ -68,7 +62,7 @@
 
   <!-- HERO SECTION -->
   <section class="pt-36 pb-20 px-6 max-w-7xl mx-auto text-center relative">
-    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-xs font-medium text-indigo-300 mb-8">
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full solid-card text-xs font-medium text-indigo-300 mb-8">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
       Built Exclusively for Trade & Field Service Businesses
     </div>
@@ -80,16 +74,16 @@
     </p>
     
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-16">
-      <a href="#pilot" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold shadow-xl shadow-indigo-500/25 hover:from-indigo-500 hover:to-blue-500 transition">
+      <a href="#pilot" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold shadow-xl hover:opacity-90 transition">
         Claim 30-Day Pilot →
       </a>
-      <a href="#features" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white font-semibold hover:bg-slate-800 transition">
+      <a href="#features" class="w-full sm:w-auto px-8 py-4 rounded-xl solid-card text-white font-semibold transition">
         See How It Works
       </a>
     </div>
 
     <!-- STATS BAR -->
-    <div class="grid grid-cols-3 gap-4 max-w-3xl mx-auto glass-card p-6 rounded-2xl mb-16 text-center">
+    <div class="grid grid-cols-3 gap-4 max-w-3xl mx-auto solid-card p-6 rounded-2xl mb-16 text-center">
       <div>
         <p class="text-2xl sm:text-3xl font-extrabold text-indigo-400">85%</p>
         <p class="text-xs text-slate-400 mt-1">Of callers go to a competitor if unanswered</p>
@@ -106,7 +100,7 @@
   </section>
 
   <!-- MOVING SLIDER SECTION -->
-  <section class="py-16 border-y border-white/10 bg-black/40 overflow-hidden relative">
+  <section class="py-16 border-y border-slate-800 bg-slate-900/50 overflow-hidden relative">
     <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
       <p class="text-xs font-semibold uppercase tracking-widest text-indigo-400">Live Engine in Action</p>
       <h3 class="text-xl font-bold text-white mt-1">Real reviews & auto-responses flowing in real-time</h3>
@@ -116,64 +110,64 @@
       <div class="marquee-track">
         
         <!-- CARD 1 -->
-        <div class="w-[380px] glass-card p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] solid-card p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">5-Star Google Review</span>
             <span class="text-xs text-slate-400">Kitchen Extension</span>
           </div>
           <p class="text-xs text-slate-300 italic mb-4">"Kelvin and his team were brilliant from start to finish. Turned up on time every day and finished right on budget."</p>
-          <div class="p-3.5 rounded-xl bg-indigo-950/50 border border-indigo-500/20 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-xs">
             <span class="font-semibold text-indigo-300 block mb-1">✅ TriDash AI Auto-Reply:</span>
             <p class="text-slate-300">"Thanks so much for the feedback! It was a real pleasure working with you on the project."</p>
           </div>
         </div>
 
         <!-- CARD 2 -->
-        <div class="w-[380px] glass-card p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] solid-card p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full border border-indigo-500/20">Instant Lead Recovery</span>
             <span class="text-xs text-slate-400">Plumbing Repair</span>
           </div>
           <p class="text-xs text-slate-300 italic mb-4">"Call unanswered at 4:15 PM — Owner under truck."</p>
-          <div class="p-3.5 rounded-xl bg-indigo-950/50 border border-indigo-500/20 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-xs">
             <span class="font-semibold text-indigo-300 block mb-1">⚡ Auto-SMS Sent in 4s:</span>
             <p class="text-slate-300">"Hi! Saw I missed your call. I'm finishing up a job right now. How can I help you today?"</p>
           </div>
         </div>
 
         <!-- CARD 3 -->
-        <div class="w-[380px] glass-card p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] solid-card p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">Review Request Trigger</span>
             <span class="text-xs text-slate-400">Post-Job SMS</span>
           </div>
           <p class="text-xs text-slate-300 italic mb-4">"Job completed & invoiced via field app."</p>
-          <div class="p-3.5 rounded-xl bg-indigo-950/50 border border-indigo-500/20 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-xs">
             <span class="font-semibold text-indigo-300 block mb-1">📲 Auto Review SMS Sent:</span>
             <p class="text-slate-300">"Thanks for choosing us today! If you have 30 seconds, would you mind leaving a quick review?"</p>
           </div>
         </div>
 
         <!-- DUPLICATE SET FOR LOOP -->
-        <div class="w-[380px] glass-card p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] solid-card p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">5-Star Google Review</span>
             <span class="text-xs text-slate-400">Kitchen Extension</span>
           </div>
           <p class="text-xs text-slate-300 italic mb-4">"Kelvin and his team were brilliant from start to finish. Turned up on time every day and finished right on budget."</p>
-          <div class="p-3.5 rounded-xl bg-indigo-950/50 border border-indigo-500/20 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-xs">
             <span class="font-semibold text-indigo-300 block mb-1">✅ TriDash AI Auto-Reply:</span>
             <p class="text-slate-300">"Thanks so much for the feedback! It was a real pleasure working with you on the project."</p>
           </div>
         </div>
 
-        <div class="w-[380px] glass-card p-6 rounded-2xl shrink-0">
+        <div class="w-[380px] solid-card p-6 rounded-2xl shrink-0">
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full border border-indigo-500/20">Instant Lead Recovery</span>
             <span class="text-xs text-slate-400">Plumbing Repair</span>
           </div>
           <p class="text-xs text-slate-300 italic mb-4">"Call unanswered at 4:15 PM — Owner under truck."</p>
-          <div class="p-3.5 rounded-xl bg-indigo-950/50 border border-indigo-500/20 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-xs">
             <span class="font-semibold text-indigo-300 block mb-1">⚡ Auto-SMS Sent in 4s:</span>
             <p class="text-slate-300">"Hi! Saw I missed your call. I'm finishing up a job right now. How can I help you today?"</p>
           </div>
@@ -191,17 +185,17 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="glass-card p-8 rounded-2xl">
+      <div class="solid-card p-8 rounded-2xl">
         <div class="w-12 h-12 rounded-xl bg-indigo-500/25 border border-indigo-500/40 flex items-center justify-center text-2xl mb-6">⚡</div>
         <h3 class="text-xl font-bold text-white mb-3">1. Instant Lead Recovery</h3>
         <p class="text-slate-300 text-sm leading-relaxed">Automatically texts missed callers back in 5 seconds with your custom booking link before they call a competitor.</p>
       </div>
-      <div class="glass-card p-8 rounded-2xl">
+      <div class="solid-card p-8 rounded-2xl">
         <div class="w-12 h-12 rounded-xl bg-blue-500/25 border border-blue-500/40 flex items-center justify-center text-2xl mb-6">⭐</div>
         <h3 class="text-xl font-bold text-white mb-3">2. Automated Google Reviews</h3>
         <p class="text-slate-300 text-sm leading-relaxed">Automatically reaches out to satisfied clients right after jobs are marked finished to collect 5-star reviews on autopilot.</p>
       </div>
-      <div class="glass-card p-8 rounded-2xl">
+      <div class="solid-card p-8 rounded-2xl">
         <div class="w-12 h-12 rounded-xl bg-emerald-500/25 border border-emerald-500/40 flex items-center justify-center text-2xl mb-6">💬</div>
         <h3 class="text-xl font-bold text-white mb-3">3. Natural AI Responses</h3>
         <p class="text-slate-300 text-sm leading-relaxed">Automatically writes tailored, professional replies to every review with zero robot-speak or spam keywords.</p>
@@ -211,7 +205,7 @@
 
   <!-- PILOT CTA -->
   <section id="pilot" class="py-20 px-6 max-w-4xl mx-auto">
-    <div class="glass-card p-8 sm:p-12 rounded-3xl border border-indigo-500/50 text-center relative">
+    <div class="solid-card p-8 sm:p-12 rounded-3xl border border-indigo-500/50 text-center relative">
       <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Try TriDashAI for 30 Days</h2>
       <p class="text-slate-300 max-w-lg mx-auto mb-8 text-sm sm:text-base">Get full access to the complete 3-in-1 lead capture and review management system for your first month.</p>
       <div class="inline-flex items-baseline gap-2 mb-8">
@@ -227,7 +221,7 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-10 border-t border-white/10 text-center text-xs text-slate-500">
+  <footer class="py-10 border-t border-slate-800 text-center text-xs text-slate-500">
     <p>© 2026 TriDashAI (tridashai.com). All rights reserved.</p>
   </footer>
 
