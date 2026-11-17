@@ -301,29 +301,30 @@
             </div>
         </section>
 
-        <!-- MEET YOUR 24/7 RECEPTIONIST & DISPATCHER -->
-        <section id="receptionist" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-            <div class="text-center mb-10">
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-3">Meet Your <span class="text-[#2563eb]">24/7 AI Receptionist &amp; Dispatcher</span></h2>
-                <p class="text-slate-600 text-sm sm:text-base">Instant text-back and live voice response the second you miss a call.</p>
+        <!-- MEET SARAH: 24/7 AI RECEPTIONIST & DISPATCHER -->
+        <section id="receptionist" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-3">Meet <span class="text-[#2563eb]">Sarah</span>, Your 24/7 AI Receptionist &amp; Dispatcher</h2>
+                <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">A friendly, professional first point of contact for your customers — answering calls and helping capture the jobs you cannot get to while you are on the tools.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="podium-card-3d p-6 rounded-3xl space-y-3">
-                    <div class="text-2xl">⚡</div>
-                    <h3 class="text-lg font-bold text-slate-900">Instant Text-Back</h3>
-                    <p class="text-xs text-slate-700 leading-relaxed">Fires off the microsecond a call is missed—before they even have time to hang up and dial your competitor.</p>
+            <!-- Sarah's portrait will sit here once the image asset is added to this repository. -->
+            <div class="max-w-3xl mx-auto mb-10">
+                <div class="rounded-3xl overflow-hidden shadow-xl bg-slate-100">
+                    <img src="sarah-receptionist.jpg" alt="Sarah, TriDashAI's friendly AI receptionist, wearing a headset in a trades business office" class="w-full h-auto object-cover" loading="lazy">
                 </div>
-                <div class="podium-card-3d p-6 rounded-3xl space-y-3">
-                    <div class="text-2xl">🎯</div>
-                    <h3 class="text-lg font-bold text-slate-900">Smart Qualification</h3>
-                    <p class="text-xs text-slate-700 leading-relaxed">Asks what’s broken, checks your emergency rates, and qualifies the job automatically.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-5">
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">See Sarah Handle an Emergency Call</h3>
+                    <p class="mt-2 text-sm sm:text-base text-slate-600">A burst pipe. A worried customer. Sarah takes the call and gathers the details while the tradesperson is busy.</p>
                 </div>
-                <div class="podium-card-3d p-6 rounded-3xl space-y-3">
-                    <div class="text-2xl">📅</div>
-                    <h3 class="text-lg font-bold text-slate-900">Automated Calendar Booking</h3>
-                    <p class="text-xs text-slate-700 leading-relaxed">Locks the job straight onto your schedule without you ever touching your phone while on the tools.</p>
-                </div>
+                <video id="sarah-emergency-demo" class="w-full rounded-2xl shadow-xl bg-slate-950" controls playsinline preload="metadata" muted poster="file_00000000f700821197172a4540a2ae66.png" aria-label="Sarah handling an emergency burst-pipe call demonstration">
+                    <source src="sarah-ai-dispatcher-burst-pipe-call-rev22-1920x1080-30fps-watermarked.mp4" type="video/mp4">
+                    Your browser does not support the video element.
+                </video>
+                <p class="mt-3 text-center text-xs text-slate-500">On a computer, move your pointer over the video to preview it. On a phone, tap play.</p>
             </div>
         </section>
 
@@ -577,6 +578,23 @@
     </footer>
 
     <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Desktop hover preview; touch devices use the native play controls.
+        (() => {
+            const demo = document.getElementById('sarah-emergency-demo');
+            if (!demo) return;
+            const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+            if (isTouch) return;
+            demo.addEventListener('pointerenter', () => {
+                demo.muted = true;
+                const playAttempt = demo.play();
+                if (playAttempt && typeof playAttempt.catch === 'function') playAttempt.catch(() => {});
+            });
+            demo.addEventListener('pointerleave', () => {
+                demo.pause();
+            });
+        })();
+    </script>
     <script>
         // Menu Toggle Logic
         const menuBtn = document.getElementById('menu-btn');
