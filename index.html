@@ -108,6 +108,51 @@
             color: #2563eb;
         }
 
+
+        /* Subtitle-style copy over each trade photograph */
+        @keyframes tradeSubtitleFade {
+            0%, 3% { opacity: 0; transform: translateY(8px); }
+            7%, 22% { opacity: 1; transform: translateY(0); }
+            27%, 100% { opacity: 0; transform: translateY(-5px); }
+        }
+        .trade-subtitle {
+            position: absolute;
+            left: 1.5rem;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            min-height: 3.5rem;
+            display: flex;
+            align-items: center;
+            padding: .85rem 1rem;
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: .85rem;
+            background: rgba(2, 6, 23, .72);
+            color: #fff;
+            font-size: .95rem;
+            line-height: 1.45;
+            font-weight: 600;
+            opacity: 0;
+            animation: tradeSubtitleFade 16s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .trade-subtitle:nth-child(2) { animation-delay: 0s; }
+        .trade-subtitle:nth-child(3) { animation-delay: 4s; }
+        .trade-subtitle:nth-child(4) { animation-delay: 8s; }
+        .trade-subtitle:nth-child(5) { animation-delay: 12s; }
+        .trade-photo-copy { position: absolute; inset: 0; }
+        .trade-photo-copy .trade-heading { position: absolute; left: 1.5rem; right: 1.5rem; top: 1.5rem; }
+        @media (min-width: 640px) {
+            .trade-photo-copy .trade-heading { left: 2.5rem; right: 2.5rem; top: 2rem; }
+            .trade-subtitle { left: 2.5rem; right: 2.5rem; bottom: 2rem; font-size: 1.05rem; min-height: 4rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .trade-subtitle { animation: none; opacity: 1; position: static; margin-top: .5rem; }
+            .trade-photo-copy { display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; }
+            .trade-photo-copy .trade-heading { position: static; }
+            .trade-subtitle:nth-of-type(n) { display: none; }
+            .trade-subtitle:nth-of-type(2) { display: flex; }
+        }
+
         /* Wider Animated Badge Floating Effect */
         @keyframes badgePulse {
             0%, 100% {
@@ -415,82 +460,79 @@
                 <p class="text-slate-600 text-sm sm:text-base">Tailored live voice & payment workflows for roofers, plumbers, and general contractors.</p>
             </div>
 
-            <!-- CARD 1: ROOFERS -->
+                        <!-- CARD 1: ROOFERS -->
             <div class="podium-card-3d rounded-3xl mb-8 overflow-hidden">
-                <div class="relative w-full h-72 sm:h-[26rem] overflow-hidden bg-slate-950">
+                <div class="relative w-full h-80 sm:h-[30rem] overflow-hidden bg-slate-950">
                     <img src="https://raw.githubusercontent.com/kelvnwilson53-bot/Tradashai-test/main/1792284293487.jpg" alt="Roofing specialist working on a roof" class="w-full h-full object-cover" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/15 to-transparent"></div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
-                        <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-300 mb-2">Roofing specialists</p>
-                        <h3 class="text-2xl sm:text-4xl font-extrabold text-white drop-shadow-lg">Up on a Roof? Your Dispatcher Answers Live.</h3>
-                    </div>
-                </div>
-                <div class="p-6 sm:p-8">
-                    <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">When you're up on a pitched roof, answering calls is impossible. The system answers live, triages storm damage leaks, and text-confirms job bookings.</p>
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm">
-                        <span class="font-semibold text-[#2563eb] block mb-1">💬 Voice & SMS Workflow:</span>
-                        <p class="text-slate-700">"Answered live, quoted our standard $150 emergency roof tarp fee, and texted the client our secure deposit link."</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-slate-950/10"></div>
+                    <div class="trade-photo-copy">
+                        <div class="trade-heading">
+                            <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-300 mb-2">Roofing specialists</p>
+                            <h3 class="text-2xl sm:text-4xl font-extrabold text-white drop-shadow-lg">Up on a Roof? Your Dispatcher Answers Live.</h3>
+                        </div>
+                        <p class="trade-subtitle" style="animation-delay:0s">When you're on a pitched roof, your calls are still answered live.</p>
+                        <p class="trade-subtitle" style="animation-delay:4s">Sarah gathers the details of storm damage and leaking roofs.</p>
+                        <p class="trade-subtitle" style="animation-delay:8s">Customers can receive booking confirmations by text.</p>
+                        <p class="trade-subtitle" style="animation-delay:12s">Emergency call-out fees and secure deposit links can be sent by SMS.</p>
                     </div>
                 </div>
             </div>
 
             <!-- CARD 2: PLUMBERS -->
             <div class="podium-card-3d rounded-3xl mb-8 overflow-hidden">
-                <div class="relative w-full h-72 sm:h-[26rem] overflow-hidden bg-slate-950">
+                <div class="relative w-full h-80 sm:h-[30rem] overflow-hidden bg-slate-950">
                     <img src="https://raw.githubusercontent.com/kelvnwilson53-bot/Tradashai-test/main/1793498924399.jpg" alt="Plumber working under a sink" class="w-full h-full object-cover" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/15 to-transparent"></div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
-                        <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-300 mb-2">Plumbing &amp; heating</p>
-                        <h3 class="text-2xl sm:text-4xl font-extrabold text-white drop-shadow-lg">Under a Sink? Triage 24/7 Callouts.</h3>
-                    </div>
-                </div>
-                <div class="p-6 sm:p-8">
-                    <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Burst pipes don't wait for business hours. Handle midnight emergency callouts live over the phone and collect callout deposit payments automatically.</p>
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm">
-                        <span class="font-semibold text-[#2563eb] block mb-1">💬 Voice & SMS Workflow:</span>
-                        <p class="text-slate-700">"Picked up a 3AM leak call live, verified water shut-off instructions, and secured the emergency callout fee upfront via SMS link."</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-slate-950/10"></div>
+                    <div class="trade-photo-copy">
+                        <div class="trade-heading">
+                            <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-300 mb-2">Plumbing &amp; heating</p>
+                            <h3 class="text-2xl sm:text-4xl font-extrabold text-white drop-shadow-lg">Under a Sink? Triage 24/7 Callouts.</h3>
+                        </div>
+                        <p class="trade-subtitle" style="animation-delay:0s">Burst pipes don't wait for business hours.</p>
+                        <p class="trade-subtitle" style="animation-delay:4s">Sarah answers emergency calls and gathers the important details.</p>
+                        <p class="trade-subtitle" style="animation-delay:8s">Customers receive clear water shut-off guidance where appropriate.</p>
+                        <p class="trade-subtitle" style="animation-delay:12s">Call-out fees can be secured upfront with an SMS payment link.</p>
                     </div>
                 </div>
             </div>
 
             <!-- CARD 3: BUILDERS / CONTRACTORS -->
             <div class="podium-card-3d rounded-3xl mb-8 overflow-hidden">
-                <div class="relative w-full h-72 sm:h-[26rem] overflow-hidden bg-slate-950">
+                <div class="relative w-full h-80 sm:h-[30rem] overflow-hidden bg-slate-950">
                     <img src="https://raw.githubusercontent.com/kelvnwilson53-bot/Tradashai-test/main/1792284328037.jpg" alt="General contractor working on site" class="w-full h-full object-cover" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/15 to-transparent"></div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
-                        <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-300 mb-2">Building contractors</p>
-                        <h3 class="text-2xl sm:text-4xl font-extrabold text-white drop-shadow-lg">Running Power Tools? Never Miss a Lead.</h3>
-                    </div>
-                </div>
-                <div class="p-6 sm:p-8">
-                    <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Never let power tool noise drown out new business. Talk with prospective clients, log project scopes, and dispatch lead notifications straight to your pocket.</p>
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm">
-                        <span class="font-semibold text-[#2563eb] block mb-1">💬 Voice & SMS Workflow:</span>
-                        <p class="text-slate-700">"Answered live while on site, gathered extension specs, and texted the client a booking link for next Tuesday."</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-slate-950/10"></div>
+                    <div class="trade-photo-copy">
+                        <div class="trade-heading">
+                            <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-300 mb-2">Building contractors</p>
+                            <h3 class="text-2xl sm:text-4xl font-extrabold text-white drop-shadow-lg">Running Power Tools? Never Miss a Lead.</h3>
+                        </div>
+                        <p class="trade-subtitle" style="animation-delay:0s">Power tools running? Your incoming calls are still answered.</p>
+                        <p class="trade-subtitle" style="animation-delay:4s">Sarah speaks with prospective clients and captures project details.</p>
+                        <p class="trade-subtitle" style="animation-delay:8s">New enquiries are logged and sent straight to your phone.</p>
+                        <p class="trade-subtitle" style="animation-delay:12s">Customers can be offered a booking link for the next available slot.</p>
                     </div>
                 </div>
             </div>
 
             <!-- CARD 4: FIELD SERVICE -->
             <div class="podium-card-3d rounded-3xl overflow-hidden">
-                <div class="relative w-full h-72 sm:h-[26rem] overflow-hidden bg-slate-950">
+                <div class="relative w-full h-80 sm:h-[30rem] overflow-hidden bg-slate-950">
                     <img src="https://raw.githubusercontent.com/kelvnwilson53-bot/Tradashai-test/main/1793498988502.jpg" alt="Field service professional at work" class="w-full h-full object-cover" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/15 to-transparent"></div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
-                        <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-300 mb-2">Field service &amp; maintenance</p>
-                        <h3 class="text-2xl sm:text-4xl font-extrabold text-white drop-shadow-lg">On a Job? Turn Calls Into Paid Bookings.</h3>
-                    </div>
-                </div>
-                <div class="p-6 sm:p-8">
-                    <p class="text-slate-700 text-sm sm:text-base leading-relaxed mb-4">Combine live 24/7 voice reception with automated deposit payment links to ensure every single enquiry converts into confirmed revenue.</p>
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm">
-                        <span class="font-semibold text-[#2563eb] block mb-1">💬 Voice & SMS Workflow:</span>
-                        <p class="text-slate-700">"Real-time voice answering + instant payment links = zero lost time and zero unpaid callouts."</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-slate-950/10"></div>
+                    <div class="trade-photo-copy">
+                        <div class="trade-heading">
+                            <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-300 mb-2">Field service &amp; maintenance</p>
+                            <h3 class="text-2xl sm:text-4xl font-extrabold text-white drop-shadow-lg">On a Job? Turn Calls Into Paid Bookings.</h3>
+                        </div>
+                        <p class="trade-subtitle" style="animation-delay:0s">Busy on site? Your virtual receptionist handles incoming enquiries.</p>
+                        <p class="trade-subtitle" style="animation-delay:4s">Calls are answered live, day or night.</p>
+                        <p class="trade-subtitle" style="animation-delay:8s">Customers can receive booking details and payment links by text.</p>
+                        <p class="trade-subtitle" style="animation-delay:12s">Turn more enquiries into confirmed, paid call-outs.</p>
                     </div>
                 </div>
             </div>
-        </section>
+
+</section>
 
         <!-- PRICING SECTION -->
         <section id="pricing" class="max-w-4xl mx-auto px-4 py-20 relative z-10">
