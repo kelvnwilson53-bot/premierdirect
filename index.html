@@ -198,10 +198,11 @@
         </div>
     </header>
     <!-- COMPACT DROPDOWN NAVIGATION PANEL -->
+    <div id="menu-backdrop" class="hidden fixed inset-0 z-[90] bg-slate-900/20" aria-hidden="true"></div>
     <div id="mobile-menu" class="hidden fixed top-[4.5rem] right-3 z-[100] w-[min(88vw,22rem)] max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-2xl border border-slate-300 bg-white p-5 shadow-2xl" aria-hidden="true">
-        <div class="mb-3 flex items-center justify-between">
+        <div class="mb-3 flex items-center justify-between gap-3">
             <span class="text-sm font-bold text-slate-500">Navigation</span>
-            <button id="menu-close" type="button" aria-label="Close menu" class="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-800">Close ✕</button>
+            <button id="menu-close" type="button" aria-label="Close menu" class="inline-flex shrink-0 items-center justify-center rounded-lg border border-slate-400 bg-slate-100 px-4 py-2 text-sm font-bold text-slate-900">Close ✕</button>
         </div>
         <nav aria-label="Main navigation" class="flex flex-col">
             <a href="#roi-calculator" class="menu-link border-b border-slate-200 py-3 text-base font-semibold text-slate-900">ROI Calculator</a>
@@ -571,19 +572,20 @@
             const menuBtn = document.getElementById('menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const closeBtn = document.getElementById('menu-close');
+            const menuBackdrop = document.getElementById('menu-backdrop');
             if (!menuBtn || !mobileMenu) return;
 
             const openMenu = () => {
                 mobileMenu.classList.remove('hidden');
+                menuBackdrop?.classList.remove('hidden');
                 mobileMenu.setAttribute('aria-hidden', 'false');
                 menuBtn.setAttribute('aria-expanded', 'true');
-                // Keep the page layout and scroll position unchanged behind the dropdown.
             };
             const closeMenu = () => {
                 mobileMenu.classList.add('hidden');
+                menuBackdrop?.classList.add('hidden');
                 mobileMenu.setAttribute('aria-hidden', 'true');
                 menuBtn.setAttribute('aria-expanded', 'false');
-                // No body scroll lock was applied.
             };
 
             menuBtn.type = 'button';
@@ -595,7 +597,12 @@
                 if (mobileMenu.classList.contains('hidden')) openMenu();
                 else closeMenu();
             });
-            closeBtn?.addEventListener('click', closeMenu);
+            closeBtn?.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                closeMenu();
+            });
+            menuBackdrop?.addEventListener('click', closeMenu);
             mobileMenu.querySelectorAll('a.menu-link').forEach(link => link.addEventListener('click', closeMenu));
             document.addEventListener('keydown', event => {
                 if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) closeMenu();
