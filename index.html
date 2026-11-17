@@ -109,15 +109,14 @@
         }
 
 
-        /* Calm, readable captions and optional spoken explanation */
-        .trade-rain { position:absolute; inset:0; z-index:3; pointer-events:none; display:flex; align-items:flex-end; padding:1rem; }
-        .trade-rain-column { width:100%; display:flex; flex-direction:column; gap:.45rem; padding:1rem 1rem 3.8rem; background:linear-gradient(to top,rgba(10,20,35,.72),rgba(10,20,35,.22),transparent); }
-        .trade-rain-column:nth-child(2) { display:none; }
-        .trade-rain-column span { display:block; color:rgba(255,255,255,.9); font-size:.9rem; line-height:1.45; font-weight:600; text-shadow:0 1px 4px rgba(0,0,0,.55); }
-        .trade-rain-column span:nth-child(n+4) { display:none; }
-        .trade-listen { position:absolute; z-index:5; right:1rem; bottom:1rem; display:inline-flex; align-items:center; gap:.45rem; border:1px solid rgba(255,255,255,.75); border-radius:999px; background:rgba(15,23,42,.9); color:white; padding:.55rem .85rem; font-size:.8rem; font-weight:700; box-shadow:0 2px 10px rgba(0,0,0,.25); }
+        /* Editorial captions: balanced paragraphs over each trade photograph */
+        .trade-rain { position:absolute; inset:0; z-index:3; pointer-events:none; overflow:hidden; display:flex; align-items:flex-start; justify-content:center; padding:1.25rem 1rem 5.25rem; background:linear-gradient(to bottom,rgba(8,18,32,.34),rgba(8,18,32,.08) 48%,rgba(8,18,32,.62)); }
+        .trade-rain-column { width:min(100%,34rem); margin:0; padding:1rem 1.1rem; color:#fff; font-size:1rem; line-height:1.55; font-weight:650; letter-spacing:.005em; text-align:left; text-shadow:0 2px 5px rgba(0,0,0,.95),0 0 2px rgba(0,0,0,.95); text-wrap:pretty; animation:tradeTextDrift 24s ease-in-out infinite alternate; }
+        @keyframes tradeTextDrift { from { transform:translateY(-.2rem); } to { transform:translateY(1.2rem); } }
+        .trade-listen { position:absolute; z-index:5; right:1rem; bottom:1rem; display:inline-flex; align-items:center; gap:.45rem; border:1px solid rgba(255,255,255,.85); border-radius:999px; background:rgba(15,23,42,.94); color:white; padding:.55rem .85rem; font-size:.8rem; font-weight:700; box-shadow:0 2px 10px rgba(0,0,0,.3); }
         .trade-listen:focus-visible { outline:3px solid #93c5fd; outline-offset:3px; }
-        @media(min-width:640px) { .trade-rain { padding:1.5rem; } .trade-rain-column span { font-size:1.05rem; } }
+        @media(min-width:640px) { .trade-rain { padding:1.75rem 1.5rem 5.5rem; } .trade-rain-column { font-size:1.1rem; line-height:1.6; } }
+        @media(prefers-reduced-motion:reduce) { .trade-rain-column { animation:none; } }
 
         /* Wider Animated Badge Floating Effect */
         @keyframes badgePulse {
@@ -409,8 +408,9 @@
         <!-- TRADE PROFESSIONS & BENEFITS -->
         <section id="how-it-works" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
             <div class="text-center mb-10">
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-3">Zero Fluff. <span class="text-[#2563eb]">Built for Dallas Trades.</span></h2>
-                <p class="text-slate-600 text-sm sm:text-base">Tailored live voice &amp; payment workflows for roofers, plumbers, and general contractors.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">Zero Fluff.</h2>
+                <p class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2">Built for Dallas trades.</p>
+                <p class="max-w-2xl mx-auto text-slate-600 text-sm sm:text-base leading-relaxed">Straightforward call answering, booking and payment support for roofers, plumbers and general contractors.</p>
             </div>
             <!-- CARD 1: ROOFERS -->
             <div class="podium-card-3d rounded-3xl mb-8 overflow-hidden">
@@ -420,11 +420,8 @@
                 </div>
                 <div class="relative w-full h-[27rem] sm:h-[36rem] overflow-hidden bg-slate-950">
                     <img src="https://raw.githubusercontent.com/kelvnwilson53-bot/Tradashai-test/main/1792284293487.jpg" alt="Roofing specialist working on a roof" class="w-full h-full object-cover" loading="lazy">
-                    <div class="trade-rain" aria-hidden="true">
-                        <div class="trade-rain-column"><span>When you're on a pitched roof, your calls are still answered live.</span><span>Customers receive booking confirmations by text.</span><span>Sarah gathers details of storm damage and leaking roofs.</span><span>Emergency fees and secure deposit links can be sent by SMS.</span><span>When you're on a pitched roof, your calls are still answered live.</span><span>Customers receive booking confirmations by text.</span></div>
-                        <div class="trade-rain-column"><span>Sarah gathers details of storm damage and leaking roofs.</span><span>Emergency fees and secure deposit links can be sent by SMS.</span><span>When you're on a pitched roof, your calls are still answered live.</span><span>Customers receive booking confirmations by text.</span><span>Sarah gathers details of storm damage and leaking roofs.</span><span>Emergency fees and secure deposit links can be sent by SMS.</span></div>
-                    </div>
-                    <button type="button" class="trade-listen" data-speech="When you're up on a roof, Sarah answers your calls, captures enquiries about repairs and storm damage, and helps arrange the next booking.">▶ Listen to Sarah</button>
+                    <div class="trade-rain" aria-hidden="true"><p class="trade-rain-column">Working on a roof? Sarah answers your calls while you stay focused on the job. She captures enquiries about repairs, leaks and storm damage, then helps arrange the next booking. Customers can receive booking confirmations and secure payment links by text.</p></div>
+                    <button type="button" class="trade-listen" data-speech="Working on a roof? Sarah answers your calls while you stay focused on the job. She captures enquiries about repairs, leaks and storm damage, then helps arrange the next booking. Customers can receive booking confirmations and secure payment links by text.">▶ Play explanation</button>
                 </div>
             </div>
             <!-- CARD 2: PLUMBERS -->
@@ -435,11 +432,8 @@
                 </div>
                 <div class="relative w-full h-[27rem] sm:h-[36rem] overflow-hidden bg-slate-950">
                     <img src="https://raw.githubusercontent.com/kelvnwilson53-bot/Tradashai-test/main/1793498924399.jpg" alt="Plumber working under a sink" class="w-full h-full object-cover" loading="lazy">
-                    <div class="trade-rain" aria-hidden="true">
-                        <div class="trade-rain-column"><span>Burst pipes don't wait for business hours.</span><span>Customers receive clear water shut-off guidance where appropriate.</span><span>Sarah answers emergency calls and gathers important details.</span><span>Call-out fees can be secured upfront with an SMS payment link.</span><span>Burst pipes don't wait for business hours.</span><span>Customers receive clear water shut-off guidance where appropriate.</span></div>
-                        <div class="trade-rain-column"><span>Sarah answers emergency calls and gathers important details.</span><span>Call-out fees can be secured upfront with an SMS payment link.</span><span>Burst pipes don't wait for business hours.</span><span>Customers receive clear water shut-off guidance where appropriate.</span><span>Sarah answers emergency calls and gathers important details.</span><span>Call-out fees can be secured upfront with an SMS payment link.</span></div>
-                    </div>
-                    <button type="button" class="trade-listen" data-speech="When you're under a sink or dealing with an emergency, Sarah answers the phone, gathers the details, and can send a call-out payment link.">▶ Listen to Sarah</button>
+                    <div class="trade-rain" aria-hidden="true"><p class="trade-rain-column">A burst pipe can't wait. Sarah answers emergency calls, gathers the important details and gives customers clear next steps. When a call-out is needed, she can send a payment link so the fee is secured before you travel.</p></div>
+                    <button type="button" class="trade-listen" data-speech="A burst pipe can't wait. Sarah answers emergency calls, gathers the important details and gives customers clear next steps. When a call-out is needed, she can send a payment link so the fee is secured before you travel.">▶ Play explanation</button>
                 </div>
             </div>
             <!-- CARD 3: BUILDERS / CONTRACTORS -->
@@ -450,11 +444,8 @@
                 </div>
                 <div class="relative w-full h-[27rem] sm:h-[36rem] overflow-hidden bg-slate-950">
                     <img src="https://raw.githubusercontent.com/kelvnwilson53-bot/Tradashai-test/main/1792284328037.jpg" alt="General contractor working on site" class="w-full h-full object-cover" loading="lazy">
-                    <div class="trade-rain" aria-hidden="true">
-                        <div class="trade-rain-column"><span>Power tools running? Your incoming calls are still answered.</span><span>New enquiries are logged and sent straight to your phone.</span><span>Sarah speaks with prospective clients and captures project details.</span><span>Customers can be offered a booking link for the next available slot.</span><span>Power tools running? Your incoming calls are still answered.</span><span>New enquiries are logged and sent straight to your phone.</span></div>
-                        <div class="trade-rain-column"><span>Sarah speaks with prospective clients and captures project details.</span><span>Customers can be offered a booking link for the next available slot.</span><span>Power tools running? Your incoming calls are still answered.</span><span>New enquiries are logged and sent straight to your phone.</span><span>Sarah speaks with prospective clients and captures project details.</span><span>Customers can be offered a booking link for the next available slot.</span></div>
-                    </div>
-                    <button type="button" class="trade-listen" data-speech="When the tools are running and you can't answer, Sarah captures new project enquiries, records the details, and helps arrange appointments.">▶ Listen to Sarah</button>
+                    <div class="trade-rain" aria-hidden="true"><p class="trade-rain-column">When the tools are running, Sarah answers incoming calls and captures new project enquiries. She records the customer's requirements and contact details, then helps arrange an appointment so a promising lead doesn't go unanswered.</p></div>
+                    <button type="button" class="trade-listen" data-speech="When the tools are running, Sarah answers incoming calls and captures new project enquiries. She records the customer's requirements and contact details, then helps arrange an appointment so a promising lead doesn't go unanswered.">▶ Play explanation</button>
                 </div>
             </div>
             <!-- CARD 4: FIELD SERVICE -->
@@ -465,11 +456,8 @@
                 </div>
                 <div class="relative w-full h-[27rem] sm:h-[36rem] overflow-hidden bg-slate-950">
                     <img src="https://raw.githubusercontent.com/kelvnwilson53-bot/Tradashai-test/main/1793498988502.jpg" alt="Field service professional at work" class="w-full h-full object-cover" loading="lazy">
-                    <div class="trade-rain" aria-hidden="true">
-                        <div class="trade-rain-column"><span>Busy on site? Your virtual receptionist handles incoming enquiries.</span><span>Customers receive booking details and payment links by text.</span><span>Calls are answered live, day or night.</span><span>Turn more enquiries into confirmed, paid call-outs.</span><span>Busy on site? Your virtual receptionist handles incoming enquiries.</span><span>Customers receive booking details and payment links by text.</span></div>
-                        <div class="trade-rain-column"><span>Calls are answered live, day or night.</span><span>Turn more enquiries into confirmed, paid call-outs.</span><span>Busy on site? Your virtual receptionist handles incoming enquiries.</span><span>Customers receive booking details and payment links by text.</span><span>Calls are answered live, day or night.</span><span>Turn more enquiries into confirmed, paid call-outs.</span></div>
-                    </div>
-                    <button type="button" class="trade-listen" data-speech="When you're out on a job, Sarah keeps things moving by answering calls, confirming bookings, and sending payment links and review requests.">▶ Listen to Sarah</button>
+                    <div class="trade-rain" aria-hidden="true"><p class="trade-rain-column">Out on a job? Sarah keeps things moving by answering calls and helping confirm bookings. She can send payment links and, after the work is complete, request a Google review so you can stay focused on the job in front of you.</p></div>
+                    <button type="button" class="trade-listen" data-speech="Out on a job? Sarah keeps things moving by answering calls and helping confirm bookings. She can send payment links and, after the work is complete, request a Google review so you can stay focused on the job in front of you.">▶ Play explanation</button>
                 </div>
             </div>
         </section>
@@ -543,15 +531,15 @@
                 if (!('speechSynthesis' in window)) { button.textContent = 'Audio unavailable'; return; }
                 if (button.dataset.playing === 'true') {
                     window.speechSynthesis.cancel();
-                    buttons.forEach(b => { b.dataset.playing = 'false'; b.textContent = '▶ Listen to Sarah'; });
+                    buttons.forEach(b => { b.dataset.playing = 'false'; b.textContent = '▶ Play explanation'; });
                     return;
                 }
                 window.speechSynthesis.cancel();
-                buttons.forEach(b => { b.dataset.playing = 'false'; b.textContent = '▶ Listen to Sarah'; });
+                buttons.forEach(b => { b.dataset.playing = 'false'; b.textContent = '▶ Play explanation'; });
                 const utterance = new SpeechSynthesisUtterance(button.dataset.speech);
                 utterance.lang = 'en-US'; utterance.rate = .94; utterance.pitch = 1.02;
-                button.dataset.playing = 'true'; button.textContent = '■ Stop narration';
-                utterance.onend = utterance.onerror = () => { button.dataset.playing = 'false'; button.textContent = '▶ Listen to Sarah'; };
+                button.dataset.playing = 'true'; button.textContent = '■ Stop audio';
+                utterance.onend = utterance.onerror = () => { button.dataset.playing = 'false'; button.textContent = '▶ Play explanation'; };
                 window.speechSynthesis.speak(utterance);
             }));
         })();
