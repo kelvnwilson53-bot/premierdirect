@@ -109,40 +109,28 @@
         }
 
 
-        /* Unboxed flowing text over trade photographs */
-        @keyframes tradeTextRain {
-            from { transform: translateY(-55%); }
-            to { transform: translateY(0); }
-        }
+        /* Subtle, transparent-style copy over trade photographs: static, not animated */
         .trade-rain {
             position:absolute; inset:0; overflow:hidden; pointer-events:none;
-            display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;
-            padding:1.25rem 1rem 7rem;
-            mask-image:linear-gradient(to bottom, transparent 0%, black 15%, black 78%, transparent 100%);
-            -webkit-mask-image:linear-gradient(to bottom, transparent 0%, black 15%, black 78%, transparent 100%);
+            display:flex; justify-content:flex-start;
+            padding:1.4rem 1.1rem;
+            opacity:.24;
         }
         .trade-rain-column {
-            display:flex; flex-direction:column; gap:1.6rem;
-            animation:tradeTextRain 18s linear infinite;
-            will-change:transform;
+            display:flex; flex-direction:column; gap:1.15rem;
+            width:min(72%, 19rem);
+            animation:none !important;
         }
-        .trade-rain-column:nth-child(2) { animation-duration:23s; animation-delay:-9s; }
+        .trade-rain-column:nth-child(2) { display:none; }
         .trade-rain-column span {
-            display:block; color:#fff; font-size:.95rem; line-height:1.5;
-            font-weight:700; text-shadow:0 2px 8px rgba(0,0,0,.95), 0 0 3px rgba(0,0,0,.9);
+            display:block; color:#172033; font-size:.9rem; line-height:1.45;
+            font-weight:600; text-shadow:none;
         }
-        .trade-heading {
-            position:absolute; left:1.25rem; right:1.25rem; bottom:1.25rem; z-index:2;
-        }
+        .trade-rain-column span:nth-child(n+4) { display:none; }
         @media(min-width:640px) {
-            .trade-rain { padding:2rem 2.5rem 9rem; gap:3rem; }
-            .trade-rain-column { gap:2rem; }
-            .trade-rain-column span { font-size:1.15rem; }
-            .trade-heading { left:2.5rem; right:2.5rem; bottom:2rem; }
-        }
-        @media(prefers-reduced-motion:reduce) {
-            .trade-rain-column { animation:none; }
-            .trade-rain-column span { margin-bottom:1rem; }
+            .trade-rain { padding:2rem 2.5rem; }
+            .trade-rain-column { gap:1.5rem; }
+            .trade-rain-column span { font-size:1.05rem; }
         }
 
         /* Wider Animated Badge Floating Effect */
@@ -219,18 +207,19 @@
             </button>
         </div>
     </header>
-    <!-- FULL-SCREEN NAVIGATION PANEL -->
-    <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-white pt-24 px-7 sm:px-12 overflow-y-auto" aria-hidden="true">
-        <button id="menu-close" type="button" aria-label="Close menu" class="absolute top-5 right-5 rounded-lg px-4 py-2 text-slate-800 font-semibold border border-slate-300">Close ✕</button>
-        <nav aria-label="Main navigation" class="mx-auto flex w-full max-w-3xl flex-col gap-0">
-            <a href="#roi-calculator" class="menu-link border-b border-slate-200 py-5 text-xl sm:text-2xl font-semibold text-black">ROI Calculator</a>
-            <a href="#receptionist" class="menu-link border-b border-slate-200 py-5 text-xl sm:text-2xl font-semibold text-black">Meet Your 24/7 Receptionist &amp; Dispatcher</a>
-            <a href="#how-it-works" class="menu-link border-b border-slate-200 py-5 text-xl sm:text-2xl font-semibold text-black">How TriDashAI Works</a>
-            <a href="#pricing" class="menu-link border-b border-slate-200 py-5 text-xl sm:text-2xl font-semibold text-black">Pricing</a>
-            <div class="mt-7 border-t border-slate-200 pt-6 flex flex-col gap-4">
-                <a href="login.html" class="menu-link text-lg font-semibold text-black">Log In</a>
-                <a href="kelvsignup.html" class="menu-link inline-flex w-full sm:w-auto sm:self-start items-center justify-center rounded-xl bg-[#2563eb] px-7 py-4 text-lg font-bold text-white shadow-md">Start Your 7-Day Free Trial</a>
-            </div>
+    <!-- COMPACT DROPDOWN NAVIGATION PANEL -->
+    <div id="mobile-menu" class="hidden fixed top-[4.5rem] right-3 z-[100] w-[min(88vw,22rem)] max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-2xl border border-slate-300 bg-white p-5 shadow-2xl" aria-hidden="true">
+        <div class="mb-3 flex items-center justify-between">
+            <span class="text-sm font-bold text-slate-500">Navigation</span>
+            <button id="menu-close" type="button" aria-label="Close menu" class="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-800">Close ✕</button>
+        </div>
+        <nav aria-label="Main navigation" class="flex flex-col">
+            <a href="#roi-calculator" class="menu-link border-b border-slate-200 py-3 text-base font-semibold text-slate-900">ROI Calculator</a>
+            <a href="#receptionist" class="menu-link border-b border-slate-200 py-3 text-base font-semibold text-slate-900">Meet Your 24/7 Receptionist &amp; Dispatcher</a>
+            <a href="#how-it-works" class="menu-link border-b border-slate-200 py-3 text-base font-semibold text-slate-900">How TriDashAI Works</a>
+            <a href="#pricing" class="menu-link border-b border-slate-200 py-3 text-base font-semibold text-slate-900">Pricing</a>
+            <a href="login.html" class="menu-link mt-4 py-2 text-base font-semibold text-slate-900">Log In</a>
+            <a href="kelvsignup.html" class="menu-link mt-2 inline-flex w-full items-center justify-center rounded-xl bg-[#2563eb] px-4 py-3 text-base font-bold text-white shadow-md">Start Your 7-Day Free Trial</a>
         </nav>
     </div>
 
@@ -573,7 +562,7 @@
         })();
     </script>
     <script>
-        // Reliable full-screen navigation menu
+        // Compact dropdown navigation menu
         (() => {
             const menuBtn = document.getElementById('menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -584,13 +573,13 @@
                 mobileMenu.classList.remove('hidden');
                 mobileMenu.setAttribute('aria-hidden', 'false');
                 menuBtn.setAttribute('aria-expanded', 'true');
-                document.body.style.overflow = 'hidden';
+                // Keep the page layout and scroll position unchanged behind the dropdown.
             };
             const closeMenu = () => {
                 mobileMenu.classList.add('hidden');
                 mobileMenu.setAttribute('aria-hidden', 'true');
                 menuBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
+                // No body scroll lock was applied.
             };
 
             menuBtn.type = 'button';
