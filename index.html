@@ -596,26 +596,41 @@
         })();
     </script>
     <script>
-        // Menu Toggle Logic
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mobileMenu.classList.toggle('hidden');
-        });
+        // Accessible full-screen navigation menu
+        (() => {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!menuBtn || !mobileMenu) return;
 
-        document.addEventListener('click', () => {
-            if (!mobileMenu.classList.contains('hidden')) {
+            const closeMenu = () => {
                 mobileMenu.classList.add('hidden');
-            }
-        });
+                menuBtn.setAttribute('aria-expanded', 'false');
+            };
+            const openMenu = () => {
+                mobileMenu.classList.remove('hidden');
+                menuBtn.setAttribute('aria-expanded', 'true');
+            };
 
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+            menuBtn.setAttribute('aria-controls', 'mobile-menu');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            menuBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                if (mobileMenu.classList.contains('hidden')) openMenu();
+                else closeMenu();
             });
-        });
+
+            // Keep clicks inside the open panel from being mistaken for outside clicks.
+            mobileMenu.addEventListener('click', (event) => event.stopPropagation());
+            document.addEventListener('click', closeMenu);
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') closeMenu();
+            });
+
+            mobileMenu.querySelectorAll('a.menu-link').forEach((link) => {
+                link.addEventListener('click', () => closeMenu());
+            });
+        })();
 
         // ROI Calculator Logic (Monthly Lost Revenue: Job Value * Missed Calls per week * 4 weeks)
         const jobValueInput = document.getElementById('job-value');
