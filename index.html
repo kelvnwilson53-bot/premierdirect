@@ -109,29 +109,15 @@
         }
 
 
-        /* Subtle, transparent-style copy over trade photographs: static, not animated */
-        .trade-rain {
-            position:absolute; inset:0; overflow:hidden; pointer-events:none;
-            display:flex; justify-content:flex-start;
-            padding:1.4rem 1.1rem;
-            opacity:.18;
-        }
-        .trade-rain-column {
-            display:flex; flex-direction:column; gap:1.15rem;
-            width:min(72%, 19rem);
-            animation:none !important;
-        }
+        /* Calm, readable captions and optional spoken explanation */
+        .trade-rain { position:absolute; inset:0; z-index:3; pointer-events:none; display:flex; align-items:flex-end; padding:1rem; }
+        .trade-rain-column { width:100%; display:flex; flex-direction:column; gap:.45rem; padding:1rem 1rem 3.8rem; background:linear-gradient(to top,rgba(10,20,35,.72),rgba(10,20,35,.22),transparent); }
         .trade-rain-column:nth-child(2) { display:none; }
-        .trade-rain-column span {
-            display:block; color:#172033; font-size:.9rem; line-height:1.45;
-            font-weight:600; text-shadow:none;
-        }
+        .trade-rain-column span { display:block; color:rgba(255,255,255,.9); font-size:.9rem; line-height:1.45; font-weight:600; text-shadow:0 1px 4px rgba(0,0,0,.55); }
         .trade-rain-column span:nth-child(n+4) { display:none; }
-        @media(min-width:640px) {
-            .trade-rain { padding:2rem 2.5rem; }
-            .trade-rain-column { gap:1.5rem; }
-            .trade-rain-column span { font-size:1.05rem; }
-        }
+        .trade-listen { position:absolute; z-index:5; right:1rem; bottom:1rem; display:inline-flex; align-items:center; gap:.45rem; border:1px solid rgba(255,255,255,.75); border-radius:999px; background:rgba(15,23,42,.9); color:white; padding:.55rem .85rem; font-size:.8rem; font-weight:700; box-shadow:0 2px 10px rgba(0,0,0,.25); }
+        .trade-listen:focus-visible { outline:3px solid #93c5fd; outline-offset:3px; }
+        @media(min-width:640px) { .trade-rain { padding:1.5rem; } .trade-rain-column span { font-size:1.05rem; } }
 
         /* Wider Animated Badge Floating Effect */
         @keyframes badgePulse {
@@ -438,6 +424,7 @@
                         <div class="trade-rain-column"><span>When you're on a pitched roof, your calls are still answered live.</span><span>Customers receive booking confirmations by text.</span><span>Sarah gathers details of storm damage and leaking roofs.</span><span>Emergency fees and secure deposit links can be sent by SMS.</span><span>When you're on a pitched roof, your calls are still answered live.</span><span>Customers receive booking confirmations by text.</span></div>
                         <div class="trade-rain-column"><span>Sarah gathers details of storm damage and leaking roofs.</span><span>Emergency fees and secure deposit links can be sent by SMS.</span><span>When you're on a pitched roof, your calls are still answered live.</span><span>Customers receive booking confirmations by text.</span><span>Sarah gathers details of storm damage and leaking roofs.</span><span>Emergency fees and secure deposit links can be sent by SMS.</span></div>
                     </div>
+                    <button type="button" class="trade-listen" data-speech="When you're up on a roof, Sarah answers your calls, captures enquiries about repairs and storm damage, and helps arrange the next booking.">▶ Listen to Sarah</button>
                 </div>
             </div>
             <!-- CARD 2: PLUMBERS -->
@@ -452,6 +439,7 @@
                         <div class="trade-rain-column"><span>Burst pipes don't wait for business hours.</span><span>Customers receive clear water shut-off guidance where appropriate.</span><span>Sarah answers emergency calls and gathers important details.</span><span>Call-out fees can be secured upfront with an SMS payment link.</span><span>Burst pipes don't wait for business hours.</span><span>Customers receive clear water shut-off guidance where appropriate.</span></div>
                         <div class="trade-rain-column"><span>Sarah answers emergency calls and gathers important details.</span><span>Call-out fees can be secured upfront with an SMS payment link.</span><span>Burst pipes don't wait for business hours.</span><span>Customers receive clear water shut-off guidance where appropriate.</span><span>Sarah answers emergency calls and gathers important details.</span><span>Call-out fees can be secured upfront with an SMS payment link.</span></div>
                     </div>
+                    <button type="button" class="trade-listen" data-speech="When you're under a sink or dealing with an emergency, Sarah answers the phone, gathers the details, and can send a call-out payment link.">▶ Listen to Sarah</button>
                 </div>
             </div>
             <!-- CARD 3: BUILDERS / CONTRACTORS -->
@@ -466,6 +454,7 @@
                         <div class="trade-rain-column"><span>Power tools running? Your incoming calls are still answered.</span><span>New enquiries are logged and sent straight to your phone.</span><span>Sarah speaks with prospective clients and captures project details.</span><span>Customers can be offered a booking link for the next available slot.</span><span>Power tools running? Your incoming calls are still answered.</span><span>New enquiries are logged and sent straight to your phone.</span></div>
                         <div class="trade-rain-column"><span>Sarah speaks with prospective clients and captures project details.</span><span>Customers can be offered a booking link for the next available slot.</span><span>Power tools running? Your incoming calls are still answered.</span><span>New enquiries are logged and sent straight to your phone.</span><span>Sarah speaks with prospective clients and captures project details.</span><span>Customers can be offered a booking link for the next available slot.</span></div>
                     </div>
+                    <button type="button" class="trade-listen" data-speech="When the tools are running and you can't answer, Sarah captures new project enquiries, records the details, and helps arrange appointments.">▶ Listen to Sarah</button>
                 </div>
             </div>
             <!-- CARD 4: FIELD SERVICE -->
@@ -480,6 +469,7 @@
                         <div class="trade-rain-column"><span>Busy on site? Your virtual receptionist handles incoming enquiries.</span><span>Customers receive booking details and payment links by text.</span><span>Calls are answered live, day or night.</span><span>Turn more enquiries into confirmed, paid call-outs.</span><span>Busy on site? Your virtual receptionist handles incoming enquiries.</span><span>Customers receive booking details and payment links by text.</span></div>
                         <div class="trade-rain-column"><span>Calls are answered live, day or night.</span><span>Turn more enquiries into confirmed, paid call-outs.</span><span>Busy on site? Your virtual receptionist handles incoming enquiries.</span><span>Customers receive booking details and payment links by text.</span><span>Calls are answered live, day or night.</span><span>Turn more enquiries into confirmed, paid call-outs.</span></div>
                     </div>
+                    <button type="button" class="trade-listen" data-speech="When you're out on a job, Sarah keeps things moving by answering calls, confirming bookings, and sending payment links and review requests.">▶ Listen to Sarah</button>
                 </div>
             </div>
         </section>
@@ -544,6 +534,28 @@
     </footer>
 
     <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Spoken trade explanations use the browser's available English voice.
+        // A recorded Sarah voice can replace this later for a consistent brand voice.
+        (() => {
+            const buttons = [...document.querySelectorAll('.trade-listen')];
+            buttons.forEach(button => button.addEventListener('click', () => {
+                if (!('speechSynthesis' in window)) { button.textContent = 'Audio unavailable'; return; }
+                if (button.dataset.playing === 'true') {
+                    window.speechSynthesis.cancel();
+                    buttons.forEach(b => { b.dataset.playing = 'false'; b.textContent = '▶ Listen to Sarah'; });
+                    return;
+                }
+                window.speechSynthesis.cancel();
+                buttons.forEach(b => { b.dataset.playing = 'false'; b.textContent = '▶ Listen to Sarah'; });
+                const utterance = new SpeechSynthesisUtterance(button.dataset.speech);
+                utterance.lang = 'en-US'; utterance.rate = .94; utterance.pitch = 1.02;
+                button.dataset.playing = 'true'; button.textContent = '■ Stop narration';
+                utterance.onend = utterance.onerror = () => { button.dataset.playing = 'false'; button.textContent = '▶ Listen to Sarah'; };
+                window.speechSynthesis.speak(utterance);
+            }));
+        })();
+    </script>
     <script>
         // Desktop hover preview; touch devices use the native play controls.
         (() => {
