@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriDashAI - Contractor Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Translucent Frosted Glass Theme Styles */
+        body.dark-theme {
+            background: #000000;
+            color: #cbd5e1;
+        }
+        body.dark-theme .dashboard-card {
+            background: rgba(9, 13, 22, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        body.dark-theme .dashboard-card:hover {
+            border-color: rgba(37, 99, 235, 0.45);
+        }
+        /* Entry fields stay dark until selected, then turn white for easy editing. */
+        .dashboard-input {
+            background: #020617 !important;
+            color: #f8fafc !important;
+            border: 1px solid #475569 !important;
+            caret-color: #f8fafc;
+            transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+        }
+        .dashboard-input::placeholder {
+            color: #94a3b8 !important;
+            opacity: 1;
+        }
+        .dashboard-input:focus {
+            background: #ffffff !important;
+            color: #111827 !important;
+            border-color: #38bdf8 !important;
+            caret-color: #111827;
+            outline: 2px solid #38bdf8;
+            outline-offset: 2px;
+        }
+        .dashboard-input:focus::placeholder {
+            color: #64748b !important;
+        }
+
+        body.dark-theme .dashboard-input {
+            background: rgba(2, 6, 23, 0.75);
+            border: 1px solid rgba(51, 65, 85, 0.6);
+            color: #ffffff;
+            cursor: text;
+            -webkit-appearance: none;
+        }
+        body.dark-theme header {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            border-color: rgba(30, 41, 59, 0.4);
+        }
+
+        /* Light Theme Style Option */
+        body.light-theme {
+            background: #f1f5f9;
+            color: #334155;
+        }
+        body.light-theme .dashboard-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(203, 213, 225, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+        }
+        body.light-theme .dashboard-input {
+            background: rgba(241, 245, 249, 0.9);
+            border: 1px solid rgba(203, 213, 225, 0.8);
+            color: #0f172a;
+            cursor: text;
+            -webkit-appearance: none;
+        }
+        body.light-theme header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-color: rgba(226, 232, 240, 0.7);
+        }
+        body.light-theme .text-white {
+            color: #0f172a !important;
+        }
+        body.light-theme .text-slate-300, 
+        body.light-theme .text-slate-400 {
+            color: #475569 !important;
+        }
+        body.light-theme .bg-black\/30 {
+            background: rgba(255, 255, 255, 0.4) !important;
+            border-color: rgba(203, 213, 225, 0.5) !important;
+        }
+        body.light-theme code {
+            background: #e2e8f0 !important;
+            color: #0f172a !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        .btn-primary-blue {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+        .advanced-setup-pulse { animation: advancedSetupPulse 2.4s ease-in-out infinite; }
+        @keyframes advancedSetupPulse { 0%,100% { background-color: rgba(59,130,246,.08); } 50% { background-color: rgba(59,130,246,.20); } }
+        @media (prefers-reduced-motion: reduce) { .advanced-setup-pulse { animation: none; } }
+        .btn-primary-blue:hover {
+            background: linear-gradient(135deg, #1d4ed8 100%, #1e40af 100%);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* CINEMATIC TRI DASH THEME — midnight, electric cyan, violet and teal */
+        body.dark-theme {
+            background:
+              radial-gradient(ellipse at 12% 8%, rgba(25, 92, 150, .28), transparent 34%),
+              radial-gradient(ellipse at 88% 18%, rgba(102, 55, 156, .22), transparent 32%),
+              radial-gradient(ellipse at 52% 100%, rgba(12, 126, 125, .13), transparent 38%),
+              #070b18;
+            color: #d8e4f5;
+        }
+        body.dark-theme .dashboard-card {
+            background: linear-gradient(145deg, rgba(18, 29, 52, .88), rgba(10, 17, 34, .91));
+            border: 1px solid rgba(105, 154, 211, .20);
+            box-shadow: 0 16px 44px rgba(0,0,0,.28), inset 0 1px 0 rgba(190,220,255,.035);
+            backdrop-filter: blur(16px);
+        }
+        body.dark-theme .dashboard-card:hover { border-color: rgba(69, 193, 222, .38); }
+        body.dark-theme header {
+            background: rgba(7, 11, 24, .88);
+            border-color: rgba(100, 149, 205, .18);
+            backdrop-filter: blur(18px);
+        }
+        body.dark-theme .dashboard-input {
+            background: rgba(5, 12, 27, .82);
+            border: 1px solid rgba(113, 157, 205, .30);
+            color: #f0f7ff;
+        }
+        .btn-primary-blue {
+            background: linear-gradient(115deg, #168fc4 0%, #5364dc 52%, #8157c8 100%);
+            color: #fff; font-weight: 600; letter-spacing: .01em;
+            box-shadow: 0 7px 22px rgba(44, 111, 201, .20);
+        }
+        .btn-primary-blue:hover {
+            background: linear-gradient(115deg, #20acd6 0%, #6378ed 52%, #9668dc 100%);
+            box-shadow: 0 9px 26px rgba(55, 143, 218, .30);
+        }
+        body.dark-theme .text-blue-400 { color: #65c9f0 !important; }
+        body.dark-theme .text-emerald-400, body.dark-theme .text-emerald-300 { color: #55dfc0 !important; }
+        body.dark-theme .text-violet-400 { color: #b9a0ff !important; }
+        body.dark-theme .bg-blue-500\/10 { background-color: rgba(40, 154, 208, .13) !important; }
+        body.dark-theme .border-blue-500\/30 { border-color: rgba(83, 174, 228, .32) !important; }
+        .advanced-setup-pulse { animation: advancedSetupPulse 2.8s ease-in-out infinite; }
+        @keyframes advancedSetupPulse { 0%,100% { background-color: rgba(40,154,208,.08); } 50% { background-color: rgba(107,83,194,.20); } }
+        @media (prefers-reduced-motion: reduce) { .advanced-setup-pulse { animation: none; } }
+
+        /* Readability pass: stronger contrast and more comfortable small text */
+        body.dark-theme .text-slate-400 { color: #b8cbe2 !important; }
+        body.dark-theme .text-slate-500 { color: #a9bfd9 !important; }
+        body.dark-theme .text-slate-300 { color: #d5e2f2 !important; }
+        body.dark-theme .text-xs { font-size: 0.8125rem; line-height: 1.5; }
+        body.dark-theme .text-\\[10px\\] { font-size: 0.75rem !important; line-height: 1.4; }
+        /* On phones, the navigation becomes a true full-screen menu. */
+        @media (max-width: 640px) {
+          #mobile-menu:not(.hidden) {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            max-height: 100vh;
+            max-height: 100dvh;
+            margin: 0;
+            border-radius: 0;
+            border: 0;
+            padding: max(1.25rem, env(safe-area-inset-top)) 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: none;
+          }
+          #mobile-menu a, #mobile-menu button { min-height: 52px; font-size: 1rem; padding: .85rem 1rem; }
+          #mobile-menu > p { font-size: .75rem; padding-top: .65rem; padding-bottom: .65rem; }
+        }
+
+        /* Professional dashboard sizing and layout */
+        body.dark-theme .text-xs { font-size: .75rem; line-height: 1.45; }
+        body.dark-theme .text-sm { font-size: .875rem; line-height: 1.5; }
+        body.dark-theme .text-base { font-size: 1rem; line-height: 1.5; }
+        body.dark-theme .text-lg { font-size: 1.125rem; line-height: 1.45; }
+        body.dark-theme .text-xl { font-size: 1.25rem; line-height: 1.35; }
+        body.dark-theme .text-2xl { font-size: 1.5rem; line-height: 1.3; }
+        body.dark-theme .text-3xl { font-size: 1.75rem; line-height: 1.25; }
+        #stage-1.dashboard-card, #advanced-setup.dashboard-card, #activity-reviews.dashboard-card { padding: 1.25rem; border-radius: 1rem; }
+        #stage-1 form { gap: 1rem; }
+        #stage-1 form > section, #phone-setup { padding: 1rem; border-radius: .875rem; }
+        #stage-2 { gap: 1rem; }
+        .dashboard-card { border-radius: 1rem; }
+        .dashboard-input { min-height: 42px; padding: .625rem .75rem; border-radius: .625rem; font-size: .9rem; }
+        .btn-primary-blue, #mobile-menu button, #mobile-menu a { min-height: 38px; padding: .55rem .9rem; border-radius: .6rem; font-size: .875rem; }
+        #hamburger-btn, #theme-toggle-btn { width: 38px; height: 38px; }
+        #roi-performance { padding: 1rem; }
+        #stage-2 > .grid article, #stage-2 > section { min-width: 0; }
+        #faq-panel details summary { font-size: .9rem; }
+        #faq-panel details p { font-size: .875rem; }
+        @media (max-width: 640px) {
+          main { padding-top: 1rem !important; padding-bottom: 1.5rem !important; }
+          #stage-1.dashboard-card, #advanced-setup.dashboard-card, #activity-reviews.dashboard-card { padding: 1rem; }
+          #stage-1 form > section, #phone-setup { padding: .875rem; }
+        }
+
+        /* Dashboard visual spacing and tonal refinement — styling only */
+        body.dark-theme {
+            background: #111b2a;
+            color: #d9e2ee;
+        }
+        body.dark-theme .dashboard-card {
+            background: #1b293b;
+            border: 1px solid rgba(96, 165, 250, .48) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+            backdrop-filter: none;
+        }
+        body.dark-theme .dashboard-card:hover {
+            border-color: rgba(96, 165, 250, .38);
+        }
+        body.dark-theme header {
+            background: #172334;
+            border-color: #34465d;
+            backdrop-filter: none;
+        }
+        body.dark-theme .dashboard-input {
+            background: #111d2d;
+            border-color: #50627a;
+        }
+        body.dark-theme main > * + * {
+            margin-top: 1.75rem !important;
+        }
+        body.dark-theme .dashboard-card {
+            padding: 1.5rem;
+            border-radius: 1.125rem;
+        }
+        body.dark-theme #stage-1 form > section,
+        body.dark-theme #phone-setup,
+        body.dark-theme #stage-2 article,
+        body.dark-theme #stage-2 > section,
+        body.dark-theme #activity-reviews article {
+            background-color: #223248;
+            border-color: rgba(96, 165, 250, .34) !important;
+            border-radius: .9rem;
+        }
+        body.dark-theme #stage-1 form > section + section {
+            margin-top: .5rem;
+        }
+        body.dark-theme #roi-performance,
+        body.dark-theme #usage-allowance {
+            background-color: #223248;
+            border: 1px solid #40536c;
+            border-radius: .9rem;
+        }
+        body.dark-theme .dashboard-card .border-slate-800\/40,
+        body.dark-theme .dashboard-card .border-slate-800\/50 {
+            border-color: #40536c !important;
+        }
+        @media (max-width: 640px) {
+            body.dark-theme main > * + * { margin-top: 1.25rem !important; }
+            body.dark-theme .dashboard-card { padding: 1.125rem; }
+        }
+    </style>
+</head>
+<body class="dark-theme font-sans antialiased selection:bg-blue-600 selection:text-white flex flex-col min-h-screen justify-between relative transition-colors duration-300">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="border-b sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+            
+            <!-- BRAND LOGO -->
+            <a href="index.html" class="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-1.5 cursor-pointer">
+                <span class="text-cyan-400">Tri</span><span class="text-white">DashAI</span>
+                <span class="text-[10px] bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded-full font-bold">Dashboard</span>
+            </a>
+
+            <!-- CENTERED THEME TOGGLE ICON -->
+            <div class="flex items-center justify-center">
+                <button id="theme-toggle-btn" class="w-9 h-9 bg-transparent hover:bg-slate-800/40 rounded-xl flex items-center justify-center text-lg transition cursor-pointer" title="Toggle Background">
+                    <span id="theme-icon">☀️</span>
+                </button>
+            </div>
+
+
+            <!-- RIGHT SIDE: HAMBURGER MENU BUTTON -->
+            <div class="relative">
+                <button id="hamburger-btn" class="w-10 h-10 bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 rounded-xl flex flex-col items-center justify-center gap-1 transition shadow-sm cursor-pointer" title="Navigation Menu">
+                    <span class="w-4 h-0.5 bg-slate-300 rounded-full"></span>
+                    <span class="w-4 h-0.5 bg-slate-300 rounded-full"></span>
+                    <span class="w-4 h-0.5 bg-slate-300 rounded-full"></span>
+                </button>
+
+                <!-- ACCOUNT & HELP MENU -->
+                <div id="mobile-menu" class="hidden absolute right-0 mt-2 w-64 max-h-[75vh] overflow-y-auto rounded-2xl bg-slate-900 border border-slate-700 py-3 px-3 space-y-1 shadow-2xl z-50">
+                  <div class="flex items-center justify-between px-3 pb-4 mb-2 border-b border-slate-700/70">
+                    <span class="text-lg font-bold text-white">Navigation</span>
+                    <button id="menu-close-btn" type="button" aria-label="Close navigation menu" class="w-11 h-11 rounded-xl border border-slate-700 text-slate-200 text-2xl leading-none hover:bg-slate-800">×</button>
+                  </div>
+                  <p class="px-3 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">Dashboard</p>
+                  <a href="#stage-2" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Overview</a>
+                  <a href="#roi-performance" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">ROI Indicator</a>
+                  <a href="#usage-allowance" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Voice & SMS usage</a>
+                  <a href="analytics.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Analytics</a>
+                  <div class="border-t border-slate-700/70 my-2"></div>
+                  <p class="px-3 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">Business setup</p>
+                  <a href="#stage-1" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Quick Start details</a>
+                  <a href="#phone-setup" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Phone connection</a>
+                  <a href="settings.html" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Advanced Setup</a>
+                  <a href="#test-receptionist" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Test Your Receptionist</a>
+                  <div class="border-t border-slate-700/70 my-2"></div>
+                  <p class="px-3 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">Support</p>
+                  <a href="#faq-panel" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Help & FAQs</a>
+                  <button id="feedback-nav-button" type="button" class="w-full text-left block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Feedback</button>
+                  <button id="logout-button" type="button" class="w-full text-left block text-sm font-semibold text-red-400 hover:text-red-300 p-2.5 rounded-lg hover:bg-slate-800/60 transition border-t border-slate-800 mt-2">Log out</button>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 space-y-5">
+
+
+        <!-- STAGE 1: QUICK START -->
+        <section id="stage-1" class="dashboard-card p-6 sm:p-8 rounded-3xl space-y-6">
+          <div class="border-b border-slate-800/40 pb-4">
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white">Quick Start</h2>
+            <p class="text-sm text-slate-300 mt-2">There is no need to complete every detail before you get to know your receptionist. Add the basic information about your business, save it, and use it to ask your receptionist a few straightforward questions about the services you provide and the areas you cover. You can add the finer details later.</p>
+          </div>
+          <form id="quick-start-form" class="space-y-5">
+            <section class="rounded-2xl border border-slate-700/50 p-4 space-y-3">
+              <h3 class="text-base font-bold text-white">1. Business details</h3>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <label class="text-sm text-slate-300">Business name<input id="qs-businessName" class="dashboard-input mt-1 w-full rounded-xl p-3" required></label>
+                <label class="text-sm text-slate-300">Business phone number (the number your customers call)<input id="qs-businessPhone" type="tel" class="dashboard-input mt-1 w-full rounded-xl p-3" required><span class="block text-xs text-slate-400 mt-1">Enter the number your customers already use to contact your business.</span></label>
+                <label class="text-sm text-slate-300">Main trade<select id="qs-primaryTrade" class="dashboard-input mt-1 w-full rounded-xl p-3"><option value="plumber">Plumbing</option><option value="roofer">Roofing</option><option value="hvac">HVAC</option><option value="electrician">Electrical</option><option value="builder">General building</option><option value="multi">Multi-trade / Other</option></select></label>
+                 
+              </div>
+            </section>
+            <section class="rounded-2xl border border-slate-700/50 p-4 space-y-3">
+              <h3 class="text-base font-bold text-white">2. Business location</h3>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <label class="text-sm text-slate-300">City / town and state<input id="qs-businessLocation" class="dashboard-input mt-1 w-full rounded-xl p-3" placeholder="City, state"></label>
+                <label class="text-sm text-slate-300">ZIP code<input id="qs-businessZip" class="dashboard-input mt-1 w-full rounded-xl p-3" placeholder="ZIP code"></label>
+              </div>
+              <label class="block text-sm text-slate-300">Service areas<input id="qs-serviceAreas" class="dashboard-input mt-1 w-full rounded-xl p-3" placeholder="Towns, areas or ZIP codes you cover"></label>
+            </section>
+            <section class="rounded-2xl border border-slate-700/50 p-4 space-y-3">
+              <h3 class="text-base font-bold text-white">3. Your receptionist — a key strength in winning more business</h3>
+              <p class="text-sm text-slate-300">With calendar booking, your receptionist can secure an appointment straight away, rather than letting your customer call a competitor — putting the money in your pocket, not your rival's.</p>
+              <p class="text-sm font-semibold text-white">Would you like your receptionist to book appointments directly into your business calendar?</p>
+              <label class="flex items-start gap-2 text-sm text-slate-300"><input type="radio" name="qs-calendarBooking" value="yes" class="mt-1"> Yes, I'd like my receptionist to book appointments for me.</label>
+              <label class="flex items-start gap-2 text-sm text-slate-300"><input type="radio" name="qs-calendarBooking" value="no" class="mt-1"> No, I'll arrange appointments myself.</label>
+              <p class="text-xs text-slate-400">Google Calendar sync must be set up before your receptionist can safely confirm appointments.</p>
+            </section>
+            <section class="rounded-2xl border border-slate-700/50 p-4 space-y-3">
+              <h3 class="text-base font-bold text-white">4. Working hours</h3>
+              <label class="block text-sm text-slate-300">Normal operating hours<input id="qs-operatingHours" class="dashboard-input mt-1 w-full rounded-xl p-3" placeholder="e.g. Monday–Friday, 8am–5pm"></label>
+               
+            </section>
+            <section class="rounded-2xl border border-slate-700/50 p-4 space-y-3">
+              <h3 class="text-base font-bold text-white">5. Call-out arrangements</h3>
+              <p class="text-sm text-slate-300">These are the four situations your receptionist needs to understand: normal daytime hours, out-of-hours, emergency call-outs, and holidays or special days.</p>
+              <p class="text-xs text-slate-400">You do not need to enter all your fees here. When you are ready to put your receptionist through more detailed tests — for example, different call-out charges, weekend rates, emergency fees or holiday exceptions — open Advanced Setup, complete the relevant fields, save them, and then test your receptionist again. That gives her the information she needs to handle those specific situations accurately.</p>
+            </section>
+        <!-- PHONE CONNECTION, PART OF QUICK START -->
+        <section id="phone-setup" class="rounded-2xl border border-slate-700/50 p-4 space-y-4">
+          <div>
+            <h3 class="text-base sm:text-lg font-extrabold text-white">6. Phone connection</h3>
+            <p class="text-sm text-slate-300 mt-1">We'll provide your dedicated TriDashAI number and help you forward calls from your existing business number.</p>
+          </div>
+          <div class="bg-black/30 border border-slate-700/40 p-3 rounded-xl space-y-2">
+            <div class="flex items-center justify-between gap-3"><h4 class="text-sm font-semibold text-blue-300">Call Routing</h4><span class="text-xs text-amber-300">Activation required</span></div>
+            <p class="text-sm text-slate-300">Calls will be forwarded from the existing business number you entered earlier in Quick Start. You can change that number later in Call Routing settings.</p>
+            <div class="rounded-xl border border-slate-700/50 bg-black/30 p-3"><p class="text-xs text-slate-400">Dedicated TriDashAI number</p><p id="dedicated-business-number" class="mt-1 text-sm text-slate-200">Assigned during activation</p></div>
+            <p class="text-xs text-slate-400">Call forwarding will only be switchable after your TriDashAI number has been assigned and the connection has been tested.</p>
+          </div>
+          <div class="bg-black/30 border border-slate-700/40 p-3 rounded-xl space-y-2">
+            <h4 class="text-sm font-bold text-blue-400">Calendar Sync</h4>
+            <p class="text-sm text-slate-300">Your receptionist should only confirm appointments once your Google Calendar is connected and availability can be checked.</p>
+            <p class="rounded-xl border border-amber-500/20 bg-amber-500/5 px-3 py-3 text-sm text-amber-200" role="status">Calendar connection is not available yet. Until it is connected and availability checks are working, your receptionist must not confirm appointments.</p>
+          </div>
+        </section>
+            <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+              <button type="submit" class="btn-primary-blue rounded-xl px-6 py-3 text-sm">Save Quick Start</button>
+              <span id="quick-start-message" class="text-sm text-slate-400" role="status">Your information is saved to your business profile.</span>
+            </div>
+          </form>
+        </section>
+        <!-- ADVANCED BUSINESS SETUP -->
+        <section id="advanced-setup" class="dashboard-card p-6 sm:p-8 rounded-3xl space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div><p class="text-xs font-bold uppercase tracking-widest text-blue-400">Business configuration</p><h3 class="text-lg font-extrabold text-white mt-1">Advanced Setup</h3><p class="text-sm text-slate-300 mt-1">Fine-tune the services you offer, call-out charges, pricing rules, payment options and the instructions your receptionist follows.</p></div>
+            <a href="settings.html" class="btn-primary-blue rounded-xl px-5 py-3 text-sm text-center whitespace-nowrap">Open Advanced Setup</a>
+          </div>
+          <p class="text-xs text-slate-400">Quick Start collects the essentials. Advanced Setup lets you tailor the receptionist to the way your business operates.</p>
+        </section>
+
+
+
+
+        <!-- ACTIVATED DASHBOARD -->
+        <section id="stage-2" class="hidden space-y-6">
+          <!-- BUSINESS IDENTITY AT TOP OF ACTIVATED DASHBOARD -->
+          <section class="dashboard-card rounded-2xl px-5 py-5 sm:px-7 space-y-2"><div><p class="text-xs font-medium tracking-wide text-blue-400">Your Business</p><h1 id="business-name-heading" class="text-2xl sm:text-3xl font-semibold text-white mt-1">Your business dashboard</h1><p id="business-plan-summary" class="text-sm text-slate-400 mt-1">Account overview</p></div></section>
+
+        <div id="advanced-setup-bar" class="hidden w-full mb-5">
+          <a id="advanced-setup-top" href="settings.html" class="w-full flex items-center justify-between gap-3 rounded-xl border border-blue-400/40 bg-blue-500/10 px-4 py-3 text-sm text-blue-100 advanced-setup-pulse">
+            <span class="min-w-0 flex-1"><span id="advanced-setup-title" class="block font-medium">Advanced Setup</span><span id="advanced-setup-subtitle" class="block mt-1 text-xs font-normal text-slate-400">Fine-tune your AI receptionist by completing your business preferences, call-out charges, emergency instructions and other settings.</span></span>
+            <span aria-hidden="true" class="shrink-0 text-blue-300 text-xl">›</span>
+          </a>
+        </div>
+
+
+
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+            <div><p class="text-xs uppercase tracking-widest text-blue-400">Your business at a glance</p><h2 class="text-2xl sm:text-3xl font-semibold text-white mt-1">Overview</h2><p class="text-sm text-slate-400 mt-1">Your service status, configuration and recorded activity.</p></div>
+            <span class="text-xs text-slate-500">Business snapshot</span>
+          </div>
+
+          <!-- CALL FORWARDING -->
+          <article class="dashboard-card rounded-2xl p-5 sm:p-6 space-y-3">
+            <div><p class="text-xs font-bold uppercase tracking-widest text-blue-400">Phone setup</p><h3 class="text-lg font-bold text-white mt-1">Call Forwarding</h3></div>
+            <div class="rounded-lg border border-slate-700/50 bg-black/20 p-3 space-y-1">
+              <p class="text-xs text-slate-400">Your existing business number</p>
+              <p id="existing-business-number-dashboard" class="text-sm font-semibold text-white">Already saved in Quick Start</p>
+              <p class="text-xs text-slate-400">This is the number your customers already call. We've carried it over from your Quick Start details, so you don't need to enter it again.</p>
+            </div>
+            <div class="rounded-lg border border-slate-700/50 bg-black/20 p-3 space-y-1">
+              <p class="text-xs text-slate-400">Your dedicated TriDashAI number</p>
+              <p id="dedicated-number-dashboard" class="text-sm font-semibold text-white">Assigned during activation</p>
+              <p class="text-xs text-slate-400">This is the number your calls will be forwarded to so your receptionist can answer them.</p>
+            </div>
+            <p class="text-xs text-slate-400" role="status">Once your dedicated TriDashAI number has been assigned and tested, we'll guide you through setting up call forwarding with your phone provider. Call forwarding is not activated from this dashboard.</p>
+          </article>
+
+        <!-- OPTIONAL PERSONAL CONTACT NUMBER -->
+        <section id="personal-contact" class="dashboard-card p-5 sm:p-6 rounded-2xl space-y-3">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-cyan-300">Optional contact details</p>
+            <h3 class="text-lg font-bold text-white mt-1">Personal Contact Number</h3>
+            <p class="text-sm text-slate-300 mt-2">Please provide a personal contact number where we can reach you directly about your account or any urgent service matters.</p>
+          </div>
+          <form id="personal-contact-form" class="space-y-2">
+            <label for="personal-contact-number" class="block text-xs text-slate-300">Personal contact number (optional)</label>
+            <input id="personal-contact-number" type="tel" autocomplete="tel" class="dashboard-input w-full rounded-xl p-3 text-sm" placeholder="Enter a number where we can reach you">
+            <div class="flex flex-wrap items-center gap-3">
+              <button id="save-personal-contact" type="submit" class="btn-primary-blue rounded-xl px-4 py-2.5 text-sm">Save contact number</button>
+              <p id="personal-contact-message" class="text-xs text-slate-400" role="status">This can be a mobile or landline number. You can leave it blank.</p>
+            </div>
+          </form>
+        </section>
+
+          <!-- MONTHLY MINUTES / SMS ALLOWANCE -->
+<!-- COMPACT MONTHLY ALLOWANCE AND BOOST PREVIEW -->
+          <section id="usage-allowance" class="dashboard-card rounded-2xl p-3 space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest text-blue-400">Monthly allowance</p>
+                <h3 class="text-sm font-bold text-white mt-0.5">Minutes & texts</h3>
+              </div>
+              <span class="rounded-full border border-amber-400/30 bg-amber-400/10 px-2 py-1 text-[10px] font-semibold text-amber-200">Preview · Not live</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <article class="rounded-lg border border-slate-700/60 bg-black/20 p-2.5 space-y-1.5">
+                <div class="flex items-center justify-between gap-2"><span class="text-xs font-semibold text-slate-200">Voice minutes left</span><span class="text-[10px] text-slate-400">Monthly</span></div>
+                <div class="flex items-end gap-1.5"><strong class="text-xl font-semibold text-blue-300">214</strong><span class="text-xs text-slate-400 pb-0.5">of 250 minutes</span></div>
+                <div class="h-1.5 rounded-full bg-slate-700 overflow-hidden"><div class="h-full rounded-full bg-blue-400" style="width:85.6%"></div></div>
+                <p class="text-xs text-slate-300">36 minutes used</p>
+              </article>
+              <article class="rounded-lg border border-slate-700/60 bg-black/20 p-2.5 space-y-1.5">
+                <div class="flex items-center justify-between gap-2"><span class="text-xs font-semibold text-slate-200">SMS segments left</span><span class="text-[10px] text-slate-400">Monthly</span></div>
+                <div class="flex items-end gap-1.5"><strong class="text-xl font-semibold text-blue-300">276</strong><span class="text-xs text-slate-400 pb-0.5">of 300 segments</span></div>
+                <div class="h-1.5 rounded-full bg-slate-700 overflow-hidden"><div class="h-full rounded-full bg-blue-400" style="width:92%"></div></div>
+                <p class="text-xs text-slate-300">24 used · incoming and outgoing</p>
+              </article>
+            </div>
+            <p class="text-[10px] leading-relaxed text-slate-400">Illustrative figures only. Monthly allowances reset each billing cycle and do not roll over. Longer texts may use multiple SMS segments.</p>
+            <details class="border-t border-slate-700/60 pt-2">
+              <summary class="cursor-pointer text-xs font-semibold text-slate-200">Need a little extra? View boost options</summary>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-2">
+                <article class="rounded-lg border border-slate-700/60 bg-black/20 p-2 space-y-1">
+                  <p class="text-[11px] font-semibold text-slate-300">Starter Boost</p><p class="text-lg font-bold text-white">$7</p><p class="text-xs text-slate-300">+50 voice minutes · +50 SMS</p><p class="text-[10px] text-slate-400">Valid 90 days</p><button type="button" disabled class="w-full rounded-lg border border-slate-600 px-2 py-1.5 text-[10px] font-semibold text-slate-400 opacity-70 cursor-not-allowed">Unavailable</button>
+                </article>
+                <article class="rounded-lg border border-blue-400/60 bg-blue-500/10 p-2 space-y-1">
+                  <p class="text-[11px] font-semibold text-slate-200">Pro Boost</p><p class="text-lg font-bold text-white">$12</p><p class="text-xs text-slate-200">+100 voice minutes · +100 SMS</p><p class="text-[10px] text-slate-400">Valid 90 days</p><button type="button" disabled class="w-full rounded-lg bg-blue-500/30 px-2 py-1.5 text-[10px] font-semibold text-blue-100 opacity-70 cursor-not-allowed">Unavailable</button>
+                </article>
+                <article class="rounded-lg border border-slate-700/60 bg-black/20 p-2 space-y-1">
+                  <p class="text-[11px] font-semibold text-slate-300">Heavy-Duty Boost</p><p class="text-lg font-bold text-white">$20</p><p class="text-xs text-slate-300">+200 voice minutes · +200 SMS</p><p class="text-[10px] text-slate-400">Valid 90 days</p><button type="button" disabled class="w-full rounded-lg border border-slate-600 px-2 py-1.5 text-[10px] font-semibold text-slate-400 opacity-70 cursor-not-allowed">Unavailable</button>
+                </article>
+              </div>
+              <p class="text-[10px] text-slate-400 mt-2">Boost balances carry over for 90 days. Checkout is not connected yet.</p>
+            </details>
+          </section>
+
+          <!-- AI RECEPTIONIST -->
+          <article class="dashboard-card rounded-2xl p-5 sm:p-6 space-y-3">
+              <div class="flex items-center justify-between"><span class="text-sm text-slate-300">AI receptionist</span><span class="text-xs text-amber-300">Not activated</span></div>
+              <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center text-blue-300"><span class="text-lg">✦</span></div><div><p class="text-sm text-white">Your Receptionist</p><p id="voice-preference-label" class="text-xs text-slate-400">Choose a voice</p></div></div>
+              <div class="flex items-center gap-4 pt-1" role="group" aria-label="Receptionist voice preference">
+                <label class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-600 bg-black/20 px-4 py-2 cursor-pointer text-sm text-slate-200"><input type="radio" name="dashboard-voice-preference" value="male" class="h-4 w-4 accent-cyan-500"> <span>Male</span></label>
+                <label class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-600 bg-black/20 px-4 py-2 cursor-pointer text-sm text-slate-200"><input type="radio" name="dashboard-voice-preference" value="female" class="h-4 w-4 accent-cyan-500"> <span>Female</span></label>
+              </div>
+              <p id="voice-preference-message" class="text-sm leading-relaxed text-slate-300" role="status">Your choice is saved as a preference. It will not change the live receptionist voice until voice selection is connected.</p>
+          </article>
+
+          <!-- YOUR CONNECTIONS -->
+<!-- YOUR CONNECTIONS -->
+          <section class="dashboard-card rounded-xl p-3 sm:p-4 space-y-3">
+            <div><p class="text-xs font-bold uppercase tracking-widest text-blue-400">Your Connections</p><h3 class="text-base font-semibold text-white mt-1">Get TriDashAI ready to go live</h3><p class="text-sm text-slate-400 mt-1">Connection indicators are shown here for the dashboard design preview.</p></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <article class="rounded-lg border border-slate-700/60 bg-black/20 p-3 space-y-1.5"><div class="flex items-center justify-between gap-2"><span class="text-sm font-semibold text-white">Google Calendar</span><span class="text-xs font-semibold text-amber-300">Not connected</span></div><p class="text-xs text-slate-400">Connect your calendar before the receptionist confirms appointments.</p><button type="button" disabled class="w-full rounded-xl border border-slate-600 px-3 py-2.5 text-sm font-semibold text-slate-400 cursor-not-allowed">Connect calendar · Preview</button></article>
+              <article class="rounded-xl border border-slate-700/60 bg-black/20 p-4 space-y-2"><div class="flex items-center justify-between gap-2"><span class="text-sm font-semibold text-white">AI receptionist</span><span class="text-xs font-semibold text-amber-300">Not live</span></div><p class="text-xs text-slate-400">Your receptionist will be ready once the phone connection and service checks are complete.</p><button type="button" disabled class="w-full rounded-xl bg-blue-500/20 px-3 py-2.5 text-sm font-semibold text-blue-200 cursor-not-allowed">Go live · Preview</button></article>
+            </div>
+          </section>
+
+          <!-- COMPACT ROI SNAPSHOT -->
+          <section id="roi-performance" class="dashboard-card rounded-2xl p-4 sm:p-5 space-y-3">
+            <h3 class="text-base font-bold text-white">ROI</h3>
+            <div class="space-y-2">
+              <div class="flex items-center gap-3 rounded-xl border border-slate-700/60 bg-black/20 px-3 py-2.5">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-500/15 text-blue-300" aria-hidden="true">
+                  <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.74a16 16 0 0 0 6 6l1.28-1.28a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92Z"/></svg>
+                </span>
+                <span class="flex-1 text-sm font-medium text-slate-200">Calls recovered</span>
+                <strong id="roi-calls-recovered" class="text-lg font-bold text-blue-300">18</strong>
+              </div>
+              <div class="flex items-center gap-3 rounded-xl border border-slate-700/60 bg-black/20 px-3 py-2.5">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300" aria-hidden="true">
+                  <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg>
+                </span>
+                <span class="flex-1 text-sm font-medium text-slate-200">Appointments booked</span>
+                <strong id="roi-bookings-secured" class="text-lg font-bold text-violet-300">12</strong>
+              </div>
+              <div class="flex items-center gap-3 rounded-xl border border-slate-700/60 bg-black/20 px-3 py-2.5">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-300" aria-hidden="true">
+                  <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 10h16M5 10V7l7-4 7 4v3M6 10v8M10 10v8M14 10v8M18 10v8"/></svg>
+                </span>
+                <span class="flex-1 text-sm font-medium text-slate-200">Estimated work won</span>
+                <strong id="roi-revenue-recovered" class="text-lg font-bold text-emerald-300">$3,600</strong>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-400">Illustrative figures for preview only.</p>
+            <a href="analytics.html" class="inline-flex text-sm font-semibold text-cyan-300 hover:text-cyan-200">View detailed analytics →</a>
+          </section>
+
+          <!-- SERVICE STATUS -->
+
+
+
+
+
+
+
+
+
+
+
+        </section>
+
+        <!-- TEST YOUR RECEPTIONIST: READ-ALOUD PHONE SCENARIOS -->
+        <section id="test-receptionist" class="dashboard-card p-6 sm:p-8 rounded-3xl space-y-5">
+          <div><p class="text-xs font-bold uppercase tracking-widest text-cyan-300">Practice by phone</p>
+            <h3 class="text-xl font-extrabold text-white mt-1">Test Your Receptionist</h3>
+            <p class="text-sm text-slate-300 mt-2">Call your TriDashAI number from another phone. Choose a situation below and read the words aloud as if you were a customer. You can also make up your own questions and experiment with situations your trade business might encounter.</p>
+            <p class="text-xs text-amber-200 mt-2">These are practice prompts only. They do not place a call or create a real booking.</p></div>
+          <div class="grid md:grid-cols-2 gap-3">
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">01 · New enquiry</p><h4 class="font-bold text-white">A potential new customer</h4><p class="text-sm text-slate-200">“Hello, I've found your business online. I'm looking for someone to help me. Can you tell me what services you cover and whether someone can get back to me?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">02 · Emergency</p><h4 class="font-bold text-white">A burst pipe</h4><p class="text-sm text-slate-200">“I've got a pipe that's burst under my kitchen sink and water is spreading across the floor. What should I do first, and can someone come out?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">03 · Storm damage</p><h4 class="font-bold text-white">A damaged roof</h4><p class="text-sm text-slate-200">“The storm has damaged my roof and rain is coming into the house. Do you deal with emergency roof repairs, and what happens next?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">04 · Out of hours</p><h4 class="font-bold text-white">Calling in the evening</h4><p class="text-sm text-slate-200">“I know it's outside normal working hours, but I've got a problem that needs attention. Are you available, and is there an additional call-out charge?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">05 · Booking</p><h4 class="font-bold text-white">Requesting an appointment</h4><p class="text-sm text-slate-200">“I'd like to arrange a visit. What information do you need from me, and can you tell me what appointment times are available?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">06 · Price and payment</p><h4 class="font-bold text-white">Checking the call-out fee</h4><p class="text-sm text-slate-200">“Before I arrange a visit, can you explain your call-out fee, what it covers, and when I would need to pay?”</p></article>
+          </div>
+          <div class="rounded-xl border border-cyan-500/25 bg-cyan-500/5 p-4"><p class="text-sm font-semibold text-white">What to listen for</p><p class="text-sm text-slate-300 mt-1">Does your receptionist ask the right questions, follow your safety instructions, explain only the prices you have entered, avoid promising an unconfirmed appointment, and collect the customer's contact details?</p></div>
+        </section>
+
+
+
+    </main>
+
+    <!-- OPTIONAL CUSTOMER FEEDBACK -->
+    <section id="feedback-panel" class="hidden max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-5 scroll-mt-24">
+      <div class="dashboard-card rounded-2xl border border-slate-700/70 overflow-hidden">
+        <div class="p-5 border-b border-slate-700/60">
+          <div class="flex items-center justify-between gap-3">
+            <div><p class="text-xs uppercase tracking-widest text-cyan-300">Optional feedback</p><h2 class="text-xl sm:text-2xl font-semibold text-white mt-1">Tell us how your receptionist is doing</h2><p class="text-sm text-slate-400 mt-1">Your answers help us improve TriDashAI.</p></div>
+            
+          </div>
+        </div>
+        <form id="customer-feedback-form" class="p-5 space-y-5">
+          <p class="text-sm text-slate-300">Please rate each item below.</p>
+          <div id="feedback-question-list" class="space-y-5">
+            <fieldset class="space-y-2"><legend class="text-sm font-semibold text-white">1. How well does your receptionist answer and handle incoming calls?</legend><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q1" value="Poor" required class="accent-cyan-400"> Poor</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q1" value="Good" required class="accent-cyan-400"> Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q1" value="Very Good" required class="accent-cyan-400"> Very Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q1" value="Excellent" required class="accent-cyan-400"> Excellent</label></div></fieldset><fieldset class="space-y-2"><legend class="text-sm font-semibold text-white">2. Does the voice sound natural, friendly and professional?</legend><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q2" value="Poor" required class="accent-cyan-400"> Poor</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q2" value="Good" required class="accent-cyan-400"> Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q2" value="Very Good" required class="accent-cyan-400"> Very Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q2" value="Excellent" required class="accent-cyan-400"> Excellent</label></div></fieldset><fieldset class="space-y-2"><legend class="text-sm font-semibold text-white">3. How well does your receptionist understand your business, services and service areas?</legend><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q3" value="Poor" required class="accent-cyan-400"> Poor</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q3" value="Good" required class="accent-cyan-400"> Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q3" value="Very Good" required class="accent-cyan-400"> Very Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q3" value="Excellent" required class="accent-cyan-400"> Excellent</label></div></fieldset><fieldset class="space-y-2"><legend class="text-sm font-semibold text-white">4. How well does your receptionist understand what customers need?</legend><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q4" value="Poor" required class="accent-cyan-400"> Poor</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q4" value="Good" required class="accent-cyan-400"> Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q4" value="Very Good" required class="accent-cyan-400"> Very Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q4" value="Excellent" required class="accent-cyan-400"> Excellent</label></div></fieldset><fieldset class="space-y-2"><legend class="text-sm font-semibold text-white">5. Does your receptionist collect the right information and handle the conversation appropriately?</legend><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q5" value="Poor" required class="accent-cyan-400"> Poor</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q5" value="Good" required class="accent-cyan-400"> Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q5" value="Very Good" required class="accent-cyan-400"> Very Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q5" value="Excellent" required class="accent-cyan-400"> Excellent</label></div></fieldset><fieldset class="space-y-2"><legend class="text-sm font-semibold text-white">6. Does your receptionist recognise urgent situations and follow the instructions you've provided?</legend><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q6" value="Poor" required class="accent-cyan-400"> Poor</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q6" value="Good" required class="accent-cyan-400"> Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q6" value="Very Good" required class="accent-cyan-400"> Very Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q6" value="Excellent" required class="accent-cyan-400"> Excellent</label></div></fieldset><fieldset class="space-y-2"><legend class="text-sm font-semibold text-white">7. How well does your receptionist handle appointment requests and explain what happens next?</legend><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q7" value="Poor" required class="accent-cyan-400"> Poor</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q7" value="Good" required class="accent-cyan-400"> Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q7" value="Very Good" required class="accent-cyan-400"> Very Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q7" value="Excellent" required class="accent-cyan-400"> Excellent</label></div></fieldset><fieldset class="space-y-2"><legend class="text-sm font-semibold text-white">8. How satisfied are you with your receptionist so far?</legend><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q8" value="Poor" required class="accent-cyan-400"> Poor</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q8" value="Good" required class="accent-cyan-400"> Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q8" value="Very Good" required class="accent-cyan-400"> Very Good</label><label class="inline-flex items-center gap-2 text-sm text-slate-300"><input type="radio" name="feedback-q8" value="Excellent" required class="accent-cyan-400"> Excellent</label></div></fieldset>
+          </div>
+          <div class="space-y-2"><label for="feedback-comments" class="block text-sm font-semibold text-white">Anything else you'd like to tell us? <span class="font-normal text-slate-400">(Optional)</span></label><textarea id="feedback-comments" rows="4" maxlength="3000" class="dashboard-input w-full bg-slate-900/70 border border-slate-600 text-white" placeholder="What do you particularly like, what needs improving, or what would you like your receptionist to do differently?"></textarea></div>
+          <div class="flex flex-wrap items-center gap-3"><button id="send-feedback-button" type="submit" class="btn-primary-blue rounded-xl px-5 py-3 text-sm font-semibold">Send Feedback</button><p id="feedback-submit-message" class="text-sm text-slate-400" role="status" aria-live="polite">Your feedback is optional.</p></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- HELP & FAQS -->
+    <section id="faq-panel" class="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-5 scroll-mt-24">
+      <div class="dashboard-card max-w-5xl mx-auto rounded-2xl border border-slate-700/70 overflow-hidden">
+        <div class="flex items-start justify-between gap-4 p-4 sm:p-5 border-b border-slate-700/60">
+          <div><p class="text-xs uppercase tracking-widest text-cyan-300">TriDashAI support</p><h2 class="text-xl sm:text-2xl font-medium text-white mt-1">Help & FAQs</h2><p class="text-sm text-slate-400 mt-1">Simple answers to common questions about using TriDashAI.</p></div>
+          
+        </div>
+        <div class="p-4 sm:p-5 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <details class="group rounded-xl border border-slate-700/60 bg-black/20 p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm text-slate-100">How do I change my business phone number?<span class="text-xl text-cyan-300 transition-transform group-open:rotate-45">＋</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">Update your business number in the Call Routing section of your dashboard and save the change. This updates the number stored in your TriDashAI profile. It does not change call forwarding with your phone provider; that must be updated separately and tested.</p>
+          </details>
+          <details class="group rounded-xl border border-slate-700/60 bg-black/20 p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm text-slate-100">What's the difference between my business number and my TriDashAI number?<span class="text-xl text-cyan-300 transition-transform group-open:rotate-45">＋</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">Your business number is the number your customers already call. Your TriDashAI number is the separate number that receives calls forwarded from your business number and routes them to the receptionist. It is assigned during activation.</p>
+          </details>
+          <details class="group rounded-xl border border-slate-700/60 bg-black/20 p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm text-slate-100">How do I turn call forwarding on or off?<span class="text-xl text-cyan-300 transition-transform group-open:rotate-45">＋</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">Call forwarding is managed through your phone provider. The activation and cancellation steps depend on that provider. Check that the change has taken effect by testing a call before relying on it.</p>
+          </details>
+          <details class="group rounded-xl border border-slate-700/60 bg-black/20 p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm text-slate-100">Does the receptionist book appointments automatically?<span class="text-xl text-cyan-300 transition-transform group-open:rotate-45">＋</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">Appointment confirmation depends on Google Calendar being connected and availability being checked. Until that connection is active, the receptionist should not promise that an appointment has been booked.</p>
+          </details>
+          <details class="group rounded-xl border border-slate-700/60 bg-black/20 p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm text-slate-100">Can the receptionist give customers a job price?<span class="text-xl text-cyan-300 transition-transform group-open:rotate-45">＋</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">Your receptionist can explain the call-out charges you enter in your business settings. Your receptionist will only quote a fixed job price when you have supplied that price and its conditions. You can assess and price all other work yourself.</p>
+          </details>
+          <details class="group rounded-xl border border-slate-700/60 bg-black/20 p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm text-slate-100">How are SMS and voice usage counted?<span class="text-xl text-cyan-300 transition-transform group-open:rotate-45">＋</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">Voice usage is measured in minutes. SMS usage is counted by message segments, including both incoming and outgoing segments. Longer messages can use more than one segment.</p>
+          </details>
+          <details class="group rounded-xl border border-slate-700/60 bg-black/20 p-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm text-slate-100">What happens if I need more usage?<span class="text-xl text-cyan-300 transition-transform group-open:rotate-45">＋</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">If extra usage bundles are available on your plan, you can review them using the Extra Bundles area in your dashboard. Check the bundle allowance and expiry details before purchasing.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT FOOTER -->
+    <footer id="support-footer" class="border-t border-slate-800/50 bg-black/30 py-4 text-center">
+      <p class="text-xs font-semibold text-slate-200">Need help?</p>
+      <p class="mt-1 text-xs text-slate-400">Contact <a href="mailto:support@tridashai.com" class="font-semibold text-blue-300 underline underline-offset-4 hover:text-blue-200">support@tridashai.com</a>.</p>
+      <p class="mt-4 text-xs text-slate-500">&copy; 2026 TriDashAI. All rights reserved.</p>
+    </footer>
+
+
+    <script>
+      // Public visual preview only: no sign-in, no database reads or writes.
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('stage-1')?.classList.add('hidden');
+        document.getElementById('advanced-setup')?.classList.add('hidden');
+        document.getElementById('stage-2')?.classList.remove('hidden');
+        document.getElementById('advanced-setup-bar')?.classList.remove('hidden');
+      });
+    </script>
+  </body>
+</html>
