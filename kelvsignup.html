@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start Your Free Trial | TriDashAI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{background:#f8fafc;color:#0f172a}
+    .panel{background:#fff;border:1px solid #e2e8f0;box-shadow:0 24px 60px rgba(15,23,42,.08)}
+    .field{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:13px 14px;background:#fff;color:#0f172a}
+    .field:focus{outline:2px solid #2563eb;outline-offset:1px}
+    .primary{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-weight:700}
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-xl font-extrabold tracking-tight"><span class="text-blue-600">Tri</span>DashAI</a>
+      <a href="login.html" class="text-sm font-semibold text-blue-700">Already have an account? Log in</a>
+    </div>
+  </header>
+  <main class="flex-1 px-4 py-10 sm:py-16">
+    <div class="max-w-xl mx-auto">
+      <div class="text-center mb-7">
+        <span class="inline-flex rounded-full bg-blue-50 border border-blue-100 text-blue-700 px-4 py-2 text-xs font-bold">7-DAY FREE TRIAL · NO CREDIT CARD</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-5">Get your business set up</h1>
+        <p class="text-slate-600 mt-3 text-sm sm:text-base">Create your account and verify your email. Then complete the six Quick Start sections in your dashboard. Your seven-day trial begins when your phone service is activated.</p>
+      </div>
+      <section class="panel rounded-3xl p-6 sm:p-9">
+        <div id="message" role="alert" class="hidden rounded-xl p-3 text-sm mb-5"></div>
+        <form id="signup-form" class="space-y-5">
+          <div>
+            <h2 class="font-bold text-lg">Your account</h2>
+            <div class="grid sm:grid-cols-2 gap-4 mt-4">
+              <label class="block text-sm font-semibold">Full name
+                <input id="full-name" class="field mt-1.5" type="text" autocomplete="name" placeholder="Your name" required>
+              </label>
+              <label class="block text-sm font-semibold">Email address
+                <input id="email" class="field mt-1.5" type="email" autocomplete="email" placeholder="you@business.com" required>
+              </label>
+            </div>
+            <label class="block text-sm font-semibold mt-4">Create a password
+              <input id="password" class="field mt-1.5" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+            </label>
+          </div>
+          <div class="border-t border-slate-100 pt-5">
+            <h2 class="font-bold text-lg">Your business</h2>
+            <label class="block text-sm font-semibold mt-4">Business name
+              <input id="business-name" class="field mt-1.5" type="text" autocomplete="organization" placeholder="Your business name" required>
+            </label>
+            <div class="grid sm:grid-cols-2 gap-4 mt-4">
+              <label class="block text-sm font-semibold">Business phone
+                <input id="business-phone" class="field mt-1.5" type="tel" autocomplete="tel" placeholder="+1 (555) 000-0000" required>
+              </label>
+              <label class="block text-sm font-semibold">Main trade
+                <select id="trade" class="field mt-1.5" required>
+                  <option value="">Choose your trade</option>
+                  <option value="plumber">Plumbing</option>
+                  <option value="roofer">Roofing</option>
+                  <option value="hvac">HVAC</option>
+                  <option value="electrician">Electrical</option>
+                  <option value="builder">General building</option>
+                  <option value="multi">Multi-trade / Other</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="rounded-2xl bg-blue-50 border border-blue-100 p-4 text-sm text-blue-900">
+            <div class="font-bold">Your seven-day trial starts when your service goes live.</div>
+            <p class="mt-1 text-blue-800">No charge today and no credit card required. Verify your email, complete your business setup and activate your phone service. Your seven-day trial begins when TriDashAI is live. If you choose to continue, the plan is $89/month and includes 250 voice minutes plus 300 SMS segments each billing month.</p>
+            <p class="mt-2 text-xs text-blue-800">Both incoming and outgoing SMS segments count toward the allowance. Monthly allowances reset each billing cycle and do not roll over. Extra-use packs are shown in your dashboard but checkout is not connected yet.</p>
+          </div>
+          <p class="text-xs text-slate-500">By creating an account, you agree to our <a class="text-blue-700 underline" href="terms.html" target="_blank">Terms of Service</a> and <a class="text-blue-700 underline" href="privacy.html" target="_blank">Privacy Policy</a>.</p>
+          <button id="create-account" type="submit" class="primary w-full rounded-xl py-4 shadow-lg disabled:opacity-60">Create account & verify email →</button>
+        </form>
+      </section>
+      <p class="text-center text-xs text-slate-500 mt-6">After verifying your email, complete your six Quick Start sections in the dashboard before phone activation.</p>
+    </div>
+  </main>
+  <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">© 2026 TriDashAI. All rights reserved.</footer>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBTGwDZYtUjJX0FQJtVJr5CIeqiskYhI6k",
+      authDomain: "tridashai-app.firebaseapp.com",
+      projectId: "tridashai-app",
+      storageBucket: "tridashai-app.firebasestorage.app",
+      messagingSenderId: "753320728065",
+      appId: "1:753320728065:web:83745fcca31b12e08a5200",
+      measurementId: "G-W9MYFE3B77"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth=firebase.auth();
+    const db=firebase.firestore();
+    const form=document.getElementById('signup-form');
+    const message=document.getElementById('message');
+    const button=document.getElementById('create-account');
+    function showMessage(text,isError=true){
+      message.textContent=text;
+      message.className='rounded-xl p-3 text-sm mb-5 '+(isError?'bg-red-50 text-red-700 border border-red-200':'bg-green-50 text-green-700 border border-green-200');
+      message.classList.remove('hidden');
+    }
+    form.addEventListener('submit',async event=>{
+      event.preventDefault();
+      button.disabled=true;
+      button.textContent='Creating your account…';
+      const fullName=document.getElementById('full-name').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const businessName=document.getElementById('business-name').value.trim();
+      const businessPhone=document.getElementById('business-phone').value.trim();
+      const primaryTrade=document.getElementById('trade').value;
+      let createdUser=null;
+      try{
+        const credential=await auth.createUserWithEmailAndPassword(email,document.getElementById('password').value);
+        const user=credential.user;
+        createdUser=user;
+        await user.updateProfile({displayName:fullName});
+        const profile={
+          uid:user.uid,fullName,email:user.email,businessName,businessPhone,primaryTrade,
+          profileComplete:false,setupComplete:false,accountStatus:'pending_verification',
+          trialDays:7,trialStartedAt:null,createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+          emailVerified:false
+        };
+        await db.collection('businesses').doc(user.uid).set(profile);
+        const actionCodeSettings={
+          url:'https://tridashai.com/verify-email.html',
+          handleCodeInApp:false
+        };
+        await user.sendEmailVerification(actionCodeSettings);
+        await auth.signOut();
+        form.classList.add('hidden');
+        showMessage('Your account has been created. We have sent a verification link to '+email+'. Please open that email, click Verify Email, then return here and log in. Check your spam folder if it does not arrive.',false);
+      }catch(error){
+        if(createdUser){
+          try{await createdUser.delete();}catch(rollbackError){console.error('Could not roll back incomplete signup:',rollbackError);}
+        }
+        const messages={
+          'auth/email-already-in-use':'An account already exists with this email. Please log in instead.',
+          'auth/invalid-email':'Please enter a valid email address.',
+          'auth/weak-password':'Please choose a password with at least 8 characters.',
+          'permission-denied':'We could not save your business profile to Firebase. Your new login will be rolled back; please try again later or contact support.',
+          'firestore/permission-denied':'We could not save your business profile to Firebase. Your new login will be rolled back; please contact support.',
+          'firestore/unavailable':'Firebase is temporarily unavailable. Please try again in a moment.'
+        };
+        showMessage(messages[error.code]||'We could not complete registration: '+(error.message||'Please try again.'));
+        button.disabled=false;
+        button.textContent='Create account & verify email →';
+      }
+    });
+  </script>
+
+<!-- Back-to-top control: appears after the visitor scrolls down -->
+<style>
+#back-to-top{position:fixed;right:18px;bottom:24px;z-index:1000;width:48px;height:48px;border:1px solid #52657d;border-radius:50%;background:#29394d;color:#e7eef7;box-shadow:0 5px 16px rgba(0,0,0,.28);font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,background .2s ease;cursor:pointer}
+#back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0)}
+#back-to-top:hover,#back-to-top:focus-visible{background:#365f86;outline:2px solid #91b4d8;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){#back-to-top{transition:none}}
+</style>
+<button id="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+(function(){
+ const button=document.getElementById('back-to-top');
+ if(!button)return;
+ const update=()=>button.classList.toggle('is-visible',window.scrollY>280);
+ window.addEventListener('scroll',update,{passive:true});
+ button.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+ update();
+})();
+</script>
+
+</body>
+</html>
