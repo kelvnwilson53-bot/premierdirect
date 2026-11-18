@@ -67,10 +67,19 @@ body{font-size:16px;line-height:1.6}
 <p class="text-sm text-slate-200">Allow your AI receptionist to send the customer an SMS confirming the call-out charge, first-hour charge and other details they have agreed to.</p>
 <p class="text-sm text-slate-400">For example, after the customer agrees to a $145 call-out charge plus $145 for the first hour, the receptionist sends a text confirming those agreed charges and the arrangement. This is a written confirmation by SMS. It is not a payment link, a request for payment or a receipt.</p>
 </div>
-<div class="rounded-2xl border border-slate-600 p-4 space-y-2">
-<h3 class="font-bold text-lg">2. Connect your payment provider for credit-card payments</h3>
-<p class="text-sm text-slate-200">Connect your payment provider to allow your AI receptionist to send customers a secure payment link.</p>
-<p class="text-sm text-slate-400">Your payment provider (for example, Stripe or Square) handles the card details and payment. You must connect your own provider and authorize TriDashAI before your receptionist can send payment links. This is separate from the SMS confirmation above, and this connection is not active yet.</p>
+<div class="rounded-2xl border border-slate-600 p-4 space-y-3">
+<h3 class="font-bold text-lg">2. Credit-card payments</h3>
+<label class="block text-sm font-semibold" for="accepts_card_payments">Do you accept credit-card payments?</label>
+<select id="accepts_card_payments" class="field">
+<option value="">Please select</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+<div id="card_payment_link_wrap" class="hidden space-y-2">
+<label class="block text-sm font-semibold" for="card_payment_link">Enter your payment link</label>
+<input id="card_payment_link" class="field" type="url" inputmode="url" placeholder="Paste your secure payment link here">
+<p class="text-sm text-slate-400">Your AI receptionist can send this link to customers when they choose to pay by card. This should be a payment link supplied by your payment provider.</p>
+</div>
 </div>
 </section>
 <section class="border-t border-slate-600 pt-5 space-y-3">
@@ -95,8 +104,12 @@ if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
 const auth=firebase.auth(),db=firebase.firestore(),form=document.getElementById('settings-form'),message=document.getElementById('message'),button=document.getElementById('save-button');
 let currentUser=null;
 let savedProfile={};
+const cardChoice=document.getElementById('accepts_card_payments');
+const cardLinkWrap=document.getElementById('card_payment_link_wrap');
+function updateCardLinkVisibility(){cardLinkWrap.classList.toggle('hidden',cardChoice.value!=='yes');}
+cardChoice.addEventListener('change',updateCardLinkVisibility);
 const priceFields=['normal_callout_price','out_of_hours_price','emergency_price','holiday_special_price'];
-const detailFields=['normal_callout_details','out_of_hours_details','emergency_details','holiday_special_details','receptionistAdditionalInfo'];
+const detailFields=['normal_callout_details','out_of_hours_details','emergency_details','holiday_special_details','receptionistAdditionalInfo','card_payment_link'];
 function showMessage(text,error=false){message.textContent=text;message.className='rounded-xl p-3 text-sm '+(error?'bg-red-900 text-red-100 border border-red-700':'bg-emerald-900 text-emerald-100 border border-emerald-700');message.classList.remove('hidden');}
 auth.onAuthStateChanged(async user=>{
  if(!user){window.location.replace('login.html');return;}
@@ -107,6 +120,8 @@ auth.onAuthStateChanged(async user=>{
   const snap=await db.collection('businesses').doc(user.uid).get();
   if(!snap.exists){showMessage('We could not find your business profile. Please contact support so we can help recover your setup.',true);return;}
   savedProfile=snap.data();
+  cardChoice.value=savedProfile.accepts_card_payments||'';
+  updateCardLinkVisibility();
   const legacyMap={
    normal_callout_price:'standard_day_callout_price',
    normal_callout_details:'standard_day_callout_details',
@@ -134,6 +149,7 @@ form.addEventListener('submit',async e=>{
  button.disabled=true;button.textContent='Saving…';
  const update={};
  [...priceFields,...detailFields].forEach(id=>{const el=document.getElementById(id);update[id]=el?el.value.trim():'';});
+ update.accepts_card_payments=cardChoice.value;
  const tradeLabel={plumber:'plumbing',roofer:'roofing',hvac:'HVAC',electrician:'electrical',builder:'general building',multi:'multi-trade'}[savedProfile.primaryTrade]||'trade services';
  const lines=[
   'TRIDASHAI RECEPTIONIST OPERATING INSTRUCTIONS',
@@ -146,7 +162,51 @@ form.addEventListener('submit',async e=>{
   'NORMAL WORKING-HOURS CALL-OUT CHARGE: '+(update.normal_callout_price?'$'+update.normal_callout_price:'Not supplied')+'. Applies: '+(update.normal_callout_details||'Conditions not specified')+'.',
   'OUT-OF-HOURS CALL-OUT CHARGE: '+(update.out_of_hours_price?'$'+update.out_of_hours_price:'Not supplied')+'. Applies: '+(update.out_of_hours_details||'Conditions not specified')+'.',
   'EMERGENCY CALL-OUT CHARGE: '+(update.emergency_price?'$'+update.emergency_price:'Not supplied')+'. Details: '+(update.emergency_details||'Not specified')+'.',
-  'HOLIDAY OR SPECIAL-DAY CALL-OUT CHARGE: '+(update.holiday_special_price?'$'+update.holiday_special_price:'Not supplied')+'. Applies: '+(update.holiday_special_details||'Conditions not specified')+'.',
+  'HOLIDAY OR SPECIAL-DAY CALL-OUT CHARGE: '+(update.holiday_special_price?'
+  'PRICING RULE: Only state charges and rates explicitly entered by the contractor, with their conditions. Do not invent, calculate, combine or assume fees. A call-out charge is not a repair quotation. Do not promise a final repair price before the tradesperson has assessed the work. If a price is missing, unclear or outside these instructions, tell the customer the contractor will confirm it.',
+  'SAFETY RULE: Apply the built-in safety procedures and trade-specific safety guidance for '+tradeLabel+'. If there may be immediate danger, prioritise the caller’s safety, tell them to move away from the hazard, and direct them to local emergency services where appropriate. Never coach a caller through dangerous electrical, gas, structural or other hazardous repairs. Escalate urgent or uncertain situations to the contractor.',
+  'BUSINESS-SPECIFIC ADDITIONAL INFORMATION: '+(update.receptionistAdditionalInfo||'None supplied.'),
+  'BOOKING RULE: Collect the customer name, callback number, service address, problem, urgency and access details. Confirm an appointment only when availability has actually been checked.',
+  'UNCERTAINTY RULE: If information is missing, ambiguous, unsafe or outside the receptionist’s instructions, say the contractor will confirm and escalate. Do not guess.'
+ ];
+ update.receptionistInstructions=lines.join('\n');
+ update.setupComplete=true;update.profileComplete=true;
+ update.updatedAt=firebase.firestore.FieldValue.serverTimestamp();
+ try{
+  await db.collection('businesses').doc(currentUser.uid).set(update,{merge:true});
+  showMessage('Saved successfully. Your call-out charges and business information are stored in your account. You can change them here at any time.');
+  button.textContent='Saved successfully ✓';
+  button.classList.remove('primary');button.classList.add('bg-emerald-600','text-white');
+ }catch(error){
+  showMessage('Save failed: '+(error.code||'')+' '+error.message,true);
+  button.disabled=false;button.textContent='Try saving again';return;
+ }
+ button.disabled=false;
+});
+</script>
+
+<!-- Back-to-top control: appears after the visitor scrolls down -->
+<style>
+#back-to-top{position:fixed;right:18px;bottom:24px;z-index:1000;width:48px;height:48px;border:1px solid #52657d;border-radius:50%;background:#29394d;color:#e7eef7;box-shadow:0 5px 16px rgba(0,0,0,.28);font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,background .2s ease;cursor:pointer}
+#back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0)}
+#back-to-top:hover,#back-to-top:focus-visible{background:#365f86;outline:2px solid #91b4d8;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){#back-to-top{transition:none}}
+</style>
+<button id="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+(function(){
+ const button=document.getElementById('back-to-top');
+ if(!button)return;
+ const update=()=>button.classList.toggle('is-visible',window.scrollY>280);
+ window.addEventListener('scroll',update,{passive:true});
+ button.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+ update();
+})();
+</script>
+
+</body></html>
++update.holiday_special_price:'Not supplied')+'. Applies: '+(update.holiday_special_details||'Conditions not specified')+'.',
+  'CARD PAYMENTS: '+(update.accepts_card_payments==='yes'?'Accepted. Payment link: '+(update.card_payment_link||'Not supplied'):'Not accepted or not confirmed. Do not offer card payment.'),
   'PRICING RULE: Only state charges and rates explicitly entered by the contractor, with their conditions. Do not invent, calculate, combine or assume fees. A call-out charge is not a repair quotation. Do not promise a final repair price before the tradesperson has assessed the work. If a price is missing, unclear or outside these instructions, tell the customer the contractor will confirm it.',
   'SAFETY RULE: Apply the built-in safety procedures and trade-specific safety guidance for '+tradeLabel+'. If there may be immediate danger, prioritise the caller’s safety, tell them to move away from the hazard, and direct them to local emergency services where appropriate. Never coach a caller through dangerous electrical, gas, structural or other hazardous repairs. Escalate urgent or uncertain situations to the contractor.',
   'BUSINESS-SPECIFIC ADDITIONAL INFORMATION: '+(update.receptionistAdditionalInfo||'None supplied.'),
