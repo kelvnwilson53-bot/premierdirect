@@ -307,13 +307,11 @@
                   </div>
                   <p class="px-3 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">Dashboard</p>
                   <a href="#stage-2" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Overview</a>
-                  <a href="#roi-performance" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">ROI Indicator</a>
-                  <a href="#usage-allowance" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Voice & SMS usage</a>
                   <a href="analytics.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Analytics</a>
                   <div class="border-t border-slate-700/70 my-2"></div>
                   <p class="px-3 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-cyan-300">Business setup</p>
                   <a href="#stage-1" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Quick Start details</a>
-                  <a href="#phone-setup" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Phone connection</a>
+                  <a href="#phone-setup" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Phone Connection</a>
                   <a href="settings.html" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Advanced Setup</a>
                   <a href="#test-receptionist" class="dashboard-nav-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 hover:text-cyan-300 hover:bg-slate-800/60">Test Your Receptionist</a>
                   <div class="border-t border-slate-700/70 my-2"></div>
@@ -373,24 +371,7 @@
               <p class="text-sm text-slate-300">These are the four situations your receptionist needs to understand: normal daytime hours, out-of-hours, emergency call-outs, and holidays or special days.</p>
               <p class="text-xs text-slate-400">You do not need to enter all your fees here. When you are ready to put your receptionist through more detailed tests — for example, different call-out charges, weekend rates, emergency fees or holiday exceptions — open Advanced Setup, complete the relevant fields, save them, and then test your receptionist again. That gives her the information she needs to handle those specific situations accurately.</p>
             </section>
-        <!-- PHONE CONNECTION, PART OF QUICK START -->
-        <section id="phone-setup" class="rounded-2xl border border-slate-700/50 p-4 space-y-4">
-          <div>
-            <h3 class="text-base sm:text-lg font-extrabold text-white">6. Phone connection</h3>
-            <p class="text-sm text-slate-300 mt-1">We'll provide your dedicated TriDashAI number and help you forward calls from your existing business number.</p>
-          </div>
-          <div class="bg-black/30 border border-slate-700/40 p-3 rounded-xl space-y-2">
-            <div class="flex items-center justify-between gap-3"><h4 class="text-sm font-semibold text-blue-300">Call Routing</h4><span class="text-xs text-amber-300">Activation required</span></div>
-            <p class="text-sm text-slate-300">Calls will be forwarded from the existing business number you entered earlier in Quick Start. You can change that number later in Call Routing settings.</p>
-            <div class="rounded-xl border border-slate-700/50 bg-black/30 p-3"><p class="text-xs text-slate-400">Dedicated TriDashAI number</p><p id="dedicated-business-number" class="mt-1 text-sm text-slate-200">Assigned during activation</p></div>
-            <p class="text-xs text-slate-400">Call forwarding will only be switchable after your TriDashAI number has been assigned and the connection has been tested.</p>
-          </div>
-          <div class="bg-black/30 border border-slate-700/40 p-3 rounded-xl space-y-2">
-            <h4 class="text-sm font-bold text-blue-400">Calendar Sync</h4>
-            <p class="text-sm text-slate-300">Your receptionist should only confirm appointments once your Google Calendar is connected and availability can be checked.</p>
-            <p class="rounded-xl border border-amber-500/20 bg-amber-500/5 px-3 py-3 text-sm text-amber-200" role="status">Calendar connection is not available yet. Until it is connected and availability checks are working, your receptionist must not confirm appointments.</p>
-          </div>
-        </section>
+
             <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
               <button type="submit" class="btn-primary-blue rounded-xl px-6 py-3 text-sm">Save Quick Start</button>
               <span id="quick-start-message" class="text-sm text-slate-400" role="status">Your information is saved to your business profile.</span>
@@ -429,8 +410,8 @@
           </div>
 
           <!-- CALL FORWARDING -->
-          <article class="dashboard-card rounded-2xl p-5 sm:p-6 space-y-3">
-            <div><p class="text-xs font-bold uppercase tracking-widest text-blue-400">Phone setup</p><h3 class="text-lg font-bold text-white mt-1">Call Forwarding</h3></div>
+          <article id="phone-setup" class="dashboard-card rounded-2xl p-5 sm:p-6 space-y-3">
+            <div><p class="text-xs font-bold uppercase tracking-widest text-blue-400">Phone setup</p><h3 class="text-lg font-bold text-white mt-1">Phone Connection</h3></div>
             <div class="rounded-lg border border-slate-700/50 bg-black/20 p-3 space-y-1">
               <p class="text-xs text-slate-400">Your existing business number</p>
               <p id="existing-business-number-dashboard" class="text-sm font-semibold text-white">Already saved in Quick Start</p>
@@ -443,6 +424,44 @@
             </div>
             <p class="text-xs text-slate-400" role="status">Once your dedicated TriDashAI number has been assigned and tested, we'll guide you through setting up call forwarding with your phone provider. Call forwarding is not activated from this dashboard.</p>
           </article>
+
+          <!-- AI RECEPTIONIST -->
+          <article id="ai-receptionist" class="dashboard-card rounded-2xl p-5 sm:p-6 space-y-3">
+              <div class="flex items-center justify-between"><span class="text-sm text-slate-300">AI receptionist</span><span class="text-xs text-amber-300">Not activated</span></div>
+              <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center text-blue-300"><span class="text-lg">✦</span></div><div><p class="text-sm text-white">Your Receptionist</p><p id="voice-preference-label" class="text-xs text-slate-400">Choose a voice</p></div></div>
+              <div class="flex items-center gap-4 pt-1" role="group" aria-label="Receptionist voice preference">
+                <label class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-600 bg-black/20 px-4 py-2 cursor-pointer text-sm text-slate-200"><input type="radio" name="dashboard-voice-preference" value="male" class="h-4 w-4 accent-cyan-500"> <span>Male</span></label>
+                <label class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-600 bg-black/20 px-4 py-2 cursor-pointer text-sm text-slate-200"><input type="radio" name="dashboard-voice-preference" value="female" class="h-4 w-4 accent-cyan-500"> <span>Female</span></label>
+              </div>
+              <p id="voice-preference-message" class="text-sm leading-relaxed text-slate-300" role="status">Your choice is saved as a preference. It will not change the live receptionist voice until voice selection is connected.</p>
+          </article>
+
+        <!-- TEST YOUR RECEPTIONIST: READ-ALOUD PHONE SCENARIOS -->
+        <section id="test-receptionist" class="dashboard-card p-6 sm:p-8 rounded-3xl space-y-5">
+          <div><p class="text-xs font-bold uppercase tracking-widest text-cyan-300">Practice scenarios</p>
+            <h3 class="text-xl font-extrabold text-white mt-1">Test Your Receptionist</h3>
+            <p class="text-sm text-slate-300 mt-2">Use these scenarios to check the answers your receptionist should give. This panel contains practice prompts; it is not a live messaging test or a live phone test.</p>
+            <p class="text-xs text-amber-200 mt-2">These are practice prompts only. They do not place a call or create a real booking.</p></div>
+          <div class="grid md:grid-cols-2 gap-3">
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">01 · New enquiry</p><h4 class="font-bold text-white">A potential new customer</h4><p class="text-sm text-slate-200">“Hello, I've found your business online. I'm looking for someone to help me. Can you tell me what services you cover and whether someone can get back to me?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">02 · Emergency</p><h4 class="font-bold text-white">A burst pipe</h4><p class="text-sm text-slate-200">“I've got a pipe that's burst under my kitchen sink and water is spreading across the floor. What should I do first, and can someone come out?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">03 · Storm damage</p><h4 class="font-bold text-white">A damaged roof</h4><p class="text-sm text-slate-200">“The storm has damaged my roof and rain is coming into the house. Do you deal with emergency roof repairs, and what happens next?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">04 · Out of hours</p><h4 class="font-bold text-white">Calling in the evening</h4><p class="text-sm text-slate-200">“I know it's outside normal working hours, but I've got a problem that needs attention. Are you available, and is there an additional call-out charge?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">05 · Booking</p><h4 class="font-bold text-white">Requesting an appointment</h4><p class="text-sm text-slate-200">“I'd like to arrange a visit. What information do you need from me, and can you tell me what appointment times are available?”</p></article>
+            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">06 · Price and payment</p><h4 class="font-bold text-white">Checking the call-out fee</h4><p class="text-sm text-slate-200">“Before I arrange a visit, can you explain your call-out fee, what it covers, and when I would need to pay?”</p></article>
+          </div>
+          <div class="rounded-xl border border-cyan-500/25 bg-cyan-500/5 p-4"><p class="text-sm font-semibold text-white">What to listen for</p><p class="text-sm text-slate-300 mt-1">Does your receptionist ask the right questions, follow your safety instructions, explain only the prices you have entered, avoid promising an unconfirmed appointment, and collect the customer's contact details?</p></div>
+        </section>
+
+          <!-- YOUR CONNECTIONS -->
+<!-- YOUR CONNECTIONS -->
+          <section class="dashboard-card rounded-xl p-3 sm:p-4 space-y-3">
+            <div><p class="text-xs font-bold uppercase tracking-widest text-blue-400">Your Connections</p><h3 class="text-base font-semibold text-white mt-1">Get TriDashAI ready to go live</h3><p class="text-sm text-slate-400 mt-1">Connection indicators are shown here for the dashboard design preview.</p></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <article class="rounded-lg border border-slate-700/60 bg-black/20 p-3 space-y-1.5"><div class="flex items-center justify-between gap-2"><span class="text-sm font-semibold text-white">Google Calendar</span><span class="text-xs font-semibold text-amber-300">Not connected</span></div><p class="text-xs text-slate-400">Connect your calendar before the receptionist confirms appointments.</p><button type="button" disabled class="w-full rounded-xl border border-slate-600 px-3 py-2.5 text-sm font-semibold text-slate-400 cursor-not-allowed">Connect calendar · Preview</button></article>
+              <article class="rounded-xl border border-slate-700/60 bg-black/20 p-4 space-y-2"><div class="flex items-center justify-between gap-2"><span class="text-sm font-semibold text-white">AI receptionist</span><span class="text-xs font-semibold text-amber-300">Not live</span></div><p class="text-xs text-slate-400">Your receptionist will be ready once the phone connection and service checks are complete.</p><button type="button" disabled class="w-full rounded-xl bg-blue-500/20 px-3 py-2.5 text-sm font-semibold text-blue-200 cursor-not-allowed">Go live · Preview</button></article>
+            </div>
+          </section>
 
         <!-- OPTIONAL PERSONAL CONTACT NUMBER -->
         <section id="personal-contact" class="dashboard-card p-5 sm:p-6 rounded-2xl space-y-3">
@@ -463,7 +482,7 @@
 
           <!-- MONTHLY MINUTES / SMS ALLOWANCE -->
 <!-- COMPACT MONTHLY ALLOWANCE AND BOOST PREVIEW -->
-          <section id="usage-allowance" class="dashboard-card rounded-2xl p-3 space-y-3">
+          <section id="usage-allowance" class="hidden dashboard-card rounded-2xl p-3 space-y-3">
             <div class="flex items-center justify-between gap-2">
               <div>
                 <p class="text-[11px] font-bold uppercase tracking-widest text-blue-400">Monthly allowance</p>
@@ -503,29 +522,8 @@
             </details>
           </section>
 
-          <!-- AI RECEPTIONIST -->
-          <article class="dashboard-card rounded-2xl p-5 sm:p-6 space-y-3">
-              <div class="flex items-center justify-between"><span class="text-sm text-slate-300">AI receptionist</span><span class="text-xs text-amber-300">Not activated</span></div>
-              <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center text-blue-300"><span class="text-lg">✦</span></div><div><p class="text-sm text-white">Your Receptionist</p><p id="voice-preference-label" class="text-xs text-slate-400">Choose a voice</p></div></div>
-              <div class="flex items-center gap-4 pt-1" role="group" aria-label="Receptionist voice preference">
-                <label class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-600 bg-black/20 px-4 py-2 cursor-pointer text-sm text-slate-200"><input type="radio" name="dashboard-voice-preference" value="male" class="h-4 w-4 accent-cyan-500"> <span>Male</span></label>
-                <label class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-600 bg-black/20 px-4 py-2 cursor-pointer text-sm text-slate-200"><input type="radio" name="dashboard-voice-preference" value="female" class="h-4 w-4 accent-cyan-500"> <span>Female</span></label>
-              </div>
-              <p id="voice-preference-message" class="text-sm leading-relaxed text-slate-300" role="status">Your choice is saved as a preference. It will not change the live receptionist voice until voice selection is connected.</p>
-          </article>
-
-          <!-- YOUR CONNECTIONS -->
-<!-- YOUR CONNECTIONS -->
-          <section class="dashboard-card rounded-xl p-3 sm:p-4 space-y-3">
-            <div><p class="text-xs font-bold uppercase tracking-widest text-blue-400">Your Connections</p><h3 class="text-base font-semibold text-white mt-1">Get TriDashAI ready to go live</h3><p class="text-sm text-slate-400 mt-1">Connection indicators are shown here for the dashboard design preview.</p></div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <article class="rounded-lg border border-slate-700/60 bg-black/20 p-3 space-y-1.5"><div class="flex items-center justify-between gap-2"><span class="text-sm font-semibold text-white">Google Calendar</span><span class="text-xs font-semibold text-amber-300">Not connected</span></div><p class="text-xs text-slate-400">Connect your calendar before the receptionist confirms appointments.</p><button type="button" disabled class="w-full rounded-xl border border-slate-600 px-3 py-2.5 text-sm font-semibold text-slate-400 cursor-not-allowed">Connect calendar · Preview</button></article>
-              <article class="rounded-xl border border-slate-700/60 bg-black/20 p-4 space-y-2"><div class="flex items-center justify-between gap-2"><span class="text-sm font-semibold text-white">AI receptionist</span><span class="text-xs font-semibold text-amber-300">Not live</span></div><p class="text-xs text-slate-400">Your receptionist will be ready once the phone connection and service checks are complete.</p><button type="button" disabled class="w-full rounded-xl bg-blue-500/20 px-3 py-2.5 text-sm font-semibold text-blue-200 cursor-not-allowed">Go live · Preview</button></article>
-            </div>
-          </section>
-
           <!-- COMPACT ROI SNAPSHOT -->
-          <section id="roi-performance" class="dashboard-card rounded-2xl p-4 sm:p-5 space-y-3">
+          <section id="roi-performance" class="hidden dashboard-card rounded-2xl p-4 sm:p-5 space-y-3">
             <h3 class="text-base font-bold text-white">ROI</h3>
             <div class="space-y-2">
               <div class="flex items-center gap-3 rounded-xl border border-slate-700/60 bg-black/20 px-3 py-2.5">
@@ -554,6 +552,18 @@
             <a href="analytics.html" class="inline-flex text-sm font-semibold text-cyan-300 hover:text-cyan-200">View detailed analytics →</a>
           </section>
 
+
+
+
+
+
+
+
+
+
+
+
+
           <!-- SERVICE STATUS -->
 
 
@@ -568,22 +578,7 @@
 
         </section>
 
-        <!-- TEST YOUR RECEPTIONIST: READ-ALOUD PHONE SCENARIOS -->
-        <section id="test-receptionist" class="dashboard-card p-6 sm:p-8 rounded-3xl space-y-5">
-          <div><p class="text-xs font-bold uppercase tracking-widest text-cyan-300">Practice by phone</p>
-            <h3 class="text-xl font-extrabold text-white mt-1">Test Your Receptionist</h3>
-            <p class="text-sm text-slate-300 mt-2">Call your TriDashAI number from another phone. Choose a situation below and read the words aloud as if you were a customer. You can also make up your own questions and experiment with situations your trade business might encounter.</p>
-            <p class="text-xs text-amber-200 mt-2">These are practice prompts only. They do not place a call or create a real booking.</p></div>
-          <div class="grid md:grid-cols-2 gap-3">
-            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">01 · New enquiry</p><h4 class="font-bold text-white">A potential new customer</h4><p class="text-sm text-slate-200">“Hello, I've found your business online. I'm looking for someone to help me. Can you tell me what services you cover and whether someone can get back to me?”</p></article>
-            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">02 · Emergency</p><h4 class="font-bold text-white">A burst pipe</h4><p class="text-sm text-slate-200">“I've got a pipe that's burst under my kitchen sink and water is spreading across the floor. What should I do first, and can someone come out?”</p></article>
-            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">03 · Storm damage</p><h4 class="font-bold text-white">A damaged roof</h4><p class="text-sm text-slate-200">“The storm has damaged my roof and rain is coming into the house. Do you deal with emergency roof repairs, and what happens next?”</p></article>
-            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">04 · Out of hours</p><h4 class="font-bold text-white">Calling in the evening</h4><p class="text-sm text-slate-200">“I know it's outside normal working hours, but I've got a problem that needs attention. Are you available, and is there an additional call-out charge?”</p></article>
-            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">05 · Booking</p><h4 class="font-bold text-white">Requesting an appointment</h4><p class="text-sm text-slate-200">“I'd like to arrange a visit. What information do you need from me, and can you tell me what appointment times are available?”</p></article>
-            <article class="rounded-xl border border-slate-600 bg-slate-800/60 p-4 space-y-2"><p class="text-xs font-bold uppercase tracking-wider text-cyan-300">06 · Price and payment</p><h4 class="font-bold text-white">Checking the call-out fee</h4><p class="text-sm text-slate-200">“Before I arrange a visit, can you explain your call-out fee, what it covers, and when I would need to pay?”</p></article>
-          </div>
-          <div class="rounded-xl border border-cyan-500/25 bg-cyan-500/5 p-4"><p class="text-sm font-semibold text-white">What to listen for</p><p class="text-sm text-slate-300 mt-1">Does your receptionist ask the right questions, follow your safety instructions, explain only the prices you have entered, avoid promising an unconfirmed appointment, and collect the customer's contact details?</p></div>
-        </section>
+
 
 
 
@@ -879,13 +874,13 @@
         document.querySelectorAll('.dashboard-nav-link').forEach(link => {
             link.addEventListener('click', event => {
                 const target = link.getAttribute('href');
-                if (target === '#stage-1' || target === '#phone-setup') {
+                if (target === '#stage-1') {
                     event.preventDefault();
                     document.getElementById('stage-2')?.classList.add('hidden');
                     document.getElementById('stage-1')?.classList.remove('hidden');
                     document.getElementById('advanced-setup')?.classList.add('hidden');
                     requestAnimationFrame(() => document.querySelector(target)?.scrollIntoView({behavior:'smooth',block:'start'}));
-                } else if (target === '#stage-2' || target === '#roi-performance' || target === '#usage-allowance' || target === '#google-reviews-performance') {
+                } else if (target === '#stage-2' || target === '#google-reviews-performance') {
                     event.preventDefault();
                     document.getElementById('stage-1')?.classList.add('hidden');
                     document.getElementById('stage-2')?.classList.remove('hidden');
