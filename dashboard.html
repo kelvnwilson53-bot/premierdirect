@@ -880,7 +880,7 @@
                     document.getElementById('stage-1')?.classList.remove('hidden');
                     document.getElementById('advanced-setup')?.classList.add('hidden');
                     requestAnimationFrame(() => document.querySelector(target)?.scrollIntoView({behavior:'smooth',block:'start'}));
-                } else if (target === '#stage-2' || target === '#google-reviews-performance') {
+                } else if (target === '#stage-2' || target === '#phone-setup' || target === '#ai-receptionist' || target === '#test-receptionist' || target === '#google-reviews-performance') {
                     event.preventDefault();
                     document.getElementById('stage-1')?.classList.add('hidden');
                     document.getElementById('stage-2')?.classList.remove('hidden');
